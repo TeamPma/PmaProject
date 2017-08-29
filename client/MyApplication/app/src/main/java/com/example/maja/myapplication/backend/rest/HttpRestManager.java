@@ -2,7 +2,11 @@ package com.example.maja.myapplication.backend.rest;
 
 import android.util.Log;
 
-import com.example.maja.myapplication.backend.bus.SmartBus;
+import com.example.maja.myapplication.backend.entity.User;
+import com.example.maja.myapplication.backend.events.LoginEvent;
+import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
@@ -54,6 +58,10 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d("Response",stringResponse +"");
                         result = stringResponse;
+                        Gson gson = new Gson();
+                        User user = gson.fromJson(stringResponse, User.class);
+                        Log.d("User",user.getUsername()+ "   " + user.getPassword());
+                        EventBus.getDefault().post(new LoginEvent(user));
                         // Do whatever you want with the String
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());

@@ -9,7 +9,6 @@ public class LoginContact {
     public interface View{
 
         void loginSuccesfull();
-
     }
 
     public interface Presenter{

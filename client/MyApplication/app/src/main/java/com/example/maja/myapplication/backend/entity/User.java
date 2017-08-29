@@ -31,4 +31,36 @@ public class User {
         this.number = number;
         this.location = location;
     }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public String getLocation() {
+        return location;
+    }
 }
