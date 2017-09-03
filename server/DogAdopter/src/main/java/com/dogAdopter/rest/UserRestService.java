@@ -27,7 +27,13 @@ public class UserRestService extends BaseRestService{
 	public String login(@PathParam("username") String username,
 					  @PathParam("password") String password) {
 		 User user = userService.findUserWithUsernameAndPassword(username, password);
-		 return gson.toJson(user);
+		 String result;
+		 if(user != null){
+			 result =  gson.toJson(user);
+		 }else{
+			 result = "NotExist";
+		 }
+		 return result;
 	}
 	
 	@GET

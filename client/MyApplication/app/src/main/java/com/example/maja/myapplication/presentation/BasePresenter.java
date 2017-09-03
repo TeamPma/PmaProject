@@ -6,6 +6,10 @@ import com.example.maja.myapplication.backend.bus.SmartBus;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  * Created by Maja on 25.8.2017.
  */
@@ -17,15 +21,7 @@ public abstract class BasePresenter {
 
     protected void login_(String username, String password) {
         Log.d(TAG, "login_: ");
-        // ovde ide poziv ka servisu i prosledjivanje atributa
-        // u ovoj klasi moras imati instancu servisa iz backenda
-        // za servis treba da pogledas android developer posto nije cisto instanciranje
         smartBus.login(username, password);
-        loginSuccesful();
-    }
-
-    protected void loginSuccesful() {
-        throw new RuntimeException("MOras overrideovati ovu metodu");
     }
 
     public void start() {
@@ -64,4 +60,23 @@ public abstract class BasePresenter {
             EventBus.getDefault().register(this);
         }
     }
+
+
+//    public boolean isInternetWorking() {
+//        Log.d(TAG, "isInternetWorking: ");
+//        boolean success = false;
+//        try {
+//            URL url = new URL("https://google.com");
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setConnectTimeout(10000);
+//            connection.connect();
+//            success = connection.getResponseCode() == 200;
+//        } catch (IOException e) {
+//            Log.d(TAG, "error: "+ e.getMessage());
+//            e.printStackTrace();
+//        }
+//        Log.d(TAG, "isInternetWorking: "+ success);
+//        return success;
+//
+//    }
 }

@@ -5,5 +5,6 @@ package com.example.maja.myapplication.backend.events;
  */
 
 public enum EventType {
-    LOGIN_EVENT
+    LOGIN_EVENT,
+    ERROR_EVENT
 }

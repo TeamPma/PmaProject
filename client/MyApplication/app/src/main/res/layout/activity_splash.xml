@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@mipmap/dog"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/loading"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"/>
+
+    <ProgressBar
+        android:id="@+id/splash_screen_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+</LinearLayout>
