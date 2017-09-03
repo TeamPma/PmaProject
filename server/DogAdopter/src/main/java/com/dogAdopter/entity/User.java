@@ -33,14 +33,14 @@ public class User implements Serializable {
 	private String lastName;
 	private String email;
 	private String number;
-	private String location;
+	private int isAdmin;
 
 	public User() {
 		// super();
 	}
 
 	public User(int idUser, String username, String password, String firstName, String lastName, String email,
-			String number, String location) {
+			String number, int isAdmin) {
 		super();
 		this.idUser = idUser;
 		this.username = username;
@@ -49,7 +49,7 @@ public class User implements Serializable {
 		this.lastName = lastName;
 		this.email = email;
 		this.number = number;
-		this.location = location;
+		this.isAdmin = isAdmin;
 	}
 
 	@Id
@@ -118,13 +118,14 @@ public class User implements Serializable {
 		this.number = number;
 	}
 
-	@Column(name = "location", unique = false, nullable = true, length = 45)
-	public String getLocation() {
-		return location;
+	@Column(name = "isAdmin", unique = false, nullable = false, length = 1)
+	public int getIsAdmin() {
+		return isAdmin;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
 	}
+	
 
 }

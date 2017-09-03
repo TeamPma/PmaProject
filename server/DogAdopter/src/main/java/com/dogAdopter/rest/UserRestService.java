@@ -1,5 +1,7 @@
 package com.dogAdopter.rest;
 
+import java.util.Random;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -27,8 +29,30 @@ public class UserRestService extends BaseRestService{
 	public String login(@PathParam("username") String username,
 					  @PathParam("password") String password) {
 		 User user = userService.findUserWithUsernameAndPassword(username, password);
-		 return gson.toJson(user);
+		 String result;
+		 if(user != null){
+			 result =  gson.toJson(user);
+		 }else{
+			 result = "NotExist";
+		 }
+		 return result;
 	}
+	
+	@GET
+	@Path("addUser/{user}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String addUser(@PathParam("user") String user) {
+		User userFromJson = gson.fromJson(user, User.class);
+		Random randomGenerator = new Random();
+		int randomInt = randomGenerator.nextInt(100);
+		userFromJson.setIdUser(randomInt);
+		userService.save(userFromJson);
+		if(userService.findUserWithUsernameAndPassword(userFromJson.getUsername(), userFromJson.getPassword()) != null){
+			return user;
+		}
+		return "NotSave";
+	}
+	
 	
 	@GET
 	@Path("userById/{idOfUser}")

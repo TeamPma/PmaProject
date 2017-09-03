@@ -14,13 +14,13 @@ public class User {
     private String lastName;
     private String email;
     private String number;
-    private String location;
+    private int isAdmin;
 
     public User() {
     }
 
     public User(int idUser, String username, String password, String firstName, String lastName, String email,
-                String number, String location) {
+                String number, int isAdmin) {
         super();
         this.idUser = idUser;
         this.username = username;
@@ -29,7 +29,17 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.number = number;
-        this.location = location;
+        this.isAdmin = isAdmin;
+    }
+
+    public User(String username, String password, String firstName, String lastName, String email, String number, int isAdmin) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.number = number;
+        this.isAdmin = isAdmin;
     }
 
     public int getIdUser() {
@@ -60,7 +70,35 @@ public class User {
         return number;
     }
 
-    public String getLocation() {
-        return location;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public int isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(int admin) {
+        isAdmin = admin;
     }
 }

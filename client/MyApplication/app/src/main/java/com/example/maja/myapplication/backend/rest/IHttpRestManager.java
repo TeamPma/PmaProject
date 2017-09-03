@@ -13,4 +13,8 @@ public interface IHttpRestManager {
 
     @GET("login/{username}/{password}")
     Call<ResponseBody> loginWithCredentials(@Path("username") String username, @Path("password") String password);
+
+    @GET("addUser/{user}")
+    Call<ResponseBody> createAccount(@Path("user") String user);
+
 }

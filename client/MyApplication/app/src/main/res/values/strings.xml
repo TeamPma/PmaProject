@@ -3,7 +3,6 @@
     <string name="title_activity_login">Sign in</string>
     <string name="default_username">Username</string>
     <string name="default_password">Password</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="shelterList">Shelters</string>
     <string name="dogList">Dogs</string>
@@ -17,4 +16,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loading">Loading ...</string>
+    <string name="registerQuestion">Create account</string>
+    <string name="account_firstname">First name: </string>
+    <string name="account_lastName">Last name: </string>
+    <string name="account_username">Username: </string>
+    <string name="account_password">Password: </string>
+    <string name="account_confirmPassword">Confirm password: </string>
+    <string name="account_email">Email: </string>
+    <string name="account_number">Phone number: </string>
+    <string name="account_createAccount">Create account</string>
 </resources>

@@ -23,13 +23,16 @@
         <service android:name=".backend.service.ServiceRepository" />
 
         <activity android:name=".presentation.mvp.testFirstActivity.TestFirst" />
-        <activity android:name=".presentation.mvp.main.MainActivity">
+        <activity android:name=".presentation.mvp.main.MainActivity"/>
+        <activity android:name=".presentation.mvp.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".backend.service.ServiceRepository" />
+        <activity android:name=".presentation.mvp.account.CreateAccountActivity"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.service.ServiceRepository;
 
 /**
@@ -53,4 +54,11 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "login: ");
         mService.login(username,password);
     }
+
+    public void createAccount(User user){
+        Log.d(TAG, "createAccount: ");
+        mService.createAccount(user);
+    }
+
+
 }
