@@ -17,16 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.mvp.login.LoginActivity">
+
+        </activity>
+
+        <service android:name=".backend.service.ServiceRepository" />
+
+        <activity android:name=".presentation.mvp.testFirstActivity.TestFirst" />
+        <activity android:name=".presentation.mvp.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service android:name=".backend.service.ServiceRepository"></service>
-
-        <activity android:name=".presentation.mvp.testFirstActivity.TestFirst"></activity>
     </application>
 
 </manifest>
