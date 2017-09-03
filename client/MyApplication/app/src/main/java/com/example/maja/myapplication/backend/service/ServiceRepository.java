@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.database.DatabaseManager;
+import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.rest.HttpRestManager;
 
 /**
@@ -32,6 +33,11 @@ public class ServiceRepository extends Service {
             mBinder = new BinderObject();
         }
       return mBinder;
+    }
+
+    public void createAccount(User user) {
+        Log.d(TAG, "createAccount: ");
+        restManager.createAccount(user);
     }
 
     public class BinderObject extends Binder{

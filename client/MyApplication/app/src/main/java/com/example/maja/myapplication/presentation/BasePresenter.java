@@ -3,6 +3,7 @@ package com.example.maja.myapplication.presentation;
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.bus.SmartBus;
+import com.example.maja.myapplication.backend.entity.User;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,6 +24,11 @@ public abstract class BasePresenter {
         Log.d(TAG, "login_: ");
         smartBus.login(username, password);
     }
+    protected void createAccount_(User user){
+        Log.d(TAG, "createAccount_: ");
+        smartBus.createAccount(user);
+    }
+
 
     public void start() {
         Log.d(TAG, "start: ");
@@ -40,8 +46,7 @@ public abstract class BasePresenter {
         }
     }
 
-    public void pause() {
-    }
+    public void pause() { Log.d(TAG, "pause: "); }
 
     public void stop() {
         Log.d(TAG, "stop: ");
@@ -60,7 +65,6 @@ public abstract class BasePresenter {
             EventBus.getDefault().register(this);
         }
     }
-
 
 //    public boolean isInternetWorking() {
 //        Log.d(TAG, "isInternetWorking: ");

@@ -27,7 +27,8 @@
         <service android:name=".backend.service.ServiceRepository" />
 
         <activity android:name=".presentation.mvp.testFirstActivity.TestFirst" />
-        <activity android:name=".presentation.mvp.login.LoginActivity"></activity>
+        <activity android:name=".presentation.mvp.login.LoginActivity" />
+        <activity android:name=".presentation.mvp.account.CreateAccountActivity"></activity>
     </application>
 
 </manifest>

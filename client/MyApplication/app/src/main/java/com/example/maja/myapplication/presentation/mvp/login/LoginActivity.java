@@ -11,9 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.User;
+import com.example.maja.myapplication.presentation.mvp.account.CreateAccountActivity;
 import com.example.maja.myapplication.presentation.mvp.testFirstActivity.TestFirst;
 
 // MVP - ideja je da sva logika u aktivitiju bude iskljucivo logika koje je vezana za UI a u presenteru sve ostalo
@@ -25,12 +27,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContact.Vie
     private EditText username;
     private EditText password;
     private Button signIn;
+    private TextView createAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(
+                R.layout.activity_login);
         presenter = new LoginPresenter(this);
         initUIComponents();
         initListener();
@@ -104,11 +108,22 @@ public class LoginActivity extends AppCompatActivity implements LoginContact.Vie
                 }
             }
         });
+        createAccount.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: Create new account");
+                Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void initUIComponents() {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        createAccount = (TextView) findViewById(R.id.createAccount);
         signIn = (Button) findViewById(R.id.signIn);
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
     }
@@ -119,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContact.Vie
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.maja.myapplication", Context.MODE_PRIVATE);
         String userIdKey = "com.example.maja.myapplication.userid";
-        prefs.edit().putInt(userIdKey,user.getIdUser()).apply();
+        //prefs.edit().putInt(userIdKey,user.getIdUser()).apply();
         Intent intent = new Intent(this, TestFirst.class);
         startActivity(intent);
         finish();
