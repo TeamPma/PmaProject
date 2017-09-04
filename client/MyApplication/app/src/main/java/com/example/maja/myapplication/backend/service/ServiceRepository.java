@@ -49,6 +49,11 @@ public class ServiceRepository extends Service {
         restManager.getShelterList();
     }
 
+    public void getDogList() {
+        Log.d(TAG, "getDogList: ");
+        restManager.getDogList();
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;
