@@ -29,7 +29,10 @@ public abstract class BasePresenter {
         smartBus.createAccount(user);
     }
 
-
+    protected void getShelterList_(){
+        Log.d(TAG, "getShelterList_: ");
+        smartBus.getShelterList();
+    }
     public void start() {
         Log.d(TAG, "start: ");
         if(!EventBus.getDefault().isRegistered(this)){

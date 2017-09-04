@@ -40,6 +40,11 @@ public class ServiceRepository extends Service {
         restManager.createAccount(user);
     }
 
+    public void getShelterList() {
+        Log.d(TAG, "getShelterList: ");
+        restManager.getShelterList();
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

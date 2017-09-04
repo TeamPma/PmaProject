@@ -17,4 +17,7 @@ public interface IHttpRestManager {
     @GET("addUser/{user}")
     Call<ResponseBody> createAccount(@Path("user") String user);
 
+    @GET("shelterAll")
+    Call<ResponseBody> getShelterList();
+
 }

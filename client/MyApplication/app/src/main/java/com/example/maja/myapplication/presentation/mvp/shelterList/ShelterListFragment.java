@@ -14,9 +14,10 @@ import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
 
 import java.util.ArrayList;
 
-public class ShelterListFragment extends Fragment {
+public class ShelterListFragment extends Fragment implements ShelterListContact.View{
 
     private FragmentListener parentActivity;
+    private ShelterListPresenter presenter;
 
     public ShelterListFragment() {
         // Required empty public constructor
@@ -26,6 +27,7 @@ public class ShelterListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new ShelterListPresenter(this);
     }
 
     @Override
