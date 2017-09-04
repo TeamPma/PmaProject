@@ -23,7 +23,9 @@ public class NewsPresenter extends BasePresenter implements NewsContact.Presente
     private NewsContact.View view;
 
     public NewsPresenter(NewsContact.View view) {
+
         this.view = view;
+        start();
     }
 
     @Override

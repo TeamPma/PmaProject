@@ -7,6 +7,7 @@ import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
+import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
 import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.google.gson.Gson;
@@ -154,10 +155,10 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Gson gson = new Gson();
-                        ArrayList<Announcement> news = gson.fromJson(stringResponse, ArrayList.class);
+                        ArrayList<Announcement> news = gson.fromJson(stringResponse,  new TypeToken<ArrayList<Announcement>>(){}.getType());
                         Log.d(TAG, "onResponse: " + stringResponse);
                         Log.d(TAG, "onResponse: " + news.get(0));
-                        Log.d(TAG, "onResponse: " + news.get(1));
+                        EventBus.getDefault().post(new GetAllNewsEvent(news));
                         // Do whatever you want with the String
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
@@ -189,7 +190,6 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Shelter>>(){}.getType());
                         EventBus.getDefault().post(new GetAllSheltersEvent(shelterList));
-
                         Log.d(TAG, "onResponse: " + stringResponse);
                         // Do whatever you want with the String
                     } catch (IOException e) {
