@@ -29,6 +29,10 @@ public abstract class BasePresenter {
         smartBus.createAccount(user);
     }
 
+    protected void getAllNews_(){
+        Log.d(TAG, "getAllNews_: ");
+        smartBus.getAllNews();
+    }
 
     public void start() {
         Log.d(TAG, "start: ");

@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.presentation.mvp.login.LoginActivity;
+import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
 import com.example.maja.myapplication.presentation.mvp.testFirstActivity.TestFirst;
 
 public class SplashActivity extends AppCompatActivity {
@@ -56,7 +57,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, LoginActivity.class);
         if (userId != 0) {
-            intent = new Intent(this, TestFirst.class);
+            intent = new Intent(this, MainActivity.class);
         }
         startActivity(intent);
 

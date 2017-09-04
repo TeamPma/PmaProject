@@ -14,7 +14,8 @@ import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
 
 import java.util.ArrayList;
 
-public class DogListFragment extends Fragment {
+public class
+DogListFragment extends Fragment {
 
     private FragmentListener parentActivity;
 

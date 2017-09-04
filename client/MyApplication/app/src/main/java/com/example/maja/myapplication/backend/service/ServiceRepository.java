@@ -40,6 +40,11 @@ public class ServiceRepository extends Service {
         restManager.createAccount(user);
     }
 
+    public void getAllNews() {
+        Log.d(TAG, "getAllNews: ");
+        restManager.getAllNews();
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

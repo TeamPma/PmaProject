@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 break;
             case 2:
                 fragment = new NewsListFragment();
+                title = R.string.newsList_fragment;
                 break;
             case 3:
                 fragment = new MapFragment();

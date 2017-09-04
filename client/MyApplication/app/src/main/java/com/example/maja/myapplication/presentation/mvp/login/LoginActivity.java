@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.presentation.mvp.account.CreateAccountActivity;
+import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
 import com.example.maja.myapplication.presentation.mvp.testFirstActivity.TestFirst;
 
 // MVP - ideja je da sva logika u aktivitiju bude iskljucivo logika koje je vezana za UI a u presenteru sve ostalo
@@ -134,8 +135,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContact.Vie
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.maja.myapplication", Context.MODE_PRIVATE);
         String userIdKey = "com.example.maja.myapplication.userid";
-        //prefs.edit().putInt(userIdKey,user.getIdUser()).apply();
-        Intent intent = new Intent(this, TestFirst.class);
+        prefs.edit().putInt(userIdKey,user.getIdUser()).apply();
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

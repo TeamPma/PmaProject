@@ -134,4 +134,8 @@ public class HttpRestManager  {
             }
         });
     }
+
+    public void getAllNews() {
+        // Need to be implemented
+    }
 }
