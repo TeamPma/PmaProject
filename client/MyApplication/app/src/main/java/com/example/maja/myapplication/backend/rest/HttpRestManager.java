@@ -11,6 +11,7 @@ import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.google.gson.Gson;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
+import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -186,7 +187,7 @@ public class HttpRestManager  {
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
-                        ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, ArrayList.class);
+                        ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Shelter>>(){}.getType());
                         EventBus.getDefault().post(new GetAllSheltersEvent(shelterList));
 
                         Log.d(TAG, "onResponse: " + stringResponse);

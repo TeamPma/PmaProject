@@ -25,6 +25,7 @@ public class ShelterListPresenter extends BasePresenter implements ShelterListCo
 
     public ShelterListPresenter(ShelterListContact.View view) {
         this.view = view;
+        start();
     }
 
     @Override
@@ -37,6 +38,7 @@ public class ShelterListPresenter extends BasePresenter implements ShelterListCo
     public void onMessageEvent(BaseEvent event) {
         switch (event.getType()){
             case GET_SHELTER_LIST_EVENT:
+                Log.d(TAG, "onMessageEvent: GET_SHELTER_LIST_EVENT");
                 GetAllSheltersEvent getAllSheltersEvent = (GetAllSheltersEvent) event;
                 handleGetAllSheltersResponse(getAllSheltersEvent.getShelterList());
                 break;
