@@ -23,10 +23,14 @@ public class DogListAdapter extends BaseAdapter {
     ArrayList<Dog> dogList = new ArrayList<Dog>();
     LayoutInflater inflater;
 
-    public DogListAdapter(Context context, ArrayList<Dog> dogList) {
+    public DogListAdapter(Context context) {
         this.context = context;
         this.dogList = dogList;
         inflater = (LayoutInflater.from(context));
+    }
+
+    public void setDogList(ArrayList<Dog> dogList) {
+        this.dogList = dogList;
     }
 
     @Override
