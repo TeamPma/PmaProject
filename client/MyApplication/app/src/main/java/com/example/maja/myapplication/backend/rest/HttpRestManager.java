@@ -2,15 +2,19 @@ package com.example.maja.myapplication.backend.rest;
 
 import android.util.Log;
 
+import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
+import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.google.gson.Gson;
+import com.google.gson.internal.bind.ArrayTypeAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -141,7 +145,7 @@ public class HttpRestManager  {
         Retrofit retrofit = getRetrofit(url);
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
-        Gson gson = new Gson();
+        final Gson gson = new Gson();
 
         iHttpRestManager.getShelterList().enqueue(new Callback<ResponseBody>() {
             @Override
@@ -150,6 +154,9 @@ public class HttpRestManager  {
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
+                        ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, ArrayList.class);
+                        EventBus.getDefault().post(new GetAllSheltersEvent(shelterList));
+
                         // Do whatever you want with the String
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());

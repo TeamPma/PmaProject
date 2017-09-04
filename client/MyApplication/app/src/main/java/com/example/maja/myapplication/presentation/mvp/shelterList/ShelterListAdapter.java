@@ -22,10 +22,14 @@ public class ShelterListAdapter extends BaseAdapter {
     ArrayList<Shelter> shelterList = new ArrayList<Shelter>();
     LayoutInflater inflater;
 
-    public ShelterListAdapter(Context context, ArrayList<Shelter> shelterList) {
+    public ShelterListAdapter(Context context) {
         this.context = context;
         this.shelterList = shelterList;
         inflater = (LayoutInflater.from(context));
+    }
+
+    public void setShelterList(ArrayList<Shelter> shelterList) {
+        this.shelterList = shelterList;
     }
 
     @Override
