@@ -138,4 +138,33 @@ public class HttpRestManager  {
     public void getAllNews() {
         // Need to be implemented
     }
+    public void getShelterList(){
+        Log.d(TAG, "getShelterList: ");
+        String url="http://192.168.0.12:8080/DogAdopter/rest/shelterService/";
+        Retrofit retrofit = getRetrofit(url);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        Gson gson = new Gson();
+
+        iHttpRestManager.getShelterList().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        // Do whatever you want with the String
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
 }

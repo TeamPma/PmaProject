@@ -44,6 +44,10 @@ public class ServiceRepository extends Service {
         Log.d(TAG, "getAllNews: ");
         restManager.getAllNews();
     }
+    public void getShelterList() {
+        Log.d(TAG, "getShelterList: ");
+        restManager.getShelterList();
+    }
 
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
