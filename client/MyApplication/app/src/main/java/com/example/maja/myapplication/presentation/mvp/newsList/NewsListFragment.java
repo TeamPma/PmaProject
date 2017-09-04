@@ -7,13 +7,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
+import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
 
-public class NewsListFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Date;
+
+public class NewsListFragment extends Fragment implements NewsContact.View{
 
     private FragmentListener parentActivity;
+    private NewsPresenter presenter;
 
     public NewsListFragment() {
         // Required empty public constructor
@@ -21,14 +27,28 @@ public class NewsListFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        presenter = new NewsPresenter(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_news_list, container, false);
+        presenter.getAllNews();
+        ArrayList<Announcement> newsList = new ArrayList<Announcement>();
+        Announcement a = new Announcement(1,1,"Comment", new Date(), "url");
+        Announcement a1 = new Announcement(2,2,"Comment1", new Date(), "url1");
+        newsList.add(a);
+        newsList.add(a1);
+        //napuni ovu listu
+        ListView listView = (ListView) view.findViewById(R.id.newsList);
+
+        NewsListAdapter newsListAdapter = new NewsListAdapter(getActivity(),newsList);
+        listView.setAdapter(newsListAdapter);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news_list, container, false);
+        return view;
     }
 
     @Override
@@ -39,4 +59,13 @@ public class NewsListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void handleError(String message) {
+
+    }
+
+    @Override
+    public void getAllNewsSuccesfull(ArrayList<Announcement> news) {
+
+    }
 }

@@ -3,6 +3,7 @@ package com.example.maja.myapplication.backend.rest;
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.entity.Shelter;
+import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
@@ -139,6 +140,37 @@ public class HttpRestManager  {
         });
     }
 
+    public void getAllNews() {
+        Log.d(TAG, "getAllNews: ");
+        String url="http://192.168.0.12:8080/DogAdopter/rest/announcementService/";
+        Retrofit retrofit = getRetrofit(url);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+        iHttpRestManager.getListOfNews().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Gson gson = new Gson();
+                        ArrayList<Announcement> news = gson.fromJson(stringResponse, ArrayList.class);
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        Log.d(TAG, "onResponse: " + news.get(0));
+                        Log.d(TAG, "onResponse: " + news.get(1));
+                        // Do whatever you want with the String
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
     public void getShelterList(){
         Log.d(TAG, "getShelterList: ");
         String url="http://192.168.0.12:8080/DogAdopter/rest/shelterService/";
@@ -157,6 +189,7 @@ public class HttpRestManager  {
                         ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, ArrayList.class);
                         EventBus.getDefault().post(new GetAllSheltersEvent(shelterList));
 
+                        Log.d(TAG, "onResponse: " + stringResponse);
                         // Do whatever you want with the String
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());

@@ -10,6 +10,6 @@ public interface AnnouncementService {
 	void delete(Announcement announcement);
 
 	ArrayList<Announcement> getAnnouncementByShelterId(Integer id);
-
+	ArrayList<Announcement> getAllAnnouncements();
 	Announcement getAnnouncementId(Integer id);
 }

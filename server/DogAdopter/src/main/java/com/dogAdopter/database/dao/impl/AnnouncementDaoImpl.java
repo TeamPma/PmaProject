@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dogAdopter.database.dao.AnnouncementDao;
 import com.dogAdopter.entity.Announcement;
+import com.dogAdopter.entity.Shelter;
 import com.dogAdopter.util.CustomHibernateDaoSupport;
 
 import java.util.ArrayList;
@@ -46,6 +47,15 @@ public class AnnouncementDaoImpl extends CustomHibernateDaoSupport implements An
 			return null;
 		}
 		return list.get(0);
+	}
+
+	@Override
+	public ArrayList<Announcement> getAllAnouncements() {
+		List<Announcement> list = getHibernateTemplate().findByNamedQuery(Announcement.GET_ALL);
+		if(list.isEmpty()){
+			return null;
+		}
+		return (ArrayList<Announcement>) list;
 	}
 
 

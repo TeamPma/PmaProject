@@ -20,4 +20,7 @@ public interface IHttpRestManager {
     @GET("shelterAll")
     Call<ResponseBody> getShelterList();
 
+    @GET("announcementsAll")
+    Call<ResponseBody> getListOfNews();
+
 }

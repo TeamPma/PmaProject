@@ -60,6 +60,11 @@ public class SmartBus implements ServiceConnection {
         mService.createAccount(user);
     }
 
+    public void getAllNews(){
+        Log.d(TAG, "getAllNews: ");
+        mService.getAllNews();
+    }
+
 
     public void getShelterList() {
         Log.d(TAG, "getShelterList: ");

@@ -10,5 +10,6 @@ public interface AnnouncementDao {
 	void delete(Announcement announcement);
 
     ArrayList<Announcement> getAnnouncementByShelterId(Integer id);
+    ArrayList<Announcement> getAllAnouncements();
 	Announcement getAnnouncementById(Integer id);
 }

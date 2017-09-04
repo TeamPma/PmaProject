@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
+		@NamedQuery(name = Announcement.GET_ALL, query = "FROM Announcement ann"),
         @NamedQuery(name = Announcement.GET_ANNOUNCMENT_BY_SHELTER_ID, query = "FROM Announcement ann WHERE ann.idShelter = :id"),
         @NamedQuery(name = Announcement.GET_ANNOUNCMENT_BY_ID, query = "FROM Announcement ann WHERE ann.idAnnouncement = :id")
 })
@@ -17,6 +18,7 @@ public class Announcement implements Serializable {
 
     public static final String GET_ANNOUNCMENT_BY_SHELTER_ID = "getAnnouncementByShelterId";
     public static final String GET_ANNOUNCMENT_BY_ID = "getAnnouncementById";
+    public final static String GET_ALL = "getAllAnnouncements";
 
     private int idAnnouncement;
     private int idShelter;

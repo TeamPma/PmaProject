@@ -40,6 +40,10 @@ public class ServiceRepository extends Service {
         restManager.createAccount(user);
     }
 
+    public void getAllNews() {
+        Log.d(TAG, "getAllNews: ");
+        restManager.getAllNews();
+    }
     public void getShelterList() {
         Log.d(TAG, "getShelterList: ");
         restManager.getShelterList();
