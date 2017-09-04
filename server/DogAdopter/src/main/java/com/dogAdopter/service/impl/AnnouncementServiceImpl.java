@@ -37,4 +37,9 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 		return announcementDao.getAnnouncementById(id);
 	}
 
+	@Override
+	public ArrayList<Announcement> getAllAnnouncements() {
+		return announcementDao.getAllAnouncements();
+	}
+
 }

@@ -41,6 +41,13 @@ public class AnnouncementRestService extends BaseRestService {
     	Object announcement = announcementService.getAnnouncementId(Integer.parseInt(idOfAnnouncement));
     	return gson.toJson(announcement);
     }
+    
+    @GET
+    @Path("announcementsAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllAnnouncements() {
+	   return gson.toJson(announcementService.getAllAnnouncements());
+    }
 
 
 }

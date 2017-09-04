@@ -19,6 +19,7 @@ import java.util.Date;
 public class NewsListFragment extends Fragment implements NewsContact.View{
 
     private FragmentListener parentActivity;
+    private NewsPresenter presenter;
 
     public NewsListFragment() {
         // Required empty public constructor
@@ -26,13 +27,16 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        presenter = new NewsPresenter(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news_list, container, false);
+        presenter.getAllNews();
         ArrayList<Announcement> newsList = new ArrayList<Announcement>();
         Announcement a = new Announcement(1,1,"Comment", new Date(), "url");
         Announcement a1 = new Announcement(2,2,"Comment1", new Date(), "url1");
