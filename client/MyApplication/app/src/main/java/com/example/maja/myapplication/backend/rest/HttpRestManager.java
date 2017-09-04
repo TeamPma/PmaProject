@@ -2,15 +2,18 @@ package com.example.maja.myapplication.backend.rest;
 
 import android.util.Log;
 
+import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
+import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
 import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.google.gson.Gson;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
+import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -153,7 +156,7 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Gson gson = new Gson();
-                        ArrayList<Announcement> news = gson.fromJson(stringResponse, ArrayList.class);
+                        ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
                         Log.d(TAG, "onResponse: " + stringResponse);
                         Log.d(TAG, "onResponse: " + news.get(0));
                         Log.d(TAG, "onResponse: " + news.get(1));
@@ -186,8 +189,42 @@ public class HttpRestManager  {
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
-                        ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, ArrayList.class);
+                        ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Shelter>>(){}.getType());
                         EventBus.getDefault().post(new GetAllSheltersEvent(shelterList));
+
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        // Do whatever you want with the String
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void getDogList() {
+        Log.d(TAG, "getDogList: ");
+        String url="http://192.168.0.12:8080/DogAdopter/rest/dogService/";
+        Retrofit retrofit = getRetrofit(url);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        final Gson gson = new Gson();
+
+        iHttpRestManager.getDogList().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        ArrayList<Dog> dogList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Dog>>(){}.getType());
+                        EventBus.getDefault().post(new GetAllDogsEvent(dogList));
 
                         Log.d(TAG, "onResponse: " + stringResponse);
                         // Do whatever you want with the String

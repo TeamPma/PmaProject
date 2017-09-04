@@ -25,6 +25,7 @@ public class ShelterListPresenter extends BasePresenter implements ShelterListCo
 
     public ShelterListPresenter(ShelterListContact.View view) {
         this.view = view;
+        start();
     }
 
     @Override

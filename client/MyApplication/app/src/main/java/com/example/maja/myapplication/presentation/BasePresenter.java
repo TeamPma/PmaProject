@@ -33,10 +33,17 @@ public abstract class BasePresenter {
         Log.d(TAG, "getAllNews_: ");
         smartBus.getAllNews();
     }
+
     protected void getShelterList_(){
         Log.d(TAG, "getShelterList_: ");
         smartBus.getShelterList();
     }
+
+    protected void getDogList_(){
+        Log.d(TAG, "getDogList_: ");
+        smartBus.getDogList();
+    }
+
     public void start() {
         Log.d(TAG, "start: ");
         if(!EventBus.getDefault().isRegistered(this)){

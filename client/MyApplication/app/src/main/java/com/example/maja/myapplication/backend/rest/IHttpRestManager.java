@@ -23,4 +23,6 @@ public interface IHttpRestManager {
     @GET("announcementsAll")
     Call<ResponseBody> getListOfNews();
 
+    @GET("dogAll")
+    Call<ResponseBody> getDogList();
 }
