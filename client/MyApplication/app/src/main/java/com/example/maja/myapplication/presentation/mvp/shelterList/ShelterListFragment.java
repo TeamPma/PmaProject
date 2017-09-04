@@ -40,11 +40,7 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shelter_list, container, false);
         presenter.getShelterList();
-
-        presenter.getShelterList();
-
         ListView listView = (ListView) view.findViewById(R.id.shelterList);
-
         shelterListAdapter = new ShelterListAdapter(getActivity());
         listView.setAdapter(shelterListAdapter);
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -22,7 +22,7 @@ public class NewsListAdapter extends BaseAdapter {
     ArrayList<Announcement> newsList = new ArrayList<Announcement>();
     LayoutInflater inflater;
 
-    public NewsListAdapter(Context context, ArrayList<Announcement> newsList) {
+    public NewsListAdapter(Context context) {
         this.context = context;
         this.newsList = newsList;
         this.inflater = (LayoutInflater.from(context));
@@ -55,4 +55,6 @@ public class NewsListAdapter extends BaseAdapter {
         newsDate.setText(announcement.getDate().toString());
         return view;
     }
+
+    public void setNewsList(ArrayList<Announcement> news) {this.newsList = news;}
 }
