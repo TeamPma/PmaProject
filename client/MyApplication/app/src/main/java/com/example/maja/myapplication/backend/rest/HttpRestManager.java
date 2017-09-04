@@ -40,7 +40,6 @@ public class HttpRestManager  {
 
     public HttpRestManager(){}
     public String result;
-
     private IHttpRestManager iHttpRestManager ;
 
     public Retrofit getRetrofit(String url){
@@ -177,6 +176,7 @@ public class HttpRestManager  {
             }
         });
     }
+
     public void getShelterList(){
         Log.d(TAG, "getShelterList: ");
         String url="http://192.168.0.12:8080/DogAdopter/rest/shelterService/";

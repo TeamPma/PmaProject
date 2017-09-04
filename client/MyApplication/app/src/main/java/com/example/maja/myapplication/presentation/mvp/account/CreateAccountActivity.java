@@ -39,6 +39,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         initListener();
 
     }
+
     private void initUIComponents() {
         firstname = (EditText) findViewById(R.id.firstname);
         lastName = (EditText) findViewById(R.id.lastname);
@@ -113,8 +114,6 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         }
         return  false;
     }
-
-
 
     @Override
     protected void onStart() {

@@ -29,6 +29,8 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
     private FragmentListener parentActivity;
     private NewsPresenter presenter;
     private NewsListAdapter newsListAdapter;
+
+
     public NewsListFragment() {
         // Required empty public constructor
     }

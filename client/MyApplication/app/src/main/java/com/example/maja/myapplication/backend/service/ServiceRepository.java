@@ -35,6 +35,12 @@ public class ServiceRepository extends Service {
       return mBinder;
     }
 
+    public class BinderObject extends Binder{
+        public ServiceRepository getService(){
+            return ServiceRepository.this;
+        }
+    }
+
     public void createAccount(User user) {
         Log.d(TAG, "createAccount: ");
         restManager.createAccount(user);
@@ -54,16 +60,9 @@ public class ServiceRepository extends Service {
         restManager.getDogList();
     }
 
-    public class BinderObject extends Binder{
-        public ServiceRepository getService(){
-            return ServiceRepository.this;
-        }
-    }
-
     public String login (String username, String password){
         Log.d(TAG, "login: ");
         restManager.login(username,password);
-        // login ce imati novu metodu ovde koja ce u sebi pozivati httprest manager i database manager
         return "";
     }
 

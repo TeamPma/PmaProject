@@ -5,6 +5,7 @@ package com.example.maja.myapplication.backend.events;
  */
 
 public class BaseEvent {
+
     protected EventType type;
 
     public BaseEvent(EventType type) {
