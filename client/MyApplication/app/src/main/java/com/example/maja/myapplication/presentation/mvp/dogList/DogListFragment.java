@@ -2,7 +2,11 @@ package com.example.maja.myapplication.presentation.mvp.dogList;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.util.EventLogTags;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +18,13 @@ import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
 
 import java.util.ArrayList;
 
-public class
-DogListFragment extends Fragment {
+public class DogListFragment extends Fragment implements DogListContact.View{
 
+    private static final String TAG = DogListFragment.class.getSimpleName();
+    private AlertDialog.Builder builder;
     private FragmentListener parentActivity;
+    private DogListPresenter presenter;
+    private DogListAdapter dogListAdapter;
 
     public DogListFragment() {
         // Required empty public constructor
@@ -26,6 +33,7 @@ DogListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new DogListPresenter(this);
     }
 
     @Override
@@ -33,18 +41,10 @@ DogListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dogs_list, container, false);
-
-        ArrayList<Dog> dogList = new ArrayList<Dog>();
-        Dog d1 = new Dog(1,"Kasper","Sibirski haski",1,1,25,30,1,1,"Anamnesis1",1);
-        Dog d2 = new Dog(2,"Dzeki","Nemacki ovcar",1,1,25,30,1,1,"Anamnesis2",2);;
-        Dog d3 = new Dog(3,"Lara","Zlatni retriver",1,1,25,30,1,1,"Anamnesis3",3);;
-        dogList.add(d1);
-        dogList.add(d2);
-        dogList.add(d3);
+        presenter.getDogList();
 
         ListView listView = (ListView) view.findViewById(R.id.dogList);
-
-        DogListAdapter dogListAdapter = new DogListAdapter(getActivity(),dogList);
+        dogListAdapter = new DogListAdapter(getActivity());
         listView.setAdapter(dogListAdapter);
 
         return view;
@@ -56,5 +56,28 @@ DogListFragment extends Fragment {
         if(context instanceof FragmentListener){
             parentActivity = (FragmentListener) context;
         }
+    }
+
+    @Override
+    public void getDogListSuccessfull(ArrayList<Dog> dogList) {
+        Log.d(TAG, "getDogListSuccessfull: ");
+        dogListAdapter.setDogList(dogList);
+        dogListAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void getDogListNotSuccessfull(String message) {
+        Log.d(TAG, "getDogListNotSuccessfull: ");
+        builder.setTitle("Getting DogList not successful")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
     }
 }
