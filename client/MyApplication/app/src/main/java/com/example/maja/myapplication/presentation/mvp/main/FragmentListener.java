@@ -9,4 +9,7 @@ import android.content.Context;
 public interface FragmentListener {
 
     Context getActivityContext();
+
+    void openAddNewsActivity();
+
 }

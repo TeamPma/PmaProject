@@ -3,6 +3,7 @@ package com.example.maja.myapplication.presentation.mvp.main;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.presentation.mvp.dogList.DogListFragment;
 import com.example.maja.myapplication.presentation.mvp.googleMap.MapFragment;
+import com.example.maja.myapplication.presentation.mvp.newsList.AddNewsActivity;
 import com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment;
 import com.example.maja.myapplication.presentation.mvp.shelterList.ShelterListFragment;
 
@@ -39,6 +41,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     @Override
     public Context getActivityContext() {
         return this;
+    }
+
+    @Override
+    public void openAddNewsActivity() {
+        Intent intent = new Intent(this, AddNewsActivity.class);
+        startActivity(intent);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

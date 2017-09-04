@@ -4,17 +4,21 @@ package com.example.maja.myapplication.presentation.mvp.newsList;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
+import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +48,15 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
         ListView listView = (ListView) view.findViewById(R.id.newsList);
          newsListAdapter = new NewsListAdapter(getActivity());
         listView.setAdapter(newsListAdapter);
+        FloatingActionButton btnAddNews = (FloatingActionButton) view.findViewById(R.id.btnAddNews);
+
+        btnAddNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                parentActivity.openAddNewsActivity();
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }
