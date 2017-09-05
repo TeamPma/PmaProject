@@ -24,19 +24,19 @@ public class Announcement implements Serializable {
     private int idShelter;
     private String comment;
     private Date date;
-    private String imageUrl;
+    private String title;
 
     public Announcement() {
         super();
     }
 
-    public Announcement(int idAnnouncement, String comment, Date date, int idShelter, String imageUrl) {
+    public Announcement(int idAnnouncement, String comment, Date date, int idShelter, String title) {
         super();
         this.idAnnouncement = idAnnouncement;
         this.comment = comment;
         this.date = date;
         this.idShelter = idShelter;
-        this.imageUrl = imageUrl;
+        this.title = title;
     }
 
     @Id
@@ -78,12 +78,12 @@ public class Announcement implements Serializable {
     }
 
     @Column(name = "url", unique = true, nullable = true, length = 128)
-    public String getImageUrl() {
-        return imageUrl;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }
