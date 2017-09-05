@@ -246,6 +246,8 @@ public class HttpRestManager  {
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
+
+
                         Shelter shelter = gson.fromJson(stringResponse, Shelter.class);
                         EventBus.getDefault().post(new GetShelterByIdEvent(shelter));
                         Log.d(TAG, "onResponse: " + stringResponse);
