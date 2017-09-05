@@ -1,7 +1,11 @@
 package com.dogAdopter.rest;
 
+import com.dogAdopter.entity.Announcement;
+import com.dogAdopter.entity.User;
 import com.dogAdopter.util.JSONMapper;
 import com.google.gson.Gson;
+
+import java.util.Random;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,15 +24,18 @@ public class AnnouncementRestService extends BaseRestService {
     public AnnouncementRestService() {
         super();
     }
+    
+    
+    //getAnnByShelterId
+    //getAnnByDate
 
 
     @GET
     @Path("announcementByShelterId/{idOfShelter}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     public String getAnnouncementByShelterId(@PathParam("idOfShelter") String idOfShelter){
-       // return announcementService.getAnnouncementByShelterId(JSONMapper.getID(jsonRequest));
-    	Object announcement = announcementService.getAnnouncementByShelterId(Integer.parseInt(idOfShelter));
+    	int shleterId = gson.fromJson(idOfShelter, int.class);
+    	Object announcement = announcementService.getAnnouncementByShelterId(shleterId);
     	return gson.toJson(announcement);
     }
 
@@ -37,7 +44,6 @@ public class AnnouncementRestService extends BaseRestService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public String getAnnouncementId(@PathParam("idOfAnnouncement") String idOfAnnouncement){
-       // return announcementService.getAnnouncementId(JSONMapper.getID(jsonRequest));
     	Object announcement = announcementService.getAnnouncementId(Integer.parseInt(idOfAnnouncement));
     	return gson.toJson(announcement);
     }
@@ -48,6 +54,39 @@ public class AnnouncementRestService extends BaseRestService {
     public String getAllAnnouncements() {
 	   return gson.toJson(announcementService.getAllAnnouncements());
     }
+    
+    @GET
+    @Path("addAnnouncement/{announcement}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addAnnouncement(@PathParam("announcement") String announcement) {
+    	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
+		Random randomGenerator = new Random();
+		int randomInt = randomGenerator.nextInt(100);
+		announcementFromJson.setIdAnnouncement(randomInt);
+		announcementService.save(announcementFromJson);
+		return gson.toJson(announcementService.getAllAnnouncements());
+    }
+    
+    @GET
+    @Path("updateAnnouncement/{announcement}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String updateAnnouncement(@PathParam("announcement") String announcement) {
+    	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
+		announcementService.update(announcementFromJson);
+		return gson.toJson(announcementService.getAllAnnouncements());
+    }
+    
+    @GET
+    @Path("deleteAnnouncement/{announcement}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteAnnouncement(@PathParam("announcement") String announcement) {
+    	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
+		announcementService.delete(announcementFromJson);
+		return gson.toJson(announcementService.getAllAnnouncements());
+    }
+    
+    
+    
 
 
 }

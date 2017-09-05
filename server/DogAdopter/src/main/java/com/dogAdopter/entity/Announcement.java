@@ -10,8 +10,8 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = Announcement.GET_ALL, query = "FROM Announcement ann"),
-        @NamedQuery(name = Announcement.GET_ANNOUNCMENT_BY_SHELTER_ID, query = "FROM Announcement ann WHERE ann.idShelter = :id"),
-        @NamedQuery(name = Announcement.GET_ANNOUNCMENT_BY_ID, query = "FROM Announcement ann WHERE ann.idAnnouncement = :id")
+        @NamedQuery(name = Announcement.GET_ANNOUNCMENT_BY_SHELTER_ID, query = "FROM Announcement ann WHERE ann.idShelter = :idShelter"),
+        @NamedQuery(name = Announcement.GET_ANNOUNCMENT_BY_ID, query = "FROM Announcement ann WHERE ann.idAnnouncement = :idAnnouncement")
 })
 @Table(name = "Announcement", catalog = "mydb")
 public class Announcement implements Serializable {
