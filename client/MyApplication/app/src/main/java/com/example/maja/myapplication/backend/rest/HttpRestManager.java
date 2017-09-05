@@ -246,8 +246,8 @@ public class HttpRestManager  {
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
-                        int shelterId = gson.fromJson(stringResponse, Integer.class);
-                        EventBus.getDefault().post(new GetShelterByIdEvent(shelterId));
+                        Shelter shelter = gson.fromJson(stringResponse, Shelter.class);
+                        EventBus.getDefault().post(new GetShelterByIdEvent(shelter));
                         Log.d(TAG, "onResponse: " + stringResponse);
                         // Do whatever you want with the String
                     } catch (IOException e) {

@@ -17,7 +17,6 @@ import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.presentation.mvp.account.CreateAccountActivity;
 import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
-import com.example.maja.myapplication.presentation.mvp.testFirstActivity.TestFirst;
 
 // MVP - ideja je da sva logika u aktivitiju bude iskljucivo logika koje je vezana za UI a u presenteru sve ostalo
 public class LoginActivity extends AppCompatActivity implements LoginContact.View {
