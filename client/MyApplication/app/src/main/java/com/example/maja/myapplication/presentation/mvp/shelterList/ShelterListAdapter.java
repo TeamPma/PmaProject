@@ -41,7 +41,7 @@ public class ShelterListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return shelterList.get(i);
     }
 
     @Override

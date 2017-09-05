@@ -48,6 +48,7 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Shelter shelter = (Shelter)shelterListAdapter.getItem(position);
+                Log.d(TAG, "onItemClick: " + shelter);
                 parentActivity.showShelter(shelter);
             }
         });

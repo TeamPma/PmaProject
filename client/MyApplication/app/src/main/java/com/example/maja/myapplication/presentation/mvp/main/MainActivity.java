@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,7 @@ import com.example.maja.myapplication.presentation.mvp.shelter.ShelterDetailsAct
 import com.example.maja.myapplication.presentation.mvp.shelterList.ShelterListFragment;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
+    private static final String TAG = "MainActivity";
     private String[] mMenuItems;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     @Override
     public void showShelter(Shelter shelter) {
+        Log.d(TAG, "showShelter: " + shelter);
         Intent intent = new Intent(this, ShelterDetailsActivity.class);
         intent.putExtra("shelter",shelter);
         startActivity(intent);

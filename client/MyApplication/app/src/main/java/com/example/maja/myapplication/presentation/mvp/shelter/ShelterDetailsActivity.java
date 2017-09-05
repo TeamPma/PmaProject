@@ -22,33 +22,52 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_details);
-        presenter = new ShelterDetailsPresenter(this);
+        Log.d(TAG, "onCreate: " + getIntent().getSerializableExtra("shelter"));
         shelter = (Shelter) getIntent().getSerializableExtra("shelter");
+        Log.d(TAG, "onCreate: " + shelter);
+        presenter = new ShelterDetailsPresenter(this);
         initUIComponents();
     }
 
+    @Override
+    protected void onStart() {
+        Log.d(TAG, "onStart: ");
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "onResume: ");
+        super.onResume();
+        presenter.resume();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d(TAG, "onStop: ");
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "onPause: ");
+        super.onPause();
+        presenter.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
+        super.onDestroy();
+        presenter.destroy();
+    }
+
     private void initUIComponents() {
+        Log.d(TAG, "initUIComponents: ");
         shelterName = (TextView) findViewById(R.id.shelterName);
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-    }
-
-    @Override
-    public void getShelterByIdSuccessfull(Shelter shelter) {
-        Log.d(TAG, "getShelterByIdSuccessfull: ");
         shelterName.setText(shelter.getName());
-    }
-
-    @Override
-    public void getShelterByIdNotSuccessfull(String message) {
-        Log.d(TAG, "getShelterByIdNotSuccessfull: ");
-        builder.setTitle("Get shelter details not successfull.")
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
     }
 }

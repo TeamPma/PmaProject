@@ -9,8 +9,6 @@ import com.example.maja.myapplication.backend.entity.Shelter;
 public class ShelterDetailsContact {
 
     public interface View{
-        void getShelterByIdSuccessfull(Shelter shelter);
-        void getShelterByIdNotSuccessfull(String message);
     }
 
     public interface Presenter{
