@@ -35,6 +35,11 @@ public class ServiceRepository extends Service {
       return mBinder;
     }
 
+    public void getShelterByID(int shelterId) {
+        Log.d(TAG, "getShelterByID: ");
+        restManager.getShelterById(shelterId);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

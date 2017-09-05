@@ -44,6 +44,10 @@ public abstract class BasePresenter {
         smartBus.getDogList();
     }
 
+    protected void getShelterById_(int shelterId){
+        Log.d(TAG, "getShelterById_: ");
+        smartBus.getShelterById(shelterId);
+    }
     public void start() {
         Log.d(TAG, "start: ");
         if(!EventBus.getDefault().isRegistered(this)){

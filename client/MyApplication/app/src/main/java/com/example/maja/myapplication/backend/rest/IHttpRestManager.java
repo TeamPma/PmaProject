@@ -25,4 +25,7 @@ public interface IHttpRestManager {
 
     @GET("dogAll")
     Call<ResponseBody> getDogList();
+
+    @GET("shelterByID/{idOfShelter}")
+    Call<ResponseBody> getShelterById();
 }

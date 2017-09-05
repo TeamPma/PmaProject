@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.mvp.login.LoginActivity"></activity>
+        <activity android:name=".presentation.mvp.login.LoginActivity" />
 
         <service android:name=".backend.service.ServiceRepository" />
 
@@ -33,7 +33,8 @@
         <service android:name=".backend.service.ServiceRepository" />
 
         <activity android:name=".presentation.mvp.account.CreateAccountActivity" />
-        <activity android:name=".presentation.mvp.newsList.AddNewsActivity"></activity>
+        <activity android:name=".presentation.mvp.newsList.AddNewsActivity" />
+        <activity android:name=".presentation.mvp.shelter.ShelterDetailsActivity"></activity>
     </application>
 
 </manifest>

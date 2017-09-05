@@ -13,10 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
+import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.dogList.DogListFragment;
 import com.example.maja.myapplication.presentation.mvp.googleMap.MapFragment;
 import com.example.maja.myapplication.presentation.mvp.newsList.AddNewsActivity;
 import com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment;
+import com.example.maja.myapplication.presentation.mvp.shelter.ShelterDetailsActivity;
 import com.example.maja.myapplication.presentation.mvp.shelterList.ShelterListFragment;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
@@ -46,6 +48,13 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     @Override
     public void openAddNewsActivity() {
         Intent intent = new Intent(this, AddNewsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showShelter(Shelter shelter) {
+        Intent intent = new Intent(this, ShelterDetailsActivity.class);
+        intent.putExtra("shelter",shelter);
         startActivity(intent);
     }
 
