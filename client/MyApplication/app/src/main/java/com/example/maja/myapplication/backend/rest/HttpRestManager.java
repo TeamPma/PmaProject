@@ -11,6 +11,7 @@ import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
 import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
 import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
+import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.google.gson.Gson;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
@@ -228,6 +229,39 @@ public class HttpRestManager  {
                         ArrayList<Dog> dogList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Dog>>(){}.getType());
                         EventBus.getDefault().post(new GetAllDogsEvent(dogList));
 
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        // Do whatever you want with the String
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void getShelterById(int shelterId) {
+        Log.d(TAG, "getShelterById: ");
+        String url="http://192.168.0.12:8080/DogAdopter/rest/shelterService/";
+        Retrofit retrofit = getRetrofit(url);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        final Gson gson = new Gson();
+
+        iHttpRestManager.getShelterById().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        int shelterId = gson.fromJson(stringResponse, Integer.class);
+                        EventBus.getDefault().post(new GetShelterByIdEvent(shelterId));
                         Log.d(TAG, "onResponse: " + stringResponse);
                         // Do whatever you want with the String
                     } catch (IOException e) {

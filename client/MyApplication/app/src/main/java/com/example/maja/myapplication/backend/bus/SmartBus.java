@@ -74,4 +74,9 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "getDogList: ");
         mService.getDogList();
     }
+
+    public void getShelterById(int shelterId){
+        Log.d(TAG, "getShelterById: ");
+        mService.getShelterByID(shelterId);
+    }
 }

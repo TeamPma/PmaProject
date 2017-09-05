@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
@@ -43,9 +44,16 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
         ListView listView = (ListView) view.findViewById(R.id.shelterList);
         shelterListAdapter = new ShelterListAdapter(getActivity());
         listView.setAdapter(shelterListAdapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Shelter shelter = (Shelter)shelterListAdapter.getItem(position);
+                parentActivity.showShelter(shelter);
+            }
+        });
+//        listView.setOnItemClickListener(shelterListAdapter.OnItemClickListener() {
 //            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//            public void onItemClick(shelterListAdapter, listView, int position, long l) {
 //
 //            }
 //        });
