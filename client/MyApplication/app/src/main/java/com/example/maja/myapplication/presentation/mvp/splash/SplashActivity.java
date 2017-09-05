@@ -11,7 +11,6 @@ import android.widget.ProgressBar;
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.presentation.mvp.login.LoginActivity;
 import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
-import com.example.maja.myapplication.presentation.mvp.testFirstActivity.TestFirst;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -51,7 +50,6 @@ public class SplashActivity extends AppCompatActivity {
         String userIdKey = "com.example.maja.myapplication.userid";
         int userId = 0;
         if (prefs != null) {
-            Log.d(TAG, "pref is not null:");
             userId = prefs.getInt(userIdKey, 0);
             Log.d(TAG, "user: " + userId);
         }

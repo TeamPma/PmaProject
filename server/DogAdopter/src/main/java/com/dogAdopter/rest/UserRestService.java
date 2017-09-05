@@ -47,10 +47,8 @@ public class UserRestService extends BaseRestService{
 		int randomInt = randomGenerator.nextInt(100);
 		userFromJson.setIdUser(randomInt);
 		userService.save(userFromJson);
-		if(userService.findUserWithUsernameAndPassword(userFromJson.getUsername(), userFromJson.getPassword()) != null){
-			return user;
-		}
-		return "NotSave";
+		return gson.toJson(userService.findUserWithId(randomInt));
+
 	}
 	
 	

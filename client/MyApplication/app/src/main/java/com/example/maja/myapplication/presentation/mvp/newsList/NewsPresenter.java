@@ -7,7 +7,6 @@ import com.example.maja.myapplication.backend.events.BaseEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
 import com.example.maja.myapplication.presentation.BasePresenter;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
