@@ -24,21 +24,5 @@ public class TestApp {
 		UserRestService service =  new UserRestService();
 		Object a = service.addUser("");
 	}
-	public static void testForUserService(ApplicationContext appContext){
-		UserService userService = (UserService)appContext.getBean("userService");
-		System.out.println("Find all users:" + userService.findAllUser());
-		System.out.println("Find findUserWithId:" + userService.findUserWithId(1));
-	}
-	public static void testForDogService(ApplicationContext appContext){
-		DogService dogService = (DogService)appContext.getBean("dogService");
-		System.out.println(dogService.getAll());
-		System.out.println(dogService.getByIdOfShleter(1));
-
-	}
-	public static void testForVCService(ApplicationContext appContext){
-		
-	}
-	public static void testForAnnouncementService(ApplicationContext appContext){
-		
-	}
+	
 }

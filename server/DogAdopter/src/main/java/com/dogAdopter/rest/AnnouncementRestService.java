@@ -26,10 +26,8 @@ public class AnnouncementRestService extends BaseRestService {
     }
     
     
-    //getAnnByShelterId
     //getAnnByDate
-
-
+    
     @GET
     @Path("announcementByShelterId/{idOfShelter}")
     @Produces(MediaType.APPLICATION_JSON)

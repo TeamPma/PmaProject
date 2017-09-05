@@ -60,7 +60,6 @@ public class UserRestService extends BaseRestService{
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String getUserById(@PathParam("idOfUser") String idOfUser){
 		
-		//User user = userService.findUserWithId(JSONMapper.getID(jsonRequest));
 		User user = userService.findUserWithId(Integer.parseInt(idOfUser));
 		return gson.toJson(user);
 	}
@@ -69,7 +68,6 @@ public class UserRestService extends BaseRestService{
 	@Path("userAll")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAllUser(){
-		//return JSONMapper.getJSONArray(userService.findAllUser());
 		return gson.toJson(userService.findAllUser());
 	}
 

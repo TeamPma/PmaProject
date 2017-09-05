@@ -25,7 +25,6 @@ public class ShelterRestService extends BaseRestService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public String getShelterById(@PathParam("idOfShelter") String idOfShelter) {
-        //return shelterService.getShelterById(JSONMapper.getID(jsonRequest));
     	Shelter shelter = shelterService.getShelterById(Integer.parseInt(idOfShelter));
     	return gson.toJson(shelter);
     	
@@ -35,7 +34,6 @@ public class ShelterRestService extends BaseRestService {
     @Path("shelterAll")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllShelter() {
-       // return JSONMapper.getJSONArray(shelterService.getAll());
 	   return gson.toJson(shelterService.getAll());
     }
 

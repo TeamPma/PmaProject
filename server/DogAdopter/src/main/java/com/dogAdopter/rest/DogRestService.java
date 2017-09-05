@@ -33,14 +33,12 @@ public class DogRestService extends BaseRestService {
     	
     	Object dog = dogService.getByIdOfShleter(Integer.parseInt(idOfDog));
     	return gson.toJson(dog);
-        //return dogService.getByIdOfShleter(JSONMapper.getID(jsonRequest));
     }
 
     @GET
     @Path("dogAll")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllDogs(){
-        //return JSONMapper.getJSONArray(dogService.getAll());
     	 return gson.toJson(dogService.getAll());
     }
 }
