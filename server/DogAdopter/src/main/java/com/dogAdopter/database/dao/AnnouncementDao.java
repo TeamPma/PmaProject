@@ -5,6 +5,7 @@ import com.dogAdopter.entity.Announcement;
 import java.util.ArrayList;
 
 public interface AnnouncementDao {
+	
 	void save(Announcement announcement);
 	void update(Announcement announcement);
 	void delete(Announcement announcement);

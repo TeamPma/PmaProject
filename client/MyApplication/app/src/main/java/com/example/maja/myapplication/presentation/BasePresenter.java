@@ -18,12 +18,12 @@ import java.net.URL;
 public abstract class BasePresenter {
     private static final String TAG = BasePresenter.class.getSimpleName();
     private SmartBus smartBus = SmartBus.getInstance();
-    //ukoliko se pojavi problem sa komunikacijom izmedju servisa i presentera postoji nesto sto se zove http://greenrobot.org/eventbus/
 
     protected void login_(String username, String password) {
         Log.d(TAG, "login_: ");
         smartBus.login(username, password);
     }
+
     protected void createAccount_(User user){
         Log.d(TAG, "createAccount_: ");
         smartBus.createAccount(user);

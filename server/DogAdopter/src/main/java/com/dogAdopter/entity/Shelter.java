@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @NamedQueries({
         @NamedQuery(name = Shelter.GET_ALL, query = "FROM Shelter shelter"),
-        @NamedQuery(name = Shelter.GET_SHELTER_BY_ID, query = "FROM Shelter shelter WHERE shelter.idShelter = :id"),
+        @NamedQuery(name = Shelter.GET_SHELTER_BY_ID, query = "FROM Shelter shelter WHERE shelter.idShelter = :idShelter"),
 })
 @Table(name = "Shelter", catalog = "mydb")
 public class Shelter implements Serializable {

@@ -39,8 +39,14 @@ public class HttpRestManager  {
 
     private static final String TAG = "HttpRestManager";
 
+    private static final String userSericeUrl = "http://192.168.0.12:8080/DogAdopter/rest/userservice/";
+    private static final String announcementsServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/announcementService/";
+    private static final String shelterServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/shelterService/";
+    private static final String dogServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/dogService/";
+
+    private final Gson gson = new Gson();
+
     public HttpRestManager(){}
-    public String result;
     private IHttpRestManager iHttpRestManager ;
 
     public Retrofit getRetrofit(String url){
@@ -62,9 +68,9 @@ public class HttpRestManager  {
     public void login(String username, String password) {
         Log.d(TAG , "login: ");
 
-        String url="http://192.168.0.12:8080/DogAdopter/rest/userservice/";
-        Retrofit retrofit = getRetrofit(url);
+        Retrofit retrofit = getRetrofit(userSericeUrl);
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
         Log.d(TAG, "username: "+ username + "    password:   " + password);
         iHttpRestManager.loginWithCredentials(username, password).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -72,26 +78,22 @@ public class HttpRestManager  {
                 Log.d("TAG",response.code()+"");
                 if (response.isSuccessful()) {
                     try {
-                        // get String from response
                         String stringResponse = response.body().string();
-
                         Log.d("Response",stringResponse +"");
-                        result = stringResponse;
-                        if(result.equals("NotExist")){
+
+                        if(stringResponse.equals("NotExist")){
                             Log.d("Response","User not exist");
                             EventBus.getDefault().post(new ErrorEvent("Username or password are not correct."));
                         }
                         else
                         {
                             Log.d(TAG, "onResponse: Login is succesfull");
-                            Gson gson = new Gson();
                             User user = gson.fromJson(stringResponse, User.class);
-                            Log.d("User", user.getUsername() + "   " + user.getPassword());
                             EventBus.getDefault().post(new LoginEvent(user));
                         }
-                        // Do whatever you want with the String
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
                         e.printStackTrace();
                     }
                 }
@@ -106,14 +108,11 @@ public class HttpRestManager  {
 
     public void createAccount(User user) {
         Log.d(TAG, "createAccount: ");
-        String url="http://192.168.0.12:8080/DogAdopter/rest/userservice/";
-        Retrofit retrofit = getRetrofit(url);
+
+        Retrofit retrofit = getRetrofit(userSericeUrl);
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
-        Log.d(TAG, "username:" + user.getUsername());
-        Gson gson = new Gson();
         String userJson = gson.toJson(user);
-        Log.d(TAG, "user: " + userJson);
         iHttpRestManager.createAccount(userJson).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -122,16 +121,11 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        if(stringResponse.equals("NotSave")){
-                            Log.d("Response","User not saved");
-                            EventBus.getDefault().post(new ErrorEvent("Problem at server. User is not saved."));
-                        }else {
-                            Log.d("Response", "User is saved:");
-                            EventBus.getDefault().post(new CreateAccountEvent());
-                        }
-                        // Do whatever you want with the String
+                        EventBus.getDefault().post(new CreateAccountEvent());
+
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
                         e.printStackTrace();
                     }
                 }
@@ -146,8 +140,8 @@ public class HttpRestManager  {
 
     public void getAllNews() {
         Log.d(TAG, "getAllNews: ");
-        String url="http://192.168.0.12:8080/DogAdopter/rest/announcementService/";
-        Retrofit retrofit = getRetrofit(url);
+
+        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
         iHttpRestManager.getListOfNews().enqueue(new Callback<ResponseBody>() {
             @Override
@@ -156,16 +150,12 @@ public class HttpRestManager  {
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
-                        Gson gson = new Gson();
-
-                        ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
-
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        Log.d(TAG, "onResponse: " + news.get(0));
+                        ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
                         EventBus.getDefault().post(new GetAllNewsEvent(news));
-                        // Do whatever you want with the String
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
                         e.printStackTrace();
                     }
                 }
@@ -180,11 +170,9 @@ public class HttpRestManager  {
 
     public void getShelterList(){
         Log.d(TAG, "getShelterList: ");
-        String url="http://192.168.0.12:8080/DogAdopter/rest/shelterService/";
-        Retrofit retrofit = getRetrofit(url);
-        iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
-        final Gson gson = new Gson();
+        Retrofit retrofit = getRetrofit(shelterServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
         iHttpRestManager.getShelterList().enqueue(new Callback<ResponseBody>() {
             @Override
@@ -196,9 +184,9 @@ public class HttpRestManager  {
                         ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Shelter>>(){}.getType());
                         EventBus.getDefault().post(new GetAllSheltersEvent(shelterList));
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        // Do whatever you want with the String
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
                         e.printStackTrace();
                     }
                 }
@@ -213,11 +201,9 @@ public class HttpRestManager  {
 
     public void getDogList() {
         Log.d(TAG, "getDogList: ");
-        String url="http://192.168.0.12:8080/DogAdopter/rest/dogService/";
-        Retrofit retrofit = getRetrofit(url);
-        iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
-        final Gson gson = new Gson();
+        Retrofit retrofit = getRetrofit(dogServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
         iHttpRestManager.getDogList().enqueue(new Callback<ResponseBody>() {
             @Override
@@ -226,13 +212,13 @@ public class HttpRestManager  {
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
                         ArrayList<Dog> dogList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Dog>>(){}.getType());
                         EventBus.getDefault().post(new GetAllDogsEvent(dogList));
 
-                        Log.d(TAG, "onResponse: " + stringResponse);
-                        // Do whatever you want with the String
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
                         e.printStackTrace();
                     }
                 }

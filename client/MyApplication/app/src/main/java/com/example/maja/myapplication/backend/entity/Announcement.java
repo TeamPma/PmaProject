@@ -12,24 +12,24 @@ public class Announcement {
     private int idShelter;
     private String comment;
     private Date date;
-    private String imageUrl;
+    private String title;
 
     public Announcement() {
     }
 
-    public Announcement(int idShelter, String comment, Date date, String imageUrl) {
+    public Announcement(int idShelter, String comment, Date date, String title) {
         this.idShelter = idShelter;
         this.comment = comment;
         this.date = date;
-        this.imageUrl = imageUrl;
+        this.title = title;
     }
 
-    public Announcement(int idAnnouncement, int idShelter, String comment, Date date, String imageUrl) {
+    public Announcement(int idAnnouncement, int idShelter, String comment, Date date, String title) {
         this.idAnnouncement = idAnnouncement;
         this.idShelter = idShelter;
         this.comment = comment;
         this.date = date;
-        this.imageUrl = imageUrl;
+        this.title = title;
     }
 
     public int getIdAnnouncement() {
@@ -64,11 +64,11 @@ public class Announcement {
         this.date = date;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

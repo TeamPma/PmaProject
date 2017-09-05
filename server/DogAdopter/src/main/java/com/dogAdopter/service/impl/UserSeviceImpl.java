@@ -37,13 +37,11 @@ public class UserSeviceImpl implements UserService {
 
 	@Override
 	public User findUserWithId(Integer id) {
-		// TODO Auto-generated method stub
 		return userDao.findUserWithId(id);
 	}
 
 	@Override
 	public ArrayList<User> findAllUser() {
-		// TODO Auto-generated method stub
 		return userDao.findAllUser();
 	}
 
