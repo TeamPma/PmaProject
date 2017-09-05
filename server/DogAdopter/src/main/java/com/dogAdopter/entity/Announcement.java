@@ -77,7 +77,7 @@ public class Announcement implements Serializable {
         this.idShelter = idShelter;
     }
 
-    @Column(name = "url", unique = true, nullable = true, length = 128)
+    @Column(name = "title", unique = false, nullable = true, length = 45)
     public String getTitle() {
         return title;
     }
