@@ -53,6 +53,10 @@ public class SmartBus implements ServiceConnection {
         context.bindService(intent, this, Context.BIND_AUTO_CREATE);
     }
 
+    public Context getContext() {
+        return context;
+    }
+
     public void login(String username, String password) {
         Log.d(TAG, "login: ");
         mService.login(username,password);
