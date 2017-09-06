@@ -7,8 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.maja.myapplication.backend.bus.SmartBus;
+import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
+
+import java.util.Date;
 
 /**
  * Created by Maja on 25.8.2017.
@@ -21,10 +24,12 @@ public class DatabaseManager {
     private SmartBus smartBus;
     private ShelterDbHelper shelterDbHelper;
     private DogDbHelper dogDbHelper;
+    private AnnouncementDbHelper announcementDbHelper;
 
     public DatabaseManager(Context context) {
         shelterDbHelper = new ShelterDbHelper(smartBus.getInstance().getContext());
         dogDbHelper = new DogDbHelper((smartBus.getInstance().getContext()));
+        announcementDbHelper = new AnnouncementDbHelper((smartBus.getInstance().getContext()));
     }
 }
 
@@ -177,7 +182,7 @@ class DogDbHelper extends SQLiteOpenHelper {
                 COLUMN_DOG_IS_STERILIZED + " TEXT, " +
                 COLUMN_DOG_IS_MARKED + " TEXT, " +
                 COLUMN_DOG_ANAMNESIS + " TEXT, " +
-                COLUMN_DOG_SHELTER_ID + " TEXT);" );
+                COLUMN_DOG_SHELTER_ID + " TEXT);");
     }
 
     @Override
@@ -215,7 +220,7 @@ class DogDbHelper extends SQLiteOpenHelper {
 
         Dog[] dogs = new Dog[cursor.getCount()];
         int i = 0;
-        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             dogs[i++] = createDog(cursor);
         }
 
@@ -226,7 +231,7 @@ class DogDbHelper extends SQLiteOpenHelper {
     public Dog readDog(int idDog) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, COLUMN_DOG_ID + "=?",
-                new String[] {Integer.toString(idDog)}, null, null, null);
+                new String[]{Integer.toString(idDog)}, null, null, null);
         cursor.moveToFirst();
         Dog dog = createDog(cursor);
 
@@ -236,7 +241,7 @@ class DogDbHelper extends SQLiteOpenHelper {
 
     public void deleteDog(int idDog) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_NAME, COLUMN_DOG_ID + "=?", new String[] {Integer.toString(idDog)});
+        db.delete(TABLE_NAME, COLUMN_DOG_ID + "=?", new String[]{Integer.toString(idDog)});
         close();
     }
 
@@ -253,7 +258,101 @@ class DogDbHelper extends SQLiteOpenHelper {
         String dogAnamnesis = cursor.getString(cursor.getColumnIndex(COLUMN_DOG_ANAMNESIS));
         int dogShelterId = cursor.getInt(cursor.getColumnIndex(COLUMN_DOG_SHELTER_ID));
 
-        return new Dog(dogId, dogName, dogBread,dogGender,dogAge,dogWeight,dogHeight,isSterilized,isMarked,dogAnamnesis,dogShelterId);
+        return new Dog(dogId, dogName, dogBread, dogGender, dogAge, dogWeight, dogHeight, isSterilized, isMarked, dogAnamnesis, dogShelterId);
     }
+}
+
+class AnnouncementDbHelper extends SQLiteOpenHelper {
+
+        public static final String DATABASE_NAME = "announcements.db";
+        public static final int DATABASE_VERSION = 1;
+
+        public static final String TABLE_NAME = "announcement";
+        public static final String COLUMN_SHELTER_ID = "shelterId";
+        public static final String COLUMN_ANNOUNCEMENT_ID= "announcementId";
+        public static final String COLUMN_COMMENT = "comment";
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_DATE = "date";
+
+        private SQLiteDatabase mDb = null;
+
+        public AnnouncementDbHelper(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            this.mDb = mDb;
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
+                    COLUMN_SHELTER_ID + " TEXT, " +
+                    COLUMN_ANNOUNCEMENT_ID + " TEXT, " +
+                    COLUMN_COMMENT + " TEXT, " +
+                    COLUMN_TITLE + " TEXT, " +
+                    COLUMN_DATE + " TEXT, " );
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+        }
+
+        public void insert(Announcement announcement) {
+            SQLiteDatabase db = getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_SHELTER_ID, announcement.getIdShelter());
+            values.put(COLUMN_ANNOUNCEMENT_ID, announcement.getIdAnnouncement());
+            values.put(COLUMN_COMMENT, announcement.getComment());
+            values.put(COLUMN_TITLE, announcement.getTitle());
+            values.put(COLUMN_DATE, announcement.getDate().toString());
+
+            db.insert(TABLE_NAME, null, values);
+            close();
+        }
+
+        public Announcement[] readAnnouncements() {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
+
+            if (cursor.getCount() <= 0) {
+                return null;
+            }
+
+            Announcement[] announcements = new Announcement[cursor.getCount()];
+            int i = 0;
+            for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                announcements[i++] = createAnnouncement(cursor);
+            }
+
+            close();
+            return announcements;
+        }
+
+        public Announcement readAnnouncement(int idAnnouncement) {
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db.query(TABLE_NAME, null, COLUMN_ANNOUNCEMENT_ID + "=?",
+                    new String[] {Integer.toString(idAnnouncement)}, null, null, null);
+            cursor.moveToFirst();
+            Announcement announcement = createAnnouncement(cursor);
+
+            close();
+            return announcement;
+        }
+
+        public void deleteAnnouncement(int idAnnouncement) {
+            SQLiteDatabase db = getWritableDatabase();
+            db.delete(TABLE_NAME, COLUMN_ANNOUNCEMENT_ID + "=?", new String[] {Integer.toString(idAnnouncement)});
+            close();
+        }
+
+        private Announcement createAnnouncement(Cursor cursor) {
+            int announcementId = cursor.getInt(cursor.getColumnIndex(COLUMN_ANNOUNCEMENT_ID));
+            int shelterId = cursor.getInt(cursor.getColumnIndex(COLUMN_SHELTER_ID));
+            String title = cursor.getString(cursor.getColumnIndex(COLUMN_TITLE));
+            String  comment = cursor.getString(cursor.getColumnIndex(COLUMN_COMMENT));
+            //Date date = Date.parse(cursor.getString(cursor.getColumnIndex(COLUMN_DATE)));
+
+            return new Announcement(announcementId, shelterId, comment,new Date(),title);
+        }
 }
 

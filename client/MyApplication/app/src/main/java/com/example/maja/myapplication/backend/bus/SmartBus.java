@@ -91,4 +91,14 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "addNews: ");
         mService.addNews(announcement);
     }
+
+    public void updateNews(Announcement announcement) {
+        Log.d(TAG, "updateNews: ");
+        mService.updateNews(announcement);
+    }
+
+    public void deleteNews(Announcement announcement) {
+        Log.d(TAG, "deleteNews: ");
+        mService.deleteNews(announcement);
+    }
 }

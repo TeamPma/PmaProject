@@ -20,14 +20,10 @@ public abstract class BasePresenter {
     private static final String TAG = BasePresenter.class.getSimpleName();
     private SmartBus smartBus = SmartBus.getInstance();
 
+    //-------------User-------------------
     protected void login_(String username, String password) {
         Log.d(TAG, "login_: ");
         smartBus.login(username, password);
-    }
-
-    protected void addNews_ (Announcement announcement){
-        Log.d(TAG, "addNews_: ");
-        smartBus.addNews(announcement);
     }
 
     protected void createAccount_(User user){
@@ -35,25 +31,46 @@ public abstract class BasePresenter {
         smartBus.createAccount(user);
     }
 
+    //----------------------News-------------------------------
     protected void getAllNews_(){
         Log.d(TAG, "getAllNews_: ");
         smartBus.getAllNews();
     }
 
+    protected void addNews_ (Announcement announcement){
+        Log.d(TAG, "addNews_: ");
+        smartBus.addNews(announcement);
+    }
+    
+    protected void updateNews_ (Announcement announcement){
+        Log.d(TAG, "updateNews_: ");
+        smartBus.updateNews(announcement);
+    }
+    
+    protected void deleteNews_ (Announcement announcement){
+        Log.d(TAG, "deleteNews_: ");
+        smartBus.deleteNews(announcement);
+    }
+
+    //--------------------Shelter--------------------------------
     protected void getShelterList_(){
         Log.d(TAG, "getShelterList_: ");
         smartBus.getShelterList();
-    }
-
-    protected void getDogList_(){
-        Log.d(TAG, "getDogList_: ");
-        smartBus.getDogList();
     }
 
     protected void getShelterById_(int shelterId){
         Log.d(TAG, "getShelterById_: ");
         smartBus.getShelterById(shelterId);
     }
+
+    //---------------------Dog ----------------------------------
+
+    protected void getDogList_(){
+        Log.d(TAG, "getDogList_: ");
+        smartBus.getDogList();
+    }
+
+    //----------------------Other----------------------------------
 
     public void start() {
         Log.d(TAG, "start: ");

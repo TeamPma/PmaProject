@@ -26,7 +26,7 @@ public class AddNewsPresenter extends BasePresenter implements AddNewsContact.Pr
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(BaseEvent event) {
         switch (event.getType()) {
-            case ADD_NEWS:
+            case ADD_NEWS_EVENT:
                 handleResponse();
                 break;
             case ERROR_EVENT:

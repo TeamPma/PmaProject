@@ -32,10 +32,14 @@ public interface IHttpRestManager {
     @GET("addAnnouncement/{announcement}")
     Call<ResponseBody> addNews(@Path("announcement") String announcement);
 
+    @GET("updateAnnouncement/{announcement}")
+    Call<ResponseBody> updateNews(@Path("announcement") String announcementUrl);
+
+    @GET("deleteAnnouncement/{announcement}")
+    Call<ResponseBody> deleteNews(@Path("announcement") String announcementToJson);
+
     //------------------Dog ------------------------------------------
     @GET("dogAll")
     Call<ResponseBody> getDogList();
-
-
 
 }

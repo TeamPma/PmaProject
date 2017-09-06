@@ -7,6 +7,6 @@ package com.example.maja.myapplication.backend.events;
 public class AddNewsEvent extends BaseEvent {
 
     public AddNewsEvent() {
-        super(EventType.ADD_NEWS);
+        super(EventType.ADD_NEWS_EVENT);
     }
 }

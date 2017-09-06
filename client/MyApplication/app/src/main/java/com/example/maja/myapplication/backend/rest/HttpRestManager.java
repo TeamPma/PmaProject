@@ -8,12 +8,14 @@ import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.events.AddNewsEvent;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
+import com.example.maja.myapplication.backend.events.DeleteNewsEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
 import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
 import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
+import com.example.maja.myapplication.backend.events.UpdateNewsEvent;
 import com.google.gson.Gson;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.google.gson.reflect.TypeToken;
@@ -273,11 +275,12 @@ public class HttpRestManager  {
 
     public void addNews(Announcement announcement) {
 
+        Log.d(TAG, "addNews: ");
         Retrofit retrofit = getRetrofit(announcementsServiceUrl);
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
-        String announcementUrl = gson.toJson(announcement);
-        iHttpRestManager.addNews(announcementUrl).enqueue(new Callback<ResponseBody>() {
+        String announcementToJson = gson.toJson(announcement);
+        iHttpRestManager.addNews(announcementToJson).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("TAG",response.code()+"");
@@ -286,6 +289,70 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
                         EventBus.getDefault().post(new AddNewsEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void updateNews(Announcement announcement) {
+        Log.d(TAG, "updateNews: ");
+        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String announcementUrl = gson.toJson(announcement);
+        iHttpRestManager.updateNews(announcementUrl).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new UpdateNewsEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+    
+
+    public void deleteNews(Announcement announcement) {
+
+        Log.d(TAG, "deleteNews: ");
+        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String announcementToJson = gson.toJson(announcement);
+        iHttpRestManager.deleteNews(announcementToJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                         EventBus.getDefault().post(new DeleteNewsEvent());
 
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());

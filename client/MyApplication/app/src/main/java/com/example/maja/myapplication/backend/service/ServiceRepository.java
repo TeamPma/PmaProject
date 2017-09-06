@@ -36,6 +36,16 @@ public class ServiceRepository extends Service {
       return mBinder;
     }
 
+    public void updateNews(Announcement announcement) {
+        Log.d(TAG, "updateNews: ");
+        restManager.updateNews(announcement);
+    }
+
+    public void deleteNews(Announcement announcement) {
+        Log.d(TAG, "deleteNews: ");
+        restManager.deleteNews(announcement);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

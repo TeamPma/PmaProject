@@ -52,6 +52,9 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
         listView.setAdapter(newsListAdapter);
 
 
+        //dodaces click za update and delete
+
+
 //        btnAddNews.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -90,5 +93,16 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
     public void getAllNewsSuccesfull(ArrayList<Announcement> news) {
         newsListAdapter.setNewsList(news);
         newsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void handleUpdateNewsSuccessful() {
+        Log.d(TAG, "handleUpdateNewsSuccessful: ");
+
+    }
+
+    @Override
+    public void handleDeleteNewsSuccessful() {
+        Log.d(TAG, "handleDeleteNewsSuccessful: ");
     }
 }
