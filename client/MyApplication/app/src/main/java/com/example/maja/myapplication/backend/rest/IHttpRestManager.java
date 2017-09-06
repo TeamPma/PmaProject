@@ -11,21 +11,31 @@ import retrofit2.http.Path;
 
 public interface IHttpRestManager {
 
+    // -------------User --------------------
     @GET("login/{username}/{password}")
     Call<ResponseBody> loginWithCredentials(@Path("username") String username, @Path("password") String password);
 
     @GET("addUser/{user}")
     Call<ResponseBody> createAccount(@Path("user") String user);
 
+    //-------------- Shelter ----------------------------
     @GET("shelterAll")
     Call<ResponseBody> getShelterList();
 
+    @GET("shelterByID/{idOfShelter}")
+    Call<ResponseBody> getShelterById(@Path("idOfShelter") String idOfShelter);
+
+    //--------------- Announcement ------------------------------
     @GET("announcementsAll")
     Call<ResponseBody> getListOfNews();
 
+    @GET("addAnnouncement/{announcement}")
+    Call<ResponseBody> addNews(@Path("announcement") String announcement);
+
+    //------------------Dog ------------------------------------------
     @GET("dogAll")
     Call<ResponseBody> getDogList();
 
-    @GET("shelterByID/{idOfShelter}")
-    Call<ResponseBody> getShelterById();
+
+
 }

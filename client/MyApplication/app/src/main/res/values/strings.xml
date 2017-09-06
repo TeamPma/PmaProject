@@ -26,4 +26,7 @@
     <string name="account_email">Email: </string>
     <string name="account_number">Phone number: </string>
     <string name="account_createAccount">Create account</string>
+
+    <string name="add_news_title">Title:</string>
+    <string name="add_news_description">Description:</string>
 </resources>

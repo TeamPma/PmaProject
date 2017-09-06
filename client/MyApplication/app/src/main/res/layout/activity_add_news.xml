@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.maja.myapplication.presentation.mvp.newsList.AddNewsActivity">
+    tools:context=".presentation.mvp.addNews.AddNewsActivity">
+
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp" >
 
-        <!-- First name -->
+        <!-- Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/account_firstname"
+            android:text="@string/add_news_title"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"/>
 
         <EditText
-            android:id="@+id/firstname"
+            android:id="@+id/add_news_title_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -34,118 +35,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/account_lastName"
+            android:text="@string/add_news_description"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/lastname"
+            android:id="@+id/add_news_description_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
+            android:layout_height="250dp"
+            android:inputType="text|textMultiLine"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:padding="5dp"
-            android:background="@drawable/border" />
-
-        <!-- Username -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/account_username"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/acc_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
-
-        <!-- Password -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/account_password"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/acc_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
-
-        <!-- Confirm password -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/account_confirmPassword"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/acc_confirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
-
-        <!-- Email -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/account_email"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
-
-        <!-- Number -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/account_number"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
+            android:background="@drawable/border"/>
 
         <Button
-            android:id="@+id/btnCreateAccount"
+            android:id="@+id/btnAddNews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="@string/account_createAccount"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:text="Dodaj"
             android:textStyle="bold" />
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

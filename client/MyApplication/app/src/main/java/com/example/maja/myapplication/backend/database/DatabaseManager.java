@@ -5,6 +5,7 @@ package com.example.maja.myapplication.backend.database;
  */
 
 public class DatabaseManager {
+
     // implementiras bazu podataka ovde i sve sto je vezano za bazu
     // pogledaj dokumentaciju (onu misinu sa vezbi)
 }

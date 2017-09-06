@@ -6,6 +6,7 @@ import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
+import com.example.maja.myapplication.backend.events.AddNewsEvent;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
@@ -64,6 +65,7 @@ public class HttpRestManager  {
         return retrofit;
 
     }
+//----------------------------User ----------------------------------------------------------
 
     public void login(String username, String password) {
         Log.d(TAG , "login: ");
@@ -138,35 +140,7 @@ public class HttpRestManager  {
         });
     }
 
-    public void getAllNews() {
-        Log.d(TAG, "getAllNews: ");
-
-        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
-        iHttpRestManager = retrofit.create(IHttpRestManager.class);
-        iHttpRestManager.getListOfNews().enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("TAG",response.code()+"");
-                if (response.isSuccessful()) {
-                    try {
-                        String stringResponse = response.body().string();
-                        Log.d(TAG, "onResponse: " + stringResponse);
-                        ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
-                        EventBus.getDefault().post(new GetAllNewsEvent(news));
-                    } catch (IOException e) {
-                        Log.d("exception",e.getMessage());
-                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
-                        e.printStackTrace();
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Failure",t.getMessage());
-                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
-            }
-        });
-    }
+    //----------------------------Shelter ----------------------------------------------------------
 
     public void getShelterList(){
         Log.d(TAG, "getShelterList: ");
@@ -198,6 +172,40 @@ public class HttpRestManager  {
             }
         });
     }
+
+    public void getShelterById(int shelterId) {
+        Log.d(TAG, "getShelterById: ");
+
+        Retrofit retrofit = getRetrofit(shelterServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String shelteridToJson = gson.toJson(shelterId);
+        iHttpRestManager.getShelterById(shelteridToJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Shelter shelter = gson.fromJson(stringResponse, Shelter.class);
+                        EventBus.getDefault().post(new GetShelterByIdEvent(shelter));
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        // Do whatever you want with the String
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    //----------------------------Dog----------------------------------------------------------
 
     public void getDogList() {
         Log.d(TAG, "getDogList: ");
@@ -231,29 +239,57 @@ public class HttpRestManager  {
         });
     }
 
-    public void getShelterById(int shelterId) {
-        Log.d(TAG, "getShelterById: ");
-        String url="http://192.168.0.12:8080/DogAdopter/rest/shelterService/";
-        Retrofit retrofit = getRetrofit(url);
+    //----------------------------Announcements ----------------------------------------------------------
+    public void getAllNews() {
+        Log.d(TAG, "getAllNews: ");
+
+        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
-
-        final Gson gson = new Gson();
-
-        iHttpRestManager.getShelterById().enqueue(new Callback<ResponseBody>() {
+        iHttpRestManager.getListOfNews().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("TAG",response.code()+"");
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
-
-
-                        Shelter shelter = gson.fromJson(stringResponse, Shelter.class);
-                        EventBus.getDefault().post(new GetShelterByIdEvent(shelter));
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        // Do whatever you want with the String
+                        ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
+                        EventBus.getDefault().post(new GetAllNewsEvent(news));
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+
+    public void addNews(Announcement announcement) {
+
+        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String announcementUrl = gson.toJson(announcement);
+        iHttpRestManager.addNews(announcementUrl).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new AddNewsEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
                         e.printStackTrace();
                     }
                 }

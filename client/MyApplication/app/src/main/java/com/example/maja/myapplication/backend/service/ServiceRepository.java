@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.database.DatabaseManager;
+import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.rest.HttpRestManager;
 
@@ -35,15 +36,15 @@ public class ServiceRepository extends Service {
       return mBinder;
     }
 
-    public void getShelterByID(int shelterId) {
-        Log.d(TAG, "getShelterByID: ");
-        restManager.getShelterById(shelterId);
-    }
-
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;
         }
+    }
+
+    public void addNews(Announcement announcement) {
+        Log.d(TAG, "addNews: ");
+        restManager.addNews(announcement);
     }
 
     public void createAccount(User user) {
@@ -51,10 +52,17 @@ public class ServiceRepository extends Service {
         restManager.createAccount(user);
     }
 
+    public void getShelterByID(int shelterId) {
+        Log.d(TAG, "getShelterByID: ");
+        restManager.getShelterById(shelterId);
+    }
+
+
     public void getAllNews() {
         Log.d(TAG, "getAllNews: ");
         restManager.getAllNews();
     }
+
     public void getShelterList() {
         Log.d(TAG, "getShelterList: ");
         restManager.getShelterList();

@@ -3,6 +3,7 @@ package com.example.maja.myapplication.presentation;
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.bus.SmartBus;
+import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
 
 import org.greenrobot.eventbus.EventBus;
@@ -22,6 +23,11 @@ public abstract class BasePresenter {
     protected void login_(String username, String password) {
         Log.d(TAG, "login_: ");
         smartBus.login(username, password);
+    }
+
+    protected void addNews_ (Announcement announcement){
+        Log.d(TAG, "addNews_: ");
+        smartBus.addNews(announcement);
     }
 
     protected void createAccount_(User user){
@@ -48,6 +54,7 @@ public abstract class BasePresenter {
         Log.d(TAG, "getShelterById_: ");
         smartBus.getShelterById(shelterId);
     }
+
     public void start() {
         Log.d(TAG, "start: ");
         if(!EventBus.getDefault().isRegistered(this)){

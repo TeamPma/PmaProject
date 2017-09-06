@@ -33,7 +33,7 @@
         <service android:name=".backend.service.ServiceRepository" />
 
         <activity android:name=".presentation.mvp.account.CreateAccountActivity" />
-        <activity android:name=".presentation.mvp.newsList.AddNewsActivity" />
+        <activity android:name=".presentation.mvp.addNews.AddNewsActivity" />
         <activity android:name=".presentation.mvp.shelter.ShelterDetailsActivity"></activity>
     </application>
 

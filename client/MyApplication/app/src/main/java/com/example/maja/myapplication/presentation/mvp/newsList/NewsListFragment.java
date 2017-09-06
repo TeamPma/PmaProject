@@ -48,17 +48,17 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
         View view = inflater.inflate(R.layout.fragment_news_list, container, false);
         presenter.getAllNews();
         ListView listView = (ListView) view.findViewById(R.id.newsList);
-         newsListAdapter = new NewsListAdapter(getActivity());
+        newsListAdapter = new NewsListAdapter(getActivity());
         listView.setAdapter(newsListAdapter);
-        FloatingActionButton btnAddNews = (FloatingActionButton) view.findViewById(R.id.btnAddNews);
 
-        btnAddNews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: ");
-                parentActivity.openAddNewsActivity();
-            }
-        });
+
+//        btnAddNews.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d(TAG, "onClick: ");
+//                parentActivity.openAddNewsActivity();
+//            }
+//        });
         // Inflate the layout for this fragment
         return view;
     }

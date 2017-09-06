@@ -11,8 +11,6 @@ import com.example.maja.myapplication.backend.entity.Shelter;
 public interface FragmentListener {
 
     Context getActivityContext();
-
-    void openAddNewsActivity();
-
+    
     void showShelter(Shelter shelter);
 }

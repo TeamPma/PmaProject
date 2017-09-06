@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.service.ServiceRepository;
 
@@ -18,6 +19,8 @@ public class SmartBus implements ServiceConnection {
 
     private static final String TAG = SmartBus.class.getSimpleName();
     private static final SmartBus ourInstance = new SmartBus();
+
+
     public Context context;
     private ServiceRepository mService = null;
     boolean mServiceBound = false;
@@ -78,5 +81,10 @@ public class SmartBus implements ServiceConnection {
     public void getShelterById(int shelterId){
         Log.d(TAG, "getShelterById: ");
         mService.getShelterByID(shelterId);
+    }
+
+    public void addNews(Announcement announcement) {
+        Log.d(TAG, "addNews: ");
+        mService.addNews(announcement);
     }
 }
