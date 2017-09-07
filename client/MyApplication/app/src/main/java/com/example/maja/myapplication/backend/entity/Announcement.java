@@ -1,12 +1,13 @@
 package com.example.maja.myapplication.backend.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Maja on 4.9.2017.
  */
 
-public class Announcement {
+public class Announcement implements Serializable{
 
     private int idAnnouncement;
     private int idShelter;

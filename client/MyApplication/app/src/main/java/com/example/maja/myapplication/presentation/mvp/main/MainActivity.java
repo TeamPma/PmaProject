@@ -14,7 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
+import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.Shelter;
+import com.example.maja.myapplication.presentation.mvp.announcement.AnnouncementDetailActivity;
 import com.example.maja.myapplication.presentation.mvp.dogList.DogListFragment;
 import com.example.maja.myapplication.presentation.mvp.googleMap.MapFragment;
 import com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment;
@@ -52,6 +54,15 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         Log.d(TAG, "showShelter: " + shelter);
         Intent intent = new Intent(this, ShelterDetailsActivity.class);
         intent.putExtra("shelter",shelter);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void showAnnouncement(Announcement announcement) {
+        Log.d(TAG, "showAnnouncement: ");
+        Intent intent = new Intent(MainActivity.this, AnnouncementDetailActivity.class);
+        intent.putExtra("announcement",announcement);
         startActivity(intent);
         finish();
     }
