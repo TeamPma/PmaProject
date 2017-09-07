@@ -29,4 +29,7 @@
 
     <string name="add_news_title">Title:</string>
     <string name="add_news_description">Description:</string>
+    <string name="lblShalter">Shelter:</string>
+    <string name="lblDescription">Descr:</string>
+    <string name="lblDate">Date:</string>
 </resources>
