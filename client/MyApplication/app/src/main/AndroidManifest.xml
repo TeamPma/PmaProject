@@ -37,7 +37,7 @@
         <!-- DETAIL -->
         <activity android:name=".presentation.mvp.announcement.AnnouncementDetailActivity" />
         <activity android:name=".presentation.mvp.shelterDetails.ShelterDetailsActivity" />
-        
+
     </application>
 
 </manifest>
