@@ -273,6 +273,37 @@ public class HttpRestManager  {
         });
     }
 
+    public void addDog(Dog dog) {
+        Log.d(TAG, "addDog: ");
+        Retrofit retrofit = getRetrofit(dogServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String dogToJson = gson.toJson(dog);
+        iHttpRestManager.addDog(dogToJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new AddNewsEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
     //----------------------------Announcements ----------------------------------------------------------
     public void getAllNews() {
         Log.d(TAG, "getAllNews: ");
@@ -400,5 +431,4 @@ public class HttpRestManager  {
             }
         });
     }
-
 }

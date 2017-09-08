@@ -20,6 +20,9 @@ public class Dog implements Serializable{
     private String anamnesis;
     private int idShelter;
 
+    public Dog() {
+    }
+
     public Dog(int dogId, String name, String bread, int gender, int age, double weight, double height, int isSterilized, int isMarked, String anamnesis, int idShelter) {
         this.dogId = dogId;
         this.name = name;
@@ -32,6 +35,42 @@ public class Dog implements Serializable{
         this.isMarked = isMarked;
         this.anamnesis = anamnesis;
         this.idShelter = idShelter;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBread(String bread) {
+        this.bread = bread;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setAnamnesis(String anamnesis) {
+        this.anamnesis = anamnesis;
+    }
+
+    public void setIsMarked(int isMarked) {
+        this.isMarked = isMarked;
+    }
+
+    public void setIsSterilized(int isSterilized) {
+        this.isSterilized = isSterilized;
     }
 
     public int getDogId() {

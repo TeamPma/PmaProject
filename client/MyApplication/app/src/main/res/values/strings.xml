@@ -43,6 +43,7 @@
     <string name="lblBread">Bread:</string>
     <string name="lblGender">Gender:</string>
     <string name="lblAge">Age:</string>
+    <string name="btnCreateDog">Create dog</string>
 
     <!-- News strings -->
     <string name="add_news_title">Title:</string>

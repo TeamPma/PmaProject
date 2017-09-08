@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.entity.Announcement;
+import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.service.ServiceRepository;
@@ -106,5 +107,10 @@ public class SmartBus implements ServiceConnection {
     public void addShelter(Shelter shelter){
         Log.d(TAG, "addShelter: ");
         mService.addShelter(shelter);
+    }
+
+    public void addDog(Dog dog) {
+        Log.d(TAG, "addDog: ");
+        mService.addDog(dog);
     }
 }

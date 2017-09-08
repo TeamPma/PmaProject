@@ -3,7 +3,9 @@ package com.example.maja.myapplication.presentation.mvp.dogList;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.util.EventLogTags;
 import android.util.Log;
@@ -26,6 +28,8 @@ public class DogListFragment extends Fragment implements DogListContact.View{
     private FragmentListener parentActivity;
     private DogListPresenter presenter;
     private DogListAdapter dogListAdapter;
+    private FloatingActionButton btnAddDog;
+    private Dog dog;
 
     public DogListFragment() {
         // Required empty public constructor
@@ -42,6 +46,10 @@ public class DogListFragment extends Fragment implements DogListContact.View{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dogs_list, container, false);
+        builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+        btnAddDog = (FloatingActionButton) view.findViewById(R.id.btnAddDog);
+
+        initListener();
         presenter.getDogList();
 
         ListView listView = (ListView) view.findViewById(R.id.dogList);
@@ -58,6 +66,21 @@ public class DogListFragment extends Fragment implements DogListContact.View{
         });
 
         return view;
+    }
+
+    private void initListener() {
+        Log.d(TAG, "initListener: ");
+        btnAddDog.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(getActivity(), AddDogActivity.class);
+                intent.putExtra("dog", dog);
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.maja.myapplication.backend.bus.SmartBus;
 import com.example.maja.myapplication.backend.entity.Announcement;
+import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.User;
 
@@ -74,6 +75,11 @@ public abstract class BasePresenter {
     protected void getDogList_(){
         Log.d(TAG, "getDogList_: ");
         smartBus.getDogList();
+    }
+
+    protected void addDog_(Dog dog){
+        Log.d(TAG, "addDog_: ");
+        smartBus.addDog(dog);
     }
 
     //----------------------Other----------------------------------

@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 
 import org.codehaus.jackson.map.Serializers;
 
+import java.util.Random;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -40,5 +42,17 @@ public class DogRestService extends BaseRestService {
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllDogs(){
     	 return gson.toJson(dogService.getAll());
+    }
+    
+    @GET
+    @Path("addDog/{dog}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addDog(@PathParam("dog") String dog) {
+    	Dog dogFromJson = gson.fromJson(dog, Dog.class);
+		Random randomGenerator = new Random();
+		int randomInt = randomGenerator.nextInt(100);
+		dogFromJson.setDogId(randomInt);
+		dogService.save(dogFromJson);
+		return gson.toJson(dogService.getAll());
     }
 }

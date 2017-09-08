@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.maja.myapplication.backend.database.DatabaseManager;
 import com.example.maja.myapplication.backend.entity.Announcement;
+import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.rest.HttpRestManager;
@@ -50,6 +51,11 @@ public class ServiceRepository extends Service {
     public void addShelter(Shelter shelter) {
         Log.d(TAG, "addShelter: ");
         restManager.addShelter(shelter);
+    }
+
+    public void addDog(Dog dog) {
+        Log.d(TAG, "addDog: ");
+        restManager.addDog(dog);
     }
 
     public class BinderObject extends Binder{

@@ -38,7 +38,8 @@
         <!-- DETAIL -->
         <activity android:name=".presentation.mvp.announcement.AnnouncementDetailActivity" />
         <activity android:name=".presentation.mvp.shelterDetails.ShelterDetailsActivity" />
-        <activity android:name=".presentation.mvp.dogDetails.DogDetailsActivity"></activity>
+        <activity android:name=".presentation.mvp.dogDetails.DogDetailsActivity" />
+        <activity android:name=".presentation.mvp.addDog.AddDogActivity"></activity>
     </application>
 
 </manifest>
