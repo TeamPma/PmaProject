@@ -1,10 +1,12 @@
 package com.example.maja.myapplication.backend.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Jovana on 3.9.2017..
  */
 
-public class Dog {
+public class Dog implements Serializable{
 
     private int dogId;
     private String name;

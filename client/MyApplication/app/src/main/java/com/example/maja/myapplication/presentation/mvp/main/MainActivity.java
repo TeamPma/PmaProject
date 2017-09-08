@@ -18,6 +18,7 @@ import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.announcement.AnnouncementDetailActivity;
+import com.example.maja.myapplication.presentation.mvp.dogDetails.DogDetailsActivity;
 import com.example.maja.myapplication.presentation.mvp.dogList.DogListFragment;
 import com.example.maja.myapplication.presentation.mvp.googleMap.MapFragment;
 import com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment;
@@ -71,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     @Override
     public void showDog(Dog dog) {
         Log.d(TAG, "showDog: ");
+        Intent intent = new Intent(MainActivity.this, DogDetailsActivity.class);
+        intent.putExtra("dog",dog);
+        startActivity(intent);
+        finish();
 
     }
 

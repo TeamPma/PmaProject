@@ -19,6 +19,7 @@
         <activity android:name=".presentation.mvp.login.LoginActivity" />
 
         <service android:name=".backend.service.ServiceRepository" />
+
         <activity android:name=".presentation.mvp.main.MainActivity" />
         <activity android:name=".presentation.mvp.splash.SplashActivity">
             <intent-filter>
@@ -32,12 +33,12 @@
         <!-- CREATE -->
         <activity android:name=".presentation.mvp.account.CreateAccountActivity" />
         <activity android:name=".presentation.mvp.addNews.AddNewsActivity" />
-        <activity android:name=".presentation.mvp.addShelter.AddShelterActivity"></activity>
+        <activity android:name=".presentation.mvp.addShelter.AddShelterActivity" />
 
         <!-- DETAIL -->
         <activity android:name=".presentation.mvp.announcement.AnnouncementDetailActivity" />
         <activity android:name=".presentation.mvp.shelterDetails.ShelterDetailsActivity" />
-
+        <activity android:name=".presentation.mvp.dogDetails.DogDetailsActivity"></activity>
     </application>
 
 </manifest>

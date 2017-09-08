@@ -6,20 +6,19 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/newsImage"
+        android:id="@+id/dogImage"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="5dp"
-
-        app:srcCompat="@drawable/news_icon" />
+        app:srcCompat="@drawable/dog_icon" />
 
     <TextView
-        android:id="@+id/newsTitle"
+        android:id="@+id/dogName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/newsImage"
+        android:layout_below="@+id/dogImage"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:text="MISA"
@@ -49,10 +48,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/textMargin"
                     android:layout_weight="1"
-                    android:text="@string/lblShalter" />
+                    android:text="@string/lblBread" />
 
                 <TextView
-                    android:id="@+id/news_shelterName"
+                    android:id="@+id/dogBread"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/textMargin"
@@ -73,13 +72,12 @@
                     android:layout_margin="@dimen/textMargin"
                     android:layout_weight="1"
 
-                    android:text="@string/lblDate" />
+                    android:text="@string/lblGender" />
 
                 <TextView
-                    android:id="@+id/newsDate"
+                    android:id="@+id/dogGender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-
                     android:layout_margin="@dimen/textMargin"
                     android:layout_weight="4" />
             </LinearLayout>
@@ -95,21 +93,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/textMargin"
-
                     android:layout_weight="1"
-                    android:text="@string/lblDescription" />
+                    android:text="@string/lblAge" />
 
                 <TextView
-                    android:id="@+id/newsDescription"
+                    android:id="@+id/dogAge"
                     android:layout_width="0dp"
                     android:layout_weight="4"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/textMargin"
-                    android:ems="10"
-                    android:lines="5"
-                    android:text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
-            </LinearLayout>
+                    android:layout_margin="@dimen/textMargin" />
 
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -137,4 +131,5 @@
             android:text="@string/btnDelete" />
 
     </LinearLayout>
+
 </RelativeLayout>
