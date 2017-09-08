@@ -35,7 +35,7 @@ public class NewsListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return newsList.get(i);
     }
 
     @Override
@@ -47,12 +47,14 @@ public class NewsListAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         Announcement announcement = newsList.get(i);
         view = inflater.inflate(R.layout.news_list_item,null);
-        TextView newsShelter = view.findViewById(R.id.newsShelter);
-        TextView newsComment = view.findViewById(R.id.newsComment);
+        TextView newsTitle = view.findViewById(R.id.newsTitle);
+        TextView newsDescription = view.findViewById(R.id.newsDescription);
         TextView newsDate = view.findViewById(R.id.newsDate);
-        newsShelter.setText(String.valueOf(announcement.getIdShelter()));
-        newsComment.setText(announcement.getComment());
+        TextView shelterName = view.findViewById(R.id.shelterName);
+        newsTitle.setText(announcement.getTitle());
+        newsDescription.setText(announcement.getComment());
         newsDate.setText(announcement.getDate().toString());
+        //TODO ANA - prikazi shelter name
         return view;
     }
 
