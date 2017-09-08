@@ -49,11 +49,11 @@ public class DogListPresenter extends BasePresenter implements DogListContact.Pr
 
     private void handleError(String message) {
         Log.d(TAG, "handleError: ");
-        view.getDogListNotSuccessfull(message);
+        view.handleError(message);
     }
 
     private void handleGetAllDogsResponse(ArrayList<Dog> dogList) {
-        Log.d(TAG, "handleGetAllDogsResponse: ");
+        Log.d(TAG, "handleGetAllDogsResponse: " + dogList.get(0));
         view.getDogListSuccessfull(dogList);
     }
 

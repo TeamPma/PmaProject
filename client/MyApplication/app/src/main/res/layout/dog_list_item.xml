@@ -1,30 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/upcoming_item_relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffff"
+    android:orientation="horizontal"
+    android:padding="4dp">
 
-    <TextView
-        android:id="@+id/dogName"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:textSize="30dp"
-        android:gravity="center_horizontal"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dogImage"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="5dp"
+            app:srcCompat="@drawable/dog_icon" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/dogBread"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:textSize="15dp"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/dogAge1"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:textSize="15dp"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/linearLayout"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dogName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:maxLines="2"
+            android:shadowColor="@color/material_blue_grey_900"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/dogLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center|left"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/lblBread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/lblBread" />
+
+            <TextView
+                android:id="@+id/dogBread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/lblBread"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lblGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/lblBread"
+                android:layout_alignStart="@+id/lblBread"
+                android:layout_below="@+id/lblBread"
+                android:text="@string/lblGender" />
+
+            <TextView
+                android:id="@+id/dogGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/dogBread"
+                android:layout_marginLeft="50dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lblAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/lblGender"
+                android:layout_alignStart="@+id/lblGender"
+                android:layout_below="@+id/lblGender"
+                android:text="@string/lblAge" />
+
+            <TextView
+                android:id="@+id/dogAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/dogGender"
+                android:layout_marginLeft="50dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
@@ -47,6 +48,15 @@ public class DogListFragment extends Fragment implements DogListContact.View{
         dogListAdapter = new DogListAdapter(getActivity());
         listView.setAdapter(dogListAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Dog dog = (Dog) dogListAdapter.getItem(position);
+                Log.d(TAG, "onItemClick: " + dog);
+                parentActivity.showDog(dog);
+            }
+        });
+
         return view;
     }
 
@@ -58,17 +68,10 @@ public class DogListFragment extends Fragment implements DogListContact.View{
         }
     }
 
-    @Override
-    public void getDogListSuccessfull(ArrayList<Dog> dogList) {
-        Log.d(TAG, "getDogListSuccessfull: ");
-        dogListAdapter.setDogList(dogList);
-        dogListAdapter.notifyDataSetChanged();
-
-    }
 
     @Override
-    public void getDogListNotSuccessfull(String message) {
-        Log.d(TAG, "getDogListNotSuccessfull: ");
+    public void handleError(String message) {
+        Log.d(TAG, "handleError: ");
         builder.setTitle("Getting DogList not successful")
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -78,6 +81,11 @@ public class DogListFragment extends Fragment implements DogListContact.View{
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
 
+    @Override
+    public void getDogListSuccessfull(ArrayList<Dog> dogList) {
+        dogListAdapter.setDogList(dogList);
+        dogListAdapter.notifyDataSetChanged();
     }
 }

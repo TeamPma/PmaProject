@@ -38,6 +38,11 @@
     <string name="add_shelter_bank_account">Bank account:</string>
     <string name="btnCreateShelter">Create shelter</string>
 
+    <!-- Dogs strings -->
+    <string name="lblName">Name:</string>
+    <string name="lblBread">Bread:</string>
+    <string name="lblGender">Gender:</string>
+    <string name="lblAge">Age:</string>
 
     <!-- News strings -->
     <string name="add_news_title">Title:</string>

@@ -40,7 +40,7 @@ public class DogListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return dogList.get(i);
     }
 
     @Override
@@ -54,10 +54,10 @@ public class DogListAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.dog_list_item,null);
         TextView dogName = (TextView)view.findViewById(R.id.dogName);
         TextView dogBread = (TextView)view.findViewById(R.id.dogBread);
-        TextView dogAge = (TextView)view.findViewById(R.id.dogAge1);
+        TextView dogAge = (TextView)view.findViewById(R.id.dogAge);
         dogName.setText(dog.getName());
         dogBread.setText(dog.getBread());
-//        dogAge.setText(dog.getAge());
+        dogAge.setText(String.valueOf(dog.getAge()));
         return view;
     }
 }

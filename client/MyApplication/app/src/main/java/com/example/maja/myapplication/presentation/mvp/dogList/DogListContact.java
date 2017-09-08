@@ -12,9 +12,9 @@ public class DogListContact {
 
     public interface View{
 
+        void handleError(String message);
         void getDogListSuccessfull(ArrayList<Dog> dogList);
 
-        void getDogListNotSuccessfull(String message);
     }
 
     public interface Presenter{
