@@ -6,6 +6,7 @@ import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
+import com.example.maja.myapplication.backend.events.AddDogEvent;
 import com.example.maja.myapplication.backend.events.AddNewsEvent;
 import com.example.maja.myapplication.backend.events.AddShelterEvent;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
@@ -287,7 +288,7 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        EventBus.getDefault().post(new AddNewsEvent());
+                        EventBus.getDefault().post(new AddDogEvent());
 
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
