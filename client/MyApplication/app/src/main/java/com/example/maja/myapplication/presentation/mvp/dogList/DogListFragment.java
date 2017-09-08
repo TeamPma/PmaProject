@@ -17,6 +17,7 @@ import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Dog;
+import com.example.maja.myapplication.presentation.mvp.addDog.AddDogActivity;
 import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
 
 import java.util.ArrayList;
@@ -66,6 +67,41 @@ public class DogListFragment extends Fragment implements DogListContact.View{
         });
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        Log.d(TAG, "onStart: ");
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "onStop: ");
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
+    public void onPause() {
+        Log.d(TAG, "onPause: ");
+        super.onPause();
+        presenter.pause();
+    }
+
+    @Override
+    public void onResume() {
+        Log.d(TAG, "onResume: ");
+        super.onResume();
+        presenter.resume();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
+        super.onDestroy();
+        presenter.destroy();
     }
 
     private void initListener() {
