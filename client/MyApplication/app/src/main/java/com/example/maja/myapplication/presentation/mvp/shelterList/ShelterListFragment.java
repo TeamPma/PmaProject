@@ -69,6 +69,41 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
         return view;
     }
 
+    @Override
+    public void onStart() {
+        Log.d(TAG, "onStart: ");
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "onStop: ");
+        super.onStop();
+        presenter.stop();
+    }
+
+    @Override
+    public void onPause() {
+        Log.d(TAG, "onPause: ");
+        super.onPause();
+        presenter.pause();
+    }
+
+    @Override
+    public void onResume() {
+        Log.d(TAG, "onResume: ");
+        super.onResume();
+        presenter.resume();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
+        super.onDestroy();
+        presenter.destroy();
+    }
+
     private void initListener() {
         Log.d(TAG, "initListener: ");
         btnAddShelter.setOnClickListener(new View.OnClickListener(){
@@ -78,7 +113,7 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
                 Log.d(TAG, "onClick: ");
                 Intent intent = new Intent(getActivity(), AddShelterActivity.class);
                 intent.putExtra("shelter", shelter);
-                startActivity(intent);
+                getActivity().startActivity(intent);
                 getActivity().finish();
             }
         });
