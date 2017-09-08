@@ -13,12 +13,19 @@ import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.addNews.AddNewsActivity;
 
+import org.w3c.dom.Text;
+
 public class ShelterDetailsActivity extends AppCompatActivity implements ShelterDetailsContact.View{
 
     private static final String TAG = ShelterDetailsActivity.class.getSimpleName();
     private AlertDialog.Builder builder;
     private ShelterDetailsPresenter presenter;
     private TextView shelterName;
+    private TextView shelterAddress;
+    private TextView shelterCity;
+    private TextView shelterNumber;
+    private TextView shelterLocation;
+    private TextView shelterBankAccount;
     private Shelter shelter;
     private FloatingActionButton  btnAddNews;
 
@@ -72,9 +79,23 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
 
     private void initUIComponents() {
         Log.d(TAG, "initUIComponents: ");
+
         shelterName = (TextView) findViewById(R.id.shelterName);
+        shelterAddress = (TextView) findViewById(R.id.shelterAddress);
+        shelterCity = (TextView) findViewById(R.id.shelterCity);
+        shelterNumber = (TextView) findViewById(R.id.shelterNumber);
+        shelterLocation = (TextView) findViewById(R.id.shelterLocation);
+        shelterBankAccount = (TextView) findViewById(R.id.shelterBankAccount);
+
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+
         shelterName.setText(shelter.getName());
+        shelterAddress.setText(shelter.getAddress());
+        shelterCity.setText(shelter.getCity());
+        shelterNumber.setText(shelter.getNumber());
+        shelterLocation.setText(shelter.getLocation());
+        shelterBankAccount.setText(shelter.getBankAccount());
+
         btnAddNews = (FloatingActionButton) findViewById(R.id.btnAddNews);
     }
 
