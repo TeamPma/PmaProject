@@ -81,11 +81,17 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         Log.d(TAG, "initUIComponents: ");
 
         shelterName = (TextView) findViewById(R.id.shelterName);
+        Log.d(TAG, "initUIComponents: " + shelterName);
         shelterAddress = (TextView) findViewById(R.id.shelterAddress);
+        Log.d(TAG, "initUIComponents: " + shelterAddress);
         shelterCity = (TextView) findViewById(R.id.shelterCity);
+        Log.d(TAG, "initUIComponents: " + shelterCity);
         shelterNumber = (TextView) findViewById(R.id.shelterNumber);
+        Log.d(TAG, "initUIComponents: " + shelterNumber);
         shelterLocation = (TextView) findViewById(R.id.shelterLocation);
+        Log.d(TAG, "initUIComponents: " + shelterLocation);
         shelterBankAccount = (TextView) findViewById(R.id.shelterBankAccount);
+        Log.d(TAG, "initUIComponents: " + shelterBankAccount);
 
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
 
@@ -94,7 +100,7 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         shelterCity.setText(shelter.getCity());
         shelterNumber.setText(shelter.getNumber());
         shelterLocation.setText(shelter.getLocation());
-        shelterBankAccount.setText(shelter.getBankAccount());
+        shelterBankAccount.setText(String.valueOf(shelter.getBankAccount()));
 
         btnAddNews = (FloatingActionButton) findViewById(R.id.btnAddNews);
     }
