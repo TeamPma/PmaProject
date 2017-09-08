@@ -54,9 +54,19 @@ public class DogListAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.dog_list_item,null);
         TextView dogName = (TextView)view.findViewById(R.id.dogName);
         TextView dogBread = (TextView)view.findViewById(R.id.dogBread);
+        TextView dogGender = (TextView)view.findViewById(R.id.dogGender);
         TextView dogAge = (TextView)view.findViewById(R.id.dogAge);
         dogName.setText(dog.getName());
         dogBread.setText(dog.getBread());
+        int gender = dog.getGender();
+        if(gender == 0){
+            dogGender.setText("Female");
+        } else if(gender == 1){
+            dogGender.setText("Male");
+        } else{
+            dogGender.setText("Not valid");
+        }
+        //dogGender.setText(String.valueOf(dog.getGender()));
         dogAge.setText(String.valueOf(dog.getAge()));
         return view;
     }

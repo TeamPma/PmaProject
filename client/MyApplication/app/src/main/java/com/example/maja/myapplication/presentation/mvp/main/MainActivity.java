@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Announcement;
+import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.announcement.AnnouncementDetailActivity;
 import com.example.maja.myapplication.presentation.mvp.dogList.DogListFragment;
@@ -65,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         intent.putExtra("announcement",announcement);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void showDog(Dog dog) {
+        Log.d(TAG, "showDog: ");
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
