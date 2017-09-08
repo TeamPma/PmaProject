@@ -13,7 +13,7 @@ import android.widget.EditText;
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.Shelter;
-import com.example.maja.myapplication.presentation.mvp.shelter.ShelterDetailsActivity;
+import com.example.maja.myapplication.presentation.mvp.shelterDetails.ShelterDetailsActivity;
 
 import java.util.Date;
 

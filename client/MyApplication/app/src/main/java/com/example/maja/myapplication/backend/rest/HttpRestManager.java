@@ -7,6 +7,7 @@ import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.events.AddNewsEvent;
+import com.example.maja.myapplication.backend.events.AddShelterEvent;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
 import com.example.maja.myapplication.backend.events.DeleteNewsEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
@@ -207,6 +208,37 @@ public class HttpRestManager  {
         });
     }
 
+    public void addShelter(Shelter shelter) {
+        Log.d(TAG, "addShelter: ");
+        Retrofit retrofit = getRetrofit(shelterServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String shelterToJson = gson.toJson(shelter);
+        iHttpRestManager.addShelter(shelterToJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new AddShelterEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
     //----------------------------Dog----------------------------------------------------------
 
     public void getDogList() {
@@ -368,4 +400,5 @@ public class HttpRestManager  {
             }
         });
     }
+
 }

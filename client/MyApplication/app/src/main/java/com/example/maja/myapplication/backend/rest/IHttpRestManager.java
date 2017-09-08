@@ -25,6 +25,9 @@ public interface IHttpRestManager {
     @GET("shelterByID/{idOfShelter}")
     Call<ResponseBody> getShelterById(@Path("idOfShelter") String idOfShelter);
 
+    @GET("addShelter/{shelter}")
+    Call<ResponseBody> addShelter(@Path("shelter") String shelter);
+
     //--------------- Announcement ------------------------------
     @GET("announcementsAll")
     Call<ResponseBody> getListOfNews();

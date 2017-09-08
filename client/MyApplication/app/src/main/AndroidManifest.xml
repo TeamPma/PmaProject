@@ -34,7 +34,8 @@
 
         <activity android:name=".presentation.mvp.account.CreateAccountActivity" />
         <activity android:name=".presentation.mvp.addNews.AddNewsActivity" />
-        <activity android:name=".presentation.mvp.shelter.ShelterDetailsActivity"></activity>
+        <activity android:name=".presentation.mvp.shelterDetails.ShelterDetailsActivity" />
+        <activity android:name=".presentation.mvp.addShelter.AddShelterActivity"></activity>
     </application>
 
 </manifest>

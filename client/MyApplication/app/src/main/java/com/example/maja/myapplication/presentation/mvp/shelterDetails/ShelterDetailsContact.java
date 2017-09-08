@@ -1,6 +1,4 @@
-package com.example.maja.myapplication.presentation.mvp.shelter;
-
-import com.example.maja.myapplication.backend.entity.Shelter;
+package com.example.maja.myapplication.presentation.mvp.shelterDetails;
 
 /**
  * Created by Jovana on 5.9.2017..

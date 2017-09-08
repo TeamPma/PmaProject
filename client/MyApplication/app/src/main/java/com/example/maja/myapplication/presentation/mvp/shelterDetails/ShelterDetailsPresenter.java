@@ -1,10 +1,9 @@
-package com.example.maja.myapplication.presentation.mvp.shelter;
+package com.example.maja.myapplication.presentation.mvp.shelterDetails;
 
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.events.BaseEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
-import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
 import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
 import com.example.maja.myapplication.presentation.BasePresenter;
 

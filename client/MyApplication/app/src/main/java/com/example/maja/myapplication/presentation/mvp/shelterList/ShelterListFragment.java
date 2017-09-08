@@ -3,7 +3,9 @@ package com.example.maja.myapplication.presentation.mvp.shelterList;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +16,10 @@ import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Shelter;
+import com.example.maja.myapplication.presentation.mvp.addNews.AddNewsActivity;
+import com.example.maja.myapplication.presentation.mvp.addShelter.AddShelterActivity;
 import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
+import com.example.maja.myapplication.presentation.mvp.shelterDetails.ShelterDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -25,6 +30,9 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
     private FragmentListener parentActivity;
     private ShelterListPresenter presenter;
     private ShelterListAdapter shelterListAdapter;
+    private FloatingActionButton btnAddShelter;
+    private Shelter shelter;
+
     public ShelterListFragment() {
         // Required empty public constructor
         // parentActivity.getActivityContext();
@@ -40,6 +48,10 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shelter_list, container, false);
+        builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+        btnAddShelter = (FloatingActionButton) view.findViewById(R.id.btnAddShelter);
+
+        initListener();
         presenter.getShelterList();
         ListView listView = (ListView) view.findViewById(R.id.shelterList);
         shelterListAdapter = new ShelterListAdapter(getActivity());
@@ -53,14 +65,24 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
 
             }
         });
-//        listView.setOnItemClickListener(shelterListAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(shelterListAdapter, listView, int position, long l) {
-//
-//            }
-//        });
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void initListener() {
+        Log.d(TAG, "initListener: ");
+        btnAddShelter.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(getActivity(), AddShelterActivity.class);
+                intent.putExtra("shelter", shelter);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
     }
 
     @Override

@@ -18,7 +18,7 @@ import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.dogList.DogListFragment;
 import com.example.maja.myapplication.presentation.mvp.googleMap.MapFragment;
 import com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment;
-import com.example.maja.myapplication.presentation.mvp.shelter.ShelterDetailsActivity;
+import com.example.maja.myapplication.presentation.mvp.shelterDetails.ShelterDetailsActivity;
 import com.example.maja.myapplication.presentation.mvp.shelterList.ShelterListFragment;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {

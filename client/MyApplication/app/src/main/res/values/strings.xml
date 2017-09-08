@@ -1,9 +1,12 @@
 <resources>
+    <!-- App settings for start page -->
     <string name="app_name">Dog shelter</string>
     <string name="title_activity_login">Sign in</string>
     <string name="default_username">Username</string>
     <string name="default_password">Password</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="loading">Loading ...</string>
+
+    <!-- Navigation drawer items -->
     <string name="shelterList">Shelters</string>
     <string name="dogList">Dogs</string>
     <string name="newsList">News</string>
@@ -14,9 +17,8 @@
     <string name="newsList_fragment">News List</string>
     <string name="map_fragment">Google map</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Registration strings -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="loading">Loading ...</string>
     <string name="registerQuestion">Create account</string>
     <string name="account_firstname">First name: </string>
     <string name="account_lastName">Last name: </string>
@@ -27,6 +29,18 @@
     <string name="account_number">Phone number: </string>
     <string name="account_createAccount">Create account</string>
 
+    <!-- Shelter strings -->
+    <string name="add_shelter_name">Name:</string>
+    <string name="add_shelter_address">Address:</string>
+    <string name="add_shelter_number">Number:</string>
+    <string name="add_shelter_location">Location:</string>
+    <string name="add_shelter_city">City:</string>
+    <string name="add_shelter_bank_account">Bank account:</string>
+    <string name="btnCreateShelter">Create shelter</string>
+
+
+    <!-- News strings -->
     <string name="add_news_title">Title:</string>
     <string name="add_news_description">Description:</string>
+
 </resources>

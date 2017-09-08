@@ -32,6 +32,34 @@ public class Shelter implements Serializable{
         this.bankAccount = bankAccount;
     }
 
+    public void setIdShelter(int idShelter) {
+        this.idShelter = idShelter;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setBankAccount(int bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
     public int getIdShelter() {
         return idShelter;
     }

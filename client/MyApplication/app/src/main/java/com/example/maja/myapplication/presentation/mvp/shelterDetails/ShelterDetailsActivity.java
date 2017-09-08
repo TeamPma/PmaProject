@@ -1,4 +1,4 @@
-package com.example.maja.myapplication.presentation.mvp.shelter;
+package com.example.maja.myapplication.presentation.mvp.shelterDetails;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;

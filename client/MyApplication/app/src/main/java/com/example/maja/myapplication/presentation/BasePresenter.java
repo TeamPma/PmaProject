@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.maja.myapplication.backend.bus.SmartBus;
 import com.example.maja.myapplication.backend.entity.Announcement;
+import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.User;
 
 import org.greenrobot.eventbus.EventBus;
@@ -61,6 +62,11 @@ public abstract class BasePresenter {
     protected void getShelterById_(int shelterId){
         Log.d(TAG, "getShelterById_: ");
         smartBus.getShelterById(shelterId);
+    }
+
+    protected void addShelter_(Shelter shelter){
+        Log.d(TAG, "addShelter_: ");
+        smartBus.addShelter(shelter);
     }
 
     //---------------------Dog ----------------------------------
