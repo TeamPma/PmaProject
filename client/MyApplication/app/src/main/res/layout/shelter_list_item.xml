@@ -74,7 +74,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textStyle="bold" />
-            
+
             <TextView
                 android:id="@+id/add_shelter_city"
                 android:layout_width="wrap_content"
