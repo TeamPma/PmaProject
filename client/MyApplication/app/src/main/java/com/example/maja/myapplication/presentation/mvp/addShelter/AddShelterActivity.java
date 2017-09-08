@@ -1,5 +1,6 @@
 package com.example.maja.myapplication.presentation.mvp.addShelter;
 
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.Shelter;
+import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
 import com.example.maja.myapplication.presentation.mvp.shelterList.ShelterListFragment;
 
 import java.util.Date;
@@ -126,7 +128,7 @@ public class AddShelterActivity extends AppCompatActivity implements AddShelterC
     @Override
     public void addShelterSuccessfull() {
         Log.d(TAG, "addShelterSuccessfull: ");
-        Intent intent = new Intent(AddShelterActivity.this, ShelterListFragment.class);
+        Intent intent = new Intent(AddShelterActivity.this, MainActivity.class);
         intent.putExtra("shelter",shelter);
         startActivity(intent);
         finish();
