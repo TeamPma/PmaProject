@@ -20,6 +20,7 @@ import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.addNews.AddNewsActivity;
 import com.example.maja.myapplication.presentation.mvp.addShelter.AddShelterActivity;
 import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
+import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
 import com.example.maja.myapplication.presentation.mvp.shelterDetails.ShelterDetailsActivity;
 
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
     private ShelterListPresenter presenter;
     private ShelterListAdapter shelterListAdapter;
     private FloatingActionButton btnAddShelter;
-    private Shelter shelter;
+    public Shelter shelter;
+    private static int IS_ADMIN = 0;
 
     public ShelterListFragment() {
         // Required empty public constructor
@@ -51,7 +53,11 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
         View view = inflater.inflate(R.layout.fragment_shelter_list, container, false);
         builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
         btnAddShelter = (FloatingActionButton) view.findViewById(R.id.btnAddShelter);
-
+        Log.d(TAG, "onCreateView: " + MainActivity.isAdmin);
+        if(MainActivity.isAdmin != 1){
+            Log.d(TAG, "onCreateView: Usao si");
+            btnAddShelter.setVisibility(View.INVISIBLE);
+        }
         initListener();
         presenter.getShelterList();
         ListView listView = (ListView) view.findViewById(R.id.shelterList);

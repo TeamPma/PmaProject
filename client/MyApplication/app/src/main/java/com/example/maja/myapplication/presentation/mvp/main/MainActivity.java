@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private ActionBarDrawerToggle mDrawerToggle;;
     private String mActivityTitle;
     private boolean gmapEnabled = true;
+    public static int isAdmin = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         setupDrawer();
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.maja.myapplication", Context.MODE_PRIVATE);
+        String isAdminKey = "com.example.maja.myapplication.isAdmin";
+        isAdmin = prefs.getInt(isAdminKey, 0);
     }
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -251,7 +256,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
     }
-//
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    //
 //    @Override
 //    public void setTitle(CharSequence title) {
 //
