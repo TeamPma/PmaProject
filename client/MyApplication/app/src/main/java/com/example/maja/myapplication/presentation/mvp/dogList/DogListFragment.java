@@ -114,7 +114,6 @@ public class DogListFragment extends Fragment implements DogListContact.View{
                 Intent intent = new Intent(getActivity(), AddDogActivity.class);
                 intent.putExtra("dog", dog);
                 getActivity().startActivity(intent);
-                getActivity().finish();
             }
         });
     }
