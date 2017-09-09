@@ -41,10 +41,11 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_details);
-        Log.d(TAG, "onCreate: " + getIntent().getSerializableExtra("shelter"));
-        shelter = (Shelter) getIntent().getSerializableExtra("shelter");
+        Log.d(TAG, "onCreate: " + getIntent().getSerializableExtra("shelterId"));
+        int shelterId = (int) getIntent().getSerializableExtra("shelterId");
         Log.d(TAG, "onCreate: " + shelter);
         presenter = new ShelterDetailsPresenter(this);
+        shelter = presenter.getShelterById(shelterId);
         initUIComponents();
         initListener();
     }

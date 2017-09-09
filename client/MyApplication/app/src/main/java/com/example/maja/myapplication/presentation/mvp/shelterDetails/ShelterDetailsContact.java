@@ -1,5 +1,7 @@
 package com.example.maja.myapplication.presentation.mvp.shelterDetails;
 
+import com.example.maja.myapplication.backend.entity.Shelter;
+
 /**
  * Created by Jovana on 5.9.2017..
  */
@@ -10,6 +12,6 @@ public class ShelterDetailsContact {
     }
 
     public interface Presenter{
-        void getShelterById(int shelterId);
+        Shelter getShelterById(int shelterId);
     }
 }

@@ -325,10 +325,14 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
+                        ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
+                        if(SmartBus.getInstance().getAllNewsDB() == null) {
+                            SmartBus.getInstance().insertAllNews(news);
+                        }
+                        EventBus.getDefault().post(new GetAllNewsEvent());
                         ArrayList<Dog> dogList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Dog>>(){}.getType());
                         SmartBus.getInstance().insertAllDogs(dogList);
                         EventBus.getDefault().post(new GetAllDogsEvent(dogList));
-
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
                         EventBus.getDefault().post(new ErrorEvent(e.getMessage()));

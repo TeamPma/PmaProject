@@ -84,9 +84,10 @@ public class SmartBus implements ServiceConnection {
         mService.getShelterList();
     }
 
-    public void getShelterById(int shelterId){
+    public Shelter getShelterById(int shelterId){
         Log.d(TAG, "getShelterById: ");
-        mService.getShelterByID(shelterId);
+        return dbManager.getShelterById(shelterId);
+        //mService.getShelterByID(shelterId);
     }
 
     public void addShelter(Shelter shelter){
