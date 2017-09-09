@@ -53,7 +53,7 @@ public class NewsPresenter extends BasePresenter implements NewsContact.Presente
             case GET_ALL_NEWS_EVENT:
                 Log.d(TAG, "onMessageEvent: GET_ALL_NEWS_EVENT ");
                 GetAllNewsEvent getAllNewsEvent = (GetAllNewsEvent) event;
-                handleGetAllNewsResponse(getAllNewsEvent.getNews());
+                handleGetAllNewsResponse();
                 break;
             case UPDATE_NEWS_EVENT:
                 UpdateNewsEvent updateNewsEvent = (UpdateNewsEvent) event;
@@ -71,12 +71,18 @@ public class NewsPresenter extends BasePresenter implements NewsContact.Presente
         }
     }
 
+    private ArrayList<Announcement> getAllNewsDB() {
+        return getAllNewsDB_();
+    }
+
     private void handleError(String message) {
         Log.d(TAG, "handleError: ");
         view.handleError(message);
     }
-    private void handleGetAllNewsResponse(ArrayList<Announcement> news){
-        Log.d(TAG, "handleGetAllNewsResponse: " + news.get(0));
+    private void handleGetAllNewsResponse(){
+        Log.d(TAG, "handleGetAllNewsResponse:");
+        ArrayList<Announcement> news = getAllNewsDB();
+        Log.d(TAG, "handleGetAllNewsResponse: "+ news.size());
         view.getAllNewsSuccesfull(news);
     }
 

@@ -2,6 +2,8 @@ package com.example.maja.myapplication.backend.rest;
 
 import android.util.Log;
 
+import com.example.maja.myapplication.backend.bus.SmartBus;
+import com.example.maja.myapplication.backend.database.DatabaseManager;
 import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.Announcement;
@@ -322,7 +324,8 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
                         ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
-                        EventBus.getDefault().post(new GetAllNewsEvent(news));
+                        SmartBus.getInstance().insertAllNews(news);
+                        EventBus.getDefault().post(new GetAllNewsEvent());
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
                         EventBus.getDefault().post(new ErrorEvent(e.getMessage()));

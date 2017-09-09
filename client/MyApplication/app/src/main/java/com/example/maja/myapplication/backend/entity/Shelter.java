@@ -15,13 +15,15 @@ public class Shelter implements Serializable{
     private String location;
     private String city;
     private int bankAccount;
+    private Double latitude;
+    private Double longitude;
 
     public Shelter() {
     }
 
 
     public Shelter(int idShelter, String name, String address, String number, String location, String city,
-                   int bankAccount) {
+                   int bankAccount, Double latitude, Double longitude) {
         super();
         this.idShelter = idShelter;
         this.name = name;
@@ -30,6 +32,8 @@ public class Shelter implements Serializable{
         this.location = location;
         this.city = city;
         this.bankAccount = bankAccount;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public void setIdShelter(int idShelter) {
@@ -86,5 +90,21 @@ public class Shelter implements Serializable{
 
     public int getBankAccount() {
         return bankAccount;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

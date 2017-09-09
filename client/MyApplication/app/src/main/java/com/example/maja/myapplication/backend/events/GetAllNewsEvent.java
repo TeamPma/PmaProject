@@ -10,14 +10,7 @@ import java.util.ArrayList;
 
 public class GetAllNewsEvent extends BaseEvent {
 
-    ArrayList<Announcement> news;
-
-    public GetAllNewsEvent(ArrayList<Announcement> news) {
+    public GetAllNewsEvent() {
         super(EventType.GET_ALL_NEWS_EVENT);
-        this.news = news;
-    }
-
-    public ArrayList<Announcement> getNews() {
-        return news;
     }
 }

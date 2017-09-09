@@ -13,6 +13,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SmartBus.getInstance().initializeDBManager(getApplicationContext());
         SmartBus.getInstance().startService(getApplicationContext());
 
     }
