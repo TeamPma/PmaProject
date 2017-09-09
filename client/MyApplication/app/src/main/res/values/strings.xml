@@ -17,6 +17,9 @@
     <string name="newsList_fragment">News List</string>
     <string name="map_fragment">Google map</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
     <!-- Registration strings -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="registerQuestion">Create account</string>
@@ -56,5 +59,6 @@
     <string name="lblAddNews">Add news:</string>
     <string name="btnUpdate">Update</string>
     <string name="btnDelete">Delete</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
