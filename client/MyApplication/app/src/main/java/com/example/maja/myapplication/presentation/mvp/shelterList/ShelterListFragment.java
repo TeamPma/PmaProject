@@ -114,7 +114,6 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
                 Intent intent = new Intent(getActivity(), AddShelterActivity.class);
                 intent.putExtra("shelter", shelter);
                 getActivity().startActivity(intent);
-                getActivity().finish();
             }
         });
 

@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.maja.myapplication.backend.entity.Shelter;
 
+import java.util.ArrayList;
+
 /**
  * Created by Jovana on 6.9.2017..
  */
@@ -118,6 +120,12 @@ public class ShelterDbHelper extends SQLiteOpenHelper {
         close();
     }
 
+    public void deleteAll() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, null, null);
+        close();
+    }
+
     private Shelter createShelter(Cursor cursor) {
         int shelterId = cursor.getInt(cursor.getColumnIndex(COLUMN_SHELTER_ID));
         String shelterName = cursor.getString(cursor.getColumnIndex(COLUMN_SHELTER_NAME));
@@ -131,4 +139,12 @@ public class ShelterDbHelper extends SQLiteOpenHelper {
 
         return new Shelter(shelterId, shelterName, shelterAddress, shelterNumber, shelterLocation, shelterCity, shelterBankAccount, shelterLatitude,shelterLongitude);
     }
+
+    public void insertAllShelters(ArrayList<Shelter> shelterList) {
+        deleteAll();
+        for(Shelter shelter: shelterList){
+           insert(shelter);
+        }
+    }
+
 }

@@ -54,9 +54,7 @@ public class DatabaseManager {
 
     public void insertAllShelters(ArrayList<Shelter> shelterList) {
         Log.d(TAG, "insertAllShelters: ");
-        for(Shelter shelter: shelterList){
-            shelterDbHelper.insert(shelter);
-        }
+        shelterDbHelper.insertAllShelters(shelterList);
 
     }
 }
