@@ -157,4 +157,9 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "insertAllShelters: ");
         dbManager.insertAllShelters(shelterList);
     }
+
+    public void insertAllDogs(ArrayList<Dog> dogList) {
+        Log.d(TAG, "insertAllDogs: ");
+        dbManager.insertAllDogs(dogList);
+    }
 }

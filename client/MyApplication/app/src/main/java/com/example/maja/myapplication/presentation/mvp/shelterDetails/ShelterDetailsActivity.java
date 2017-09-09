@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.addNews.AddNewsActivity;
+import com.example.maja.myapplication.presentation.mvp.addShelter.AddShelterActivity;
 import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
 import com.example.maja.myapplication.presentation.mvp.updateShelter.UpdateShelterActivity;
 
@@ -30,7 +31,8 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
     private TextView shelterLocation;
     private TextView shelterBankAccount;
     private Shelter shelter;
-    private FloatingActionButton  btnAddNews;
+    private Button  btnAddNews;
+    private Button btnAddShelter;
     private Button btnUpdate;
     private Button btnDelete;
 
@@ -107,7 +109,8 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         shelterLocation.setText(shelter.getLocation());
         shelterBankAccount.setText(String.valueOf(shelter.getBankAccount()));
 
-        btnAddNews = (FloatingActionButton) findViewById(R.id.btnAddNews);
+        btnAddNews = (Button) findViewById(R.id.btnAddNews);
+        btnAddShelter = (Button) findViewById(R.id.btnAddShelter);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
         btnDelete = (Button) findViewById(R.id.btnDelete);
     }
@@ -121,6 +124,18 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
                 Intent intent = new Intent(ShelterDetailsActivity.this, AddNewsActivity.class);
+                intent.putExtra("shelter",shelter);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+        btnAddShelter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(ShelterDetailsActivity.this, AddShelterActivity.class);
                 intent.putExtra("shelter",shelter);
                 startActivity(intent);
                 finish();

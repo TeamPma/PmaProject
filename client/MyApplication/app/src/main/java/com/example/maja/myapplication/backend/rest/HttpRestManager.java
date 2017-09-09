@@ -326,6 +326,7 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
                         ArrayList<Dog> dogList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Dog>>(){}.getType());
+                        SmartBus.getInstance().insertAllDogs(dogList);
                         EventBus.getDefault().post(new GetAllDogsEvent(dogList));
 
                     } catch (IOException e) {

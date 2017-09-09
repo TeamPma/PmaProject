@@ -57,5 +57,10 @@ public class DatabaseManager {
         shelterDbHelper.insertAllShelters(shelterList);
 
     }
+
+    public void insertAllDogs(ArrayList<Dog> dogList) {
+        Log.d(TAG, "insertAllDogs: ");
+        dogDbHelper.insertAllDogs(dogList);
+    }
 }
 

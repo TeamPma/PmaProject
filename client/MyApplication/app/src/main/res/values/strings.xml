@@ -63,5 +63,7 @@
     <string name="action_settings">Settings</string>
     <string name="mapShelter">Shelter map</string>
     <string name="title_activity_map">Map</string>
+    <string name="btnAddNews">Add news</string>
+    <string name="btnAddDog">Add dog</string>
 
 </resources>
