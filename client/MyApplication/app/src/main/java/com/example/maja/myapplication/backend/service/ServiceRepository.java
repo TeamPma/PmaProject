@@ -57,6 +57,16 @@ public class ServiceRepository extends Service {
         restManager.addDog(dog);
     }
 
+    public void updateShelter(Shelter shelter) {
+        Log.d(TAG, "updateShelter: ");
+        restManager.updateShelter(shelter);
+    }
+
+    public void deleteShelter(Shelter shelter) {
+        Log.d(TAG, "deleteShelter: ");
+        restManager.deleteShelter(shelter);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

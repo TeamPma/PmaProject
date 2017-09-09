@@ -55,4 +55,22 @@ public class DogRestService extends BaseRestService {
 		dogService.save(dogFromJson);
 		return gson.toJson(dogService.getAll());
     }
+    
+    @GET
+    @Path("updateDog/{dog}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String updateDog(@PathParam("dog") String dog) {
+    	Dog dogFromJson = gson.fromJson(dog, Dog.class);
+		dogService.update(dogFromJson);
+		return gson.toJson(dogService.getAll());
+    }
+    
+    @GET
+    @Path("deleteDog/{dog}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteDog(@PathParam("dog") String dog) {
+    	Dog dogFromJson = gson.fromJson(dog, Dog.class);
+		dogService.delete(dogFromJson);
+		return gson.toJson(dogService.getAll());
+    }
 }

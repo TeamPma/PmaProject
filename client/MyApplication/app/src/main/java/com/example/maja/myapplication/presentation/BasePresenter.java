@@ -76,6 +76,16 @@ public abstract class BasePresenter {
         smartBus.addShelter(shelter);
     }
 
+    protected void updateShelter_(Shelter shelter){
+        Log.d(TAG, "updateShelter_: ");
+        smartBus.updateShelter(shelter);
+    }
+
+    protected void deleteShelter_(Shelter shelter){
+        Log.d(TAG, "deleteShelter_: ");
+        smartBus.deleteShelter(shelter);
+    }
+
     //---------------------Dog ----------------------------------
 
     protected void getDogList_(){

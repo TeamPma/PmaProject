@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.mvp.updateShelter.UpdateShelterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp" >
+
+        <!-- Name -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_shelter_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/update_shelter_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Address -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_shelter_address"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/update_shelter_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Number -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_shelter_number"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/update_shelter_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Location -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_shelter_location"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/update_shelter_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- City -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_shelter_city"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/update_shelter_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Bank account -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_shelter_bank_account"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/update_shelter_bank_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <Button
+            android:id="@+id/btnUpdateShelter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/btnUpdateShelter"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
+

@@ -77,24 +77,40 @@ public class SmartBus implements ServiceConnection {
         mService.createAccount(user);
     }
 
-    public void getAllNews(){
-        Log.d(TAG, "getAllNews: ");
-        mService.getAllNews();
-    }
+    //----------------------------Shelter-------------------------------------
 
     public void getShelterList() {
         Log.d(TAG, "getShelterList: ");
         mService.getShelterList();
     }
 
+    public void getShelterById(int shelterId){
+        Log.d(TAG, "getShelterById: ");
+        mService.getShelterByID(shelterId);
+    }
+
+    public void addShelter(Shelter shelter){
+        Log.d(TAG, "addShelter: ");
+        mService.addShelter(shelter);
+    }
+
+    //-----------------------------------------Dog------------------------------------------------
     public void getDogList() {
         Log.d(TAG, "getDogList: ");
         mService.getDogList();
     }
 
-    public void getShelterById(int shelterId){
-        Log.d(TAG, "getShelterById: ");
-        mService.getShelterByID(shelterId);
+    public void addDog(Dog dog) {
+        Log.d(TAG, "addDog: ");
+        mService.addDog(dog);
+    }
+
+
+    //-----------------------------------------------------News------------------------------------------------------
+
+    public void getAllNews(){
+        Log.d(TAG, "getAllNews: ");
+        mService.getAllNews();
     }
 
     public void addNews(Announcement announcement) {
@@ -112,14 +128,14 @@ public class SmartBus implements ServiceConnection {
         mService.deleteNews(announcement);
     }
 
-    public void addShelter(Shelter shelter){
-        Log.d(TAG, "addShelter: ");
-        mService.addShelter(shelter);
+    public void updateShelter(Shelter shelter) {
+        Log.d(TAG, "updateShelter: ");
+        mService.updateShelter(shelter);
     }
 
-    public void addDog(Dog dog) {
-        Log.d(TAG, "addDog: ");
-        mService.addDog(dog);
+    public void deleteShelter(Shelter shelter) {
+        Log.d(TAG, "deleteShelter: ");
+        mService.deleteShelter(shelter);
     }
 
     public void insertAllNews(ArrayList<Announcement> news) {

@@ -13,6 +13,7 @@ import com.example.maja.myapplication.backend.events.AddNewsEvent;
 import com.example.maja.myapplication.backend.events.AddShelterEvent;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
 import com.example.maja.myapplication.backend.events.DeleteNewsEvent;
+import com.example.maja.myapplication.backend.events.DeleteShelterEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
 import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
@@ -20,6 +21,7 @@ import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.example.maja.myapplication.backend.events.UpdateNewsEvent;
+import com.example.maja.myapplication.backend.events.UpdateShelterEvent;
 import com.google.gson.Gson;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.google.gson.reflect.TypeToken;
@@ -431,6 +433,70 @@ public class HttpRestManager  {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void updateShelter(Shelter shelter) {
+        Log.d(TAG, "updateShelter: ");
+        Retrofit retrofit = getRetrofit(shelterServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String shelterUrl = gson.toJson(shelter);
+        iHttpRestManager.updateShelter(shelterUrl).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new UpdateShelterEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void deleteShelter(Shelter shelter) {
+
+        Log.d(TAG, "deleteShelter: ");
+        Retrofit retrofit = getRetrofit(shelterServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String shelterToJson = gson.toJson(shelter);
+        iHttpRestManager.deleteShelter(shelterToJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG", response.code() + "");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new DeleteShelterEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception", e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure", t.getMessage());
                 EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
             }
         });
