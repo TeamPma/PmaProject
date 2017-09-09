@@ -40,7 +40,7 @@ public class AnnouncementDbHelper extends SQLiteOpenHelper {
                     COLUMN_ANNOUNCEMENT_ID + " INTEGER, " +
                     COLUMN_COMMENT + " TEXT, " +
                     COLUMN_TITLE + " TEXT, " +
-                    COLUMN_DATE + " TEXT )" );
+                    COLUMN_DATE + " TEXT );" );
         }
 
         @Override

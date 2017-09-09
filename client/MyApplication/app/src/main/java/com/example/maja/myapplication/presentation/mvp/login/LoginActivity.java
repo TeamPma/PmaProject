@@ -135,6 +135,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContact.Vie
                 "com.example.maja.myapplication", Context.MODE_PRIVATE);
         String userIdKey = "com.example.maja.myapplication.userid";
         prefs.edit().putInt(userIdKey,user.getIdUser()).apply();
+        String isAdminKey = "com.example.maja.myapplication.isAdmin";
+        prefs.edit().putInt(isAdminKey,user.isAdmin()).apply();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

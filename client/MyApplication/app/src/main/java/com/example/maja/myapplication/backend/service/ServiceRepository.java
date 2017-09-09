@@ -17,10 +17,6 @@ import com.example.maja.myapplication.backend.rest.HttpRestManager;
 /**
  * Created by Maja on 25.8.2017.
  */
-// pogledaj dokumentaciju za servis i njegovo kreiranje
-// takodje imas u misinoj dok sa vezbi
-// za servise nemoj da koristis AIDL
-// koristi binder pristup
 public class ServiceRepository extends Service {
 
     private static final String TAG = ServiceRepository.class.getSimpleName();
@@ -87,7 +83,6 @@ public class ServiceRepository extends Service {
         Log.d(TAG, "getShelterByID: ");
         restManager.getShelterById(shelterId);
     }
-
 
     public void getAllNews() {
         Log.d(TAG, "getAllNews: ");

@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.example.maja.myapplication.presentation.mvp.announcement.Announcement
 import com.example.maja.myapplication.presentation.mvp.dogDetails.DogDetailsActivity;
 import com.example.maja.myapplication.presentation.mvp.dogList.DogListFragment;
 import com.example.maja.myapplication.presentation.mvp.googleMap.MapActivity;
+import com.example.maja.myapplication.presentation.mvp.login.LoginActivity;
 import com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment;
 import com.example.maja.myapplication.presentation.mvp.shelterDetails.ShelterDetailsActivity;
 import com.example.maja.myapplication.presentation.mvp.shelterList.ShelterListFragment;
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mMenuItems = new String[]{getString(R.string.shelterList), getString(R.string.dogList), getString(R.string.newsList), getString(R.string.mapShelter)};
+        mMenuItems = new String[]{getString(R.string.shelterList), getString(R.string.dogList), getString(R.string.newsList), getString(R.string.mapShelter), getString(R.string.logOut)};
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -164,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         Intent intent = new Intent(this, ShelterDetailsActivity.class);
         intent.putExtra("shelterId",shelter.getIdShelter());
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     @Override
@@ -173,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         Intent intent = new Intent(MainActivity.this, AnnouncementDetailActivity.class);
         intent.putExtra("announcement",announcement);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     @Override
@@ -182,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         Intent intent = new Intent(MainActivity.this, DogDetailsActivity.class);
         intent.putExtra("dog",dog);
         startActivity(intent);
-        finish();
+        //finish();
 
     }
 
@@ -221,19 +223,33 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                     Toast.makeText(this,"Google map is not available", Toast.LENGTH_LONG).show();
                 }
                 break;
+            case 4:
+                logout();
+                break;
         }
         if(position!=3) {
+            Log.d(TAG, "selectItem: ");
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, fragment)
-                    .commit();
-
+            if(fragment != null) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .commit();
+            }
             // Highlight the selected item, update the title, and close the drawer
             mDrawerList.setItemChecked(position, true);
             mDrawerLayout.closeDrawer(mDrawerList);
         }
 
+    }
+
+    private void logout() {
+        Log.d(TAG, "logout: ");
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.maja.myapplication", Context.MODE_PRIVATE);
+        prefs.edit().clear().apply();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        finish();
     }
 //
 //    @Override

@@ -28,6 +28,12 @@ public interface IHttpRestManager {
     @GET("addShelter/{shelter}")
     Call<ResponseBody> addShelter(@Path("shelter") String shelter);
 
+    @GET("updateShelter/{shelter}")
+    Call<ResponseBody> updateShelter(@Path("shelter") String shelterUrl);
+
+    @GET("deleteShelter/{shelter}")
+    Call<ResponseBody> deleteShelter(@Path("shelter") String shelterUrl);
+
     //--------------- Announcement ------------------------------
     @GET("announcementsAll")
     Call<ResponseBody> getListOfNews();
@@ -47,10 +53,4 @@ public interface IHttpRestManager {
 
     @GET("addDog/{dog}")
     Call<ResponseBody> addDog(@Path("dog") String dog);
-
-    @GET("updateShelter/{shelter}")
-    Call<ResponseBody> updateShelter(@Path("shelter") String shelterUrl);
-
-    @GET("deleteShelter/{shelter}")
-    Call<ResponseBody> deleteShelter(@Path("shelter") String shelterUrl);
 }

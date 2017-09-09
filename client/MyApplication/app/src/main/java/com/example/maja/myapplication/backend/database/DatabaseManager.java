@@ -36,7 +36,7 @@ public class DatabaseManager {
 
     public void insertAllNews(ArrayList<Announcement> news){
         Log.d(TAG, "insertAllNews: ");
-            announcementDbHelper.insertAllAnnouncements(news);
+        announcementDbHelper.insertAllAnnouncements(news);
     }
 
     public ArrayList<Announcement> readAllNews(){
@@ -53,13 +53,13 @@ public class DatabaseManager {
     public void insertAllShelters(ArrayList<Shelter> shelterList) {
         Log.d(TAG, "insertAllShelters: ");
         shelterDbHelper.insertAllShelters(shelterList);
-
     }
 
     public Shelter getShelterById(int shelterId) {
         Log.d(TAG, "getShelterById: " + shelterDbHelper.readShelter(shelterId));
         return shelterDbHelper.readShelter(shelterId);
     }
+
     public void insertAllDogs(ArrayList<Dog> dogList) {
         Log.d(TAG, "insertAllDogs: ");
         dogDbHelper.insertAllDogs(dogList);

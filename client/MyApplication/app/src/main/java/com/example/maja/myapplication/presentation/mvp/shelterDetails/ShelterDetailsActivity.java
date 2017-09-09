@@ -1,6 +1,8 @@
 package com.example.maja.myapplication.presentation.mvp.shelterDetails;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Shelter;
+import com.example.maja.myapplication.presentation.mvp.addDog.AddDogActivity;
 import com.example.maja.myapplication.presentation.mvp.addNews.AddNewsActivity;
 import com.example.maja.myapplication.presentation.mvp.addShelter.AddShelterActivity;
 import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
@@ -32,7 +35,7 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
     private TextView shelterBankAccount;
     private Shelter shelter;
     private Button  btnAddNews;
-    private Button btnAddShelter;
+    private Button btnAddDog;
     private Button btnUpdate;
     private Button btnDelete;
 
@@ -47,7 +50,6 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         presenter = new ShelterDetailsPresenter(this);
         shelter = presenter.getShelterById(shelterId);
         initUIComponents();
-        initListener();
     }
 
     @Override
@@ -110,10 +112,33 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         shelterLocation.setText(shelter.getLocation());
         shelterBankAccount.setText(String.valueOf(shelter.getBankAccount()));
 
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.maja.myapplication", Context.MODE_PRIVATE);
+        String isAdminKey = "com.example.maja.myapplication.isAdmin";
+        int isAdmin = prefs.getInt(isAdminKey, 0);
+        Log.d(TAG, "initUIComponents: "+ isAdmin);
+
         btnAddNews = (Button) findViewById(R.id.btnAddNews);
-        btnAddShelter = (Button) findViewById(R.id.btnAddShelter);
-        btnUpdate = (Button) findViewById(R.id.btnUpdate);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
+        Log.d(TAG, "initUIComponents: " + btnAddNews);
+        btnAddDog = (Button) findViewById(R.id.btnAddDog);
+        Log.d(TAG, "initUIComponents: " + btnAddDog);
+        btnUpdate = (Button) findViewById(R.id.btnUpdateShelter);
+        Log.d(TAG, "initUIComponents: "+ btnUpdate);
+        btnDelete = (Button) findViewById(R.id.btnDeleteShelter);
+        Log.d(TAG, "initUIComponents: "+ btnDelete);
+
+        if(btnAddNews != null && btnAddDog != null && btnUpdate != null && btnDelete != null)
+        {
+            if(isAdmin != 1)
+            {
+                Log.d(TAG, "initUIComponents: " + isAdmin);
+                btnAddNews.setVisibility(View.INVISIBLE);
+                btnAddDog.setVisibility(View.INVISIBLE);
+                btnUpdate.setVisibility(View.INVISIBLE);
+                btnDelete.setVisibility(View.INVISIBLE);
+            }
+            initListener();
+        }
     }
 
     private void initListener(){
@@ -132,11 +157,11 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
             }
         });
 
-        btnAddShelter.setOnClickListener(new View.OnClickListener() {
+        btnAddDog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
-                Intent intent = new Intent(ShelterDetailsActivity.this, AddShelterActivity.class);
+                Intent intent = new Intent(ShelterDetailsActivity.this, AddDogActivity.class);
                 intent.putExtra("shelter",shelter);
                 startActivity(intent);
                 finish();

@@ -325,13 +325,8 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
-                        if(SmartBus.getInstance().getAllNewsDB() == null) {
-                            SmartBus.getInstance().insertAllNews(news);
-                        }
-                        EventBus.getDefault().post(new GetAllNewsEvent());
                         ArrayList<Dog> dogList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Dog>>(){}.getType());
-                        SmartBus.getInstance().insertAllDogs(dogList);
+                        SmartBus.getInstance().insertAllDogsDB(dogList);
                         EventBus.getDefault().post(new GetAllDogsEvent(dogList));
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
@@ -394,7 +389,7 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
                         ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
-                        SmartBus.getInstance().insertAllNews(news);
+                        SmartBus.getInstance().insertAllNewsDB(news);
                         EventBus.getDefault().post(new GetAllNewsEvent());
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());

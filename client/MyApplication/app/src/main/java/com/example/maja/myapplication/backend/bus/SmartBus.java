@@ -25,8 +25,6 @@ public class SmartBus implements ServiceConnection {
     private static final String TAG = SmartBus.class.getSimpleName();
     private static final SmartBus ourInstance = new SmartBus();
     private DatabaseManager dbManager;
-
-
     public Context context;
     private ServiceRepository mService = null;
     boolean mServiceBound = false;
@@ -95,6 +93,26 @@ public class SmartBus implements ServiceConnection {
         mService.addShelter(shelter);
     }
 
+    public void updateShelter(Shelter shelter) {
+        Log.d(TAG, "updateShelter: ");
+        mService.updateShelter(shelter);
+    }
+
+    public void deleteShelter(Shelter shelter) {
+        Log.d(TAG, "deleteShelter: ");
+        mService.deleteShelter(shelter);
+    }
+
+    public Shelter getShelterDBByTitle(String title) {
+        Log.d(TAG, "getShelterDBByTitle: ");
+        return  dbManager.getShelterByTitle(title);
+    }
+
+    public void insertAllShelters(ArrayList<Shelter> shelterList) {
+        Log.d(TAG, "insertAllShelters: ");
+        dbManager.insertAllShelters(shelterList);
+    }
+
     //-----------------------------------------Dog------------------------------------------------
     public void getDogList() {
         Log.d(TAG, "getDogList: ");
@@ -104,6 +122,11 @@ public class SmartBus implements ServiceConnection {
     public void addDog(Dog dog) {
         Log.d(TAG, "addDog: ");
         mService.addDog(dog);
+    }
+
+    public void insertAllDogsDB(ArrayList<Dog> dogList) {
+        Log.d(TAG, "insertAllDogs: ");
+        dbManager.insertAllDogs(dogList);
     }
 
 
@@ -129,17 +152,8 @@ public class SmartBus implements ServiceConnection {
         mService.deleteNews(announcement);
     }
 
-    public void updateShelter(Shelter shelter) {
-        Log.d(TAG, "updateShelter: ");
-        mService.updateShelter(shelter);
-    }
 
-    public void deleteShelter(Shelter shelter) {
-        Log.d(TAG, "deleteShelter: ");
-        mService.deleteShelter(shelter);
-    }
-
-    public void insertAllNews(ArrayList<Announcement> news) {
+    public void insertAllNewsDB(ArrayList<Announcement> news) {
         Log.d(TAG, "insertAllNews: ");
         dbManager.insertAllNews(news);
     }
@@ -147,20 +161,5 @@ public class SmartBus implements ServiceConnection {
     public ArrayList<Announcement> getAllNewsDB() {
         Log.d(TAG, "getAllNewsDB: ");
         return dbManager.readAllNews();
-    }
-
-    public Shelter getShelterDBByTitle(String title) {
-        Log.d(TAG, "getShelterDBByTitle: ");
-        return  dbManager.getShelterByTitle(title);
-    }
-
-    public void insertAllShelters(ArrayList<Shelter> shelterList) {
-        Log.d(TAG, "insertAllShelters: ");
-        dbManager.insertAllShelters(shelterList);
-    }
-
-    public void insertAllDogs(ArrayList<Dog> dogList) {
-        Log.d(TAG, "insertAllDogs: ");
-        dbManager.insertAllDogs(dogList);
     }
 }
