@@ -164,6 +164,7 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         ArrayList<Shelter> shelterList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Shelter>>(){}.getType());
+                        SmartBus.getInstance().insertAllShelters(shelterList);
                         EventBus.getDefault().post(new GetAllSheltersEvent(shelterList));
                         Log.d(TAG, "onResponse: " + stringResponse);
                     } catch (IOException e) {

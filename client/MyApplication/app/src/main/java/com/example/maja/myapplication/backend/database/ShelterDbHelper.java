@@ -101,6 +101,17 @@ public class ShelterDbHelper extends SQLiteOpenHelper {
         return shelter;
     }
 
+    public Shelter readShelterByTitle(String title) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, null, COLUMN_SHELTER_NAME + "=?",
+                new String[] {title}, null, null, null);
+        cursor.moveToFirst();
+        Shelter shelter = createShelter(cursor);
+
+        close();
+        return shelter;
+    }
+
     public void deleteShelter(int idShelter) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_NAME, COLUMN_SHELTER_ID + "=?", new String[]{Integer.toString(idShelter)});

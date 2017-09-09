@@ -84,7 +84,14 @@ public abstract class BasePresenter {
     protected void deleteShelter_(Shelter shelter){
         Log.d(TAG, "deleteShelter_: ");
         smartBus.deleteShelter(shelter);
+
     }
+
+
+    protected Shelter getShelterDB_(String title) {
+        return  smartBus.getShelterDBByTitle(title);
+    }
+
 
     //---------------------Dog ----------------------------------
 

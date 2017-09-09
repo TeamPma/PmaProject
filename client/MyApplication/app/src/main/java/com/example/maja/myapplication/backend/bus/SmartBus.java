@@ -147,4 +147,14 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "getAllNewsDB: ");
         return dbManager.readAllNews();
     }
+
+    public Shelter getShelterDBByTitle(String title) {
+        Log.d(TAG, "getShelterDBByTitle: ");
+        return  dbManager.getShelterByTitle(title);
+    }
+
+    public void insertAllShelters(ArrayList<Shelter> shelterList) {
+        Log.d(TAG, "insertAllShelters: ");
+        dbManager.insertAllShelters(shelterList);
+    }
 }

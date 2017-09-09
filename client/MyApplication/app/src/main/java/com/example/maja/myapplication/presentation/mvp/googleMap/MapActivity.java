@@ -161,6 +161,8 @@ public class MapActivity extends FragmentActivity implements MapContact.View, On
     @Override
     public boolean onMarkerClick(Marker marker) {
         Log.d("ANA", "onMarkerClick: location:" + marker.getTitle());
+        Shelter shelter = presenter.getShelter(marker.getTitle());
+        Log.d(TAG, "onMarkerClick: "+ shelter);
         Toast.makeText(MapActivity.this, "onMarkerClick", Toast.LENGTH_SHORT).show();
         return true;
     }

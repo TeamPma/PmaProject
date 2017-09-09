@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 
 public class MapPresenter extends BasePresenter implements MapContact.Presenter {
+    private static final String TAG = "MapPresenter";
 
     private MapContact.View view;
 
@@ -26,7 +27,9 @@ public class MapPresenter extends BasePresenter implements MapContact.Presenter 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(BaseEvent event) {
+    public void onMessageEvent(BaseEvent event) 
+    {
+        Log.d(TAG, "onMessageEvent: ");
         switch (event.getType()){
             case ERROR_EVENT:
                 break;
@@ -46,7 +49,15 @@ public class MapPresenter extends BasePresenter implements MapContact.Presenter 
     }
 
     @Override
+    public Shelter getShelter(String title){
+        Log.d(TAG, "getShelter: ");
+        return getShelterDB_(title);
+    }
+
+
+    @Override
     public void getAllShelters() {
+        Log.d(TAG, "getAllShelters: ");
         getShelterList_();
     }
 }

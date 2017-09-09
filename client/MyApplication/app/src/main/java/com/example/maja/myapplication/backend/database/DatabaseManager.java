@@ -45,5 +45,19 @@ public class DatabaseManager {
         Log.d(TAG, "readAllNews: ");
         return announcementDbHelper.readAnnouncements();
     }
+
+    public Shelter getShelterByTitle(String title) {
+        Log.d(TAG, "getShelterByTitle: ");
+        Log.d(TAG, "getShelterByTitle: "+  shelterDbHelper.readShelterByTitle(title));
+        return shelterDbHelper.readShelterByTitle(title);
+    }
+
+    public void insertAllShelters(ArrayList<Shelter> shelterList) {
+        Log.d(TAG, "insertAllShelters: ");
+        for(Shelter shelter: shelterList){
+            shelterDbHelper.insert(shelter);
+        }
+
+    }
 }
 

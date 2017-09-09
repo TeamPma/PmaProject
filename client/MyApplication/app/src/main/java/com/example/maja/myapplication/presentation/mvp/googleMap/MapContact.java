@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class MapContact {
 
     interface Presenter{
-
+        Shelter getShelter(String title);
         void getAllShelters();
     }
 
