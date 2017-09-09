@@ -36,9 +36,7 @@ public class DatabaseManager {
 
     public void insertAllNews(ArrayList<Announcement> news){
         Log.d(TAG, "insertAllNews: ");
-        for (Announcement announcement: news) {
-            announcementDbHelper.insert(announcement);
-        }
+            announcementDbHelper.insertAllAnnouncements(news);
     }
 
     public ArrayList<Announcement> readAllNews(){
@@ -56,6 +54,11 @@ public class DatabaseManager {
         Log.d(TAG, "insertAllShelters: ");
         shelterDbHelper.insertAllShelters(shelterList);
 
+    }
+
+    public Shelter getShelterById(int shelterId) {
+        Log.d(TAG, "getShelterById: " + shelterDbHelper.readShelter(shelterId));
+        return shelterDbHelper.readShelter(shelterId);
     }
 }
 

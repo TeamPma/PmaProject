@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;;
     private String mActivityTitle;
-    private boolean gmapEnabled = false;
+    private boolean gmapEnabled = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,12 +117,14 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG, "onConfigurationChanged: ");
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
         checkGmapPermision();
     }
 
     private void checkGmapPermision() {
+        Log.d(TAG, "checkGmapPermision: ");
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION },
                     MY_PERMISSIONS_REQUEST_LOCATION);
@@ -136,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.d(TAG, "onRequestPermissionsResult: ");
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION:{
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
@@ -159,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     public void showShelter(Shelter shelter) {
         Log.d(TAG, "showShelter: " + shelter);
         Intent intent = new Intent(this, ShelterDetailsActivity.class);
-        intent.putExtra("shelter",shelter);
+        intent.putExtra("shelterId",shelter.getIdShelter());
         startActivity(intent);
         finish();
     }
@@ -192,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
+        Log.d(TAG, "selectItem: ");
         // Create a new fragment and specify the planet to show based on position
         Fragment fragment = null;
         int title = 0;
@@ -209,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 title = R.string.newsList_fragment;
                 break;
             case 3:
+                Log.d(TAG, "selectItem: "+ gmapEnabled);
                 if(gmapEnabled){
                     startActivity(new Intent(MainActivity.this, MapActivity.class));
                 }

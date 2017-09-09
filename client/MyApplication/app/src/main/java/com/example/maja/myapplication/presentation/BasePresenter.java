@@ -66,9 +66,9 @@ public abstract class BasePresenter {
         smartBus.getShelterList();
     }
 
-    protected void getShelterById_(int shelterId){
+    protected Shelter getShelterById_(int shelterId){
         Log.d(TAG, "getShelterById_: ");
-        smartBus.getShelterById(shelterId);
+        return smartBus.getShelterById(shelterId);
     }
 
     protected void addShelter_(Shelter shelter){

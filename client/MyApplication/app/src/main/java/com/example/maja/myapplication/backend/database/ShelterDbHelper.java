@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.maja.myapplication.backend.entity.Shelter;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  */
 
 public class ShelterDbHelper extends SQLiteOpenHelper {
+    private static final String TAG = "ShelterDbHelper";
 
     public static final String DATABASE_NAME = "shelters.db";
     public static final int DATABASE_VERSION = 1;
@@ -121,6 +123,7 @@ public class ShelterDbHelper extends SQLiteOpenHelper {
     }
 
     public void deleteAll() {
+        Log.d(TAG, "deleteAll: ");
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_NAME, null, null);
         close();
@@ -141,6 +144,7 @@ public class ShelterDbHelper extends SQLiteOpenHelper {
     }
 
     public void insertAllShelters(ArrayList<Shelter> shelterList) {
+        Log.d(TAG, "insertAllShelters: ");
         deleteAll();
         for(Shelter shelter: shelterList){
            insert(shelter);

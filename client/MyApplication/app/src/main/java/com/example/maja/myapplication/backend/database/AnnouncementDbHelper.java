@@ -97,6 +97,12 @@ public class AnnouncementDbHelper extends SQLiteOpenHelper {
             close();
         }
 
+        public void deleteAll() {
+            SQLiteDatabase db = getWritableDatabase();
+            db.delete(TABLE_NAME, null, null);
+            close();
+        }
+
         private Announcement createAnnouncement(Cursor cursor) {
             int announcementId = cursor.getInt(cursor.getColumnIndex(COLUMN_ANNOUNCEMENT_ID));
             int shelterId = cursor.getInt(cursor.getColumnIndex(COLUMN_SHELTER_ID));
@@ -106,4 +112,11 @@ public class AnnouncementDbHelper extends SQLiteOpenHelper {
 
             return new Announcement(announcementId, shelterId, comment,new Date(),title);
         }
+
+    public void insertAllAnnouncements(ArrayList<Announcement> news) {
+        deleteAll();
+        for(Announcement announcement: news){
+            insert(announcement);
+        }
+    }
 }

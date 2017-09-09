@@ -1,6 +1,7 @@
 package com.example.maja.myapplication.presentation.mvp.googleMap;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Shelter;
+import com.example.maja.myapplication.presentation.mvp.shelterDetails.ShelterDetailsActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -163,6 +165,9 @@ public class MapActivity extends FragmentActivity implements MapContact.View, On
         Log.d("ANA", "onMarkerClick: location:" + marker.getTitle());
         Shelter shelter = presenter.getShelter(marker.getTitle());
         Log.d(TAG, "onMarkerClick: "+ shelter);
+        Intent intent = new Intent(MapActivity.this, ShelterDetailsActivity.class);
+        intent.putExtra("shelterId", shelter.getIdShelter());
+        startActivity(intent);
         Toast.makeText(MapActivity.this, "onMarkerClick", Toast.LENGTH_SHORT).show();
         return true;
     }

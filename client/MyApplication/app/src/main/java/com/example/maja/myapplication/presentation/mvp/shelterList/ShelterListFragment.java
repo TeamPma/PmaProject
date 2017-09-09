@@ -112,7 +112,7 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
                 Intent intent = new Intent(getActivity(), AddShelterActivity.class);
-                intent.putExtra("shelter", shelter);
+                intent.putExtra("shelterId", shelter.getIdShelter());
                 getActivity().startActivity(intent);
             }
         });

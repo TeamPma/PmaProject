@@ -2,6 +2,7 @@ package com.example.maja.myapplication.presentation.mvp.shelterDetails;
 
 import android.util.Log;
 
+import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.events.BaseEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
@@ -26,9 +27,9 @@ public class ShelterDetailsPresenter extends BasePresenter implements ShelterDet
     }
 
     @Override
-    public void getShelterById(int shelterId) {
+    public Shelter getShelterById(int shelterId) {
         Log.d(TAG, "getShelterById: ");
-        getShelterById_(shelterId);
+        return getShelterById_(shelterId);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
