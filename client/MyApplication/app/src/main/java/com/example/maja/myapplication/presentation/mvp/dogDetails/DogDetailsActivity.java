@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.EventLogTags;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
@@ -23,6 +24,8 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
     private TextView dogGender;
     private TextView dogAge;
     private Dog dog;
+    private Button btnUpdate;
+    private Button btnDelete;
 
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
