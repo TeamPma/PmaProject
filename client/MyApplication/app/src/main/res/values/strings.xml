@@ -37,6 +37,7 @@
     <string name="add_shelter_city">City:</string>
     <string name="add_shelter_bank_account">Bank account:</string>
     <string name="btnCreateShelter">Create shelter</string>
+    <string name="btnUpdateShelter">Update shelter</string>
 
     <!-- Dogs strings -->
     <string name="lblName">Name:</string>

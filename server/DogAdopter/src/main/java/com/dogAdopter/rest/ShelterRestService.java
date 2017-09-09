@@ -53,21 +53,21 @@ public class ShelterRestService extends BaseRestService {
     }
     
     @GET
-    @Path("updateAnnouncement/{announcement}")
+    @Path("updateShelter/{shelter}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateAnnouncement(@PathParam("announcement") String announcement) {
-    	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
-		announcementService.update(announcementFromJson);
-		return gson.toJson(announcementService.getAllAnnouncements());
+    public String updateShelter(@PathParam("shelter") String shelter) {
+    	Shelter shelterFromJson = gson.fromJson(shelter, Shelter.class);
+		shelterService.update(shelterFromJson);
+		return gson.toJson(shelterService.getAll());
     }
     
     @GET
-    @Path("deleteAnnouncement/{announcement}")
+    @Path("deleteShelter/{shelter}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteAnnouncement(@PathParam("announcement") String announcement) {
-    	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
-		announcementService.delete(announcementFromJson);
-		return gson.toJson(announcementService.getAllAnnouncements());
+    public String deleteShelter(@PathParam("shelter") String shelter) {
+    	Shelter shelterFromJson = gson.fromJson(shelter, Shelter.class);
+		shelterService.delete(shelterFromJson);
+		return gson.toJson(shelterService.getAll());
     }
 
 }

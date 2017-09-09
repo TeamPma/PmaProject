@@ -7,11 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.addNews.AddNewsActivity;
+import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
+import com.example.maja.myapplication.presentation.mvp.updateShelter.UpdateShelterActivity;
 
 import org.w3c.dom.Text;
 
@@ -28,6 +31,8 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
     private TextView shelterBankAccount;
     private Shelter shelter;
     private FloatingActionButton  btnAddNews;
+    private Button btnUpdate;
+    private Button btnDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +108,14 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         shelterBankAccount.setText(String.valueOf(shelter.getBankAccount()));
 
         btnAddNews = (FloatingActionButton) findViewById(R.id.btnAddNews);
+        btnUpdate = (Button) findViewById(R.id.btnUpdate);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
     }
 
     private void initListener(){
         Log.d(TAG, "initListener: ");
+
+        Log.d(TAG, "initListener: add news");
         btnAddNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,5 +127,34 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
 
             }
         });
+
+        Log.d(TAG, "initListener: update shelter");
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(ShelterDetailsActivity.this, UpdateShelterActivity.class);
+                intent.putExtra("shelter",shelter);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+        Log.d(TAG, "initListener: delete shelter");
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                //set activity for delete shelter
+                Intent intent = new Intent(ShelterDetailsActivity.this, MainActivity.class);
+                intent.putExtra("shelter",shelter);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+
     }
 }
