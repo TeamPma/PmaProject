@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.maja.myapplication.backend.entity.Dog;
 
+import java.util.ArrayList;
+
 /**
  * Created by Jovana on 6.9.2017..
  */
@@ -113,6 +115,12 @@ public class DogDbHelper extends SQLiteOpenHelper {
         close();
     }
 
+    public void deleteAll() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, null, null);
+        close();
+    }
+
     private Dog createDog(Cursor cursor) {
         int dogId = cursor.getInt(cursor.getColumnIndex(COLUMN_DOG_ID));
         String dogName = cursor.getString(cursor.getColumnIndex(COLUMN_DOG_NAME));
@@ -128,4 +136,12 @@ public class DogDbHelper extends SQLiteOpenHelper {
 
         return new Dog(dogId, dogName, dogBread, dogGender, dogAge, dogWeight, dogHeight, isSterilized, isMarked, dogAnamnesis, dogShelterId);
     }
+
+    public void insertAllDogs(ArrayList<Dog> dogList) {
+        deleteAll();
+        for(Dog dog: dogList){
+            insert(dog);
+        }
+    }
+
 }

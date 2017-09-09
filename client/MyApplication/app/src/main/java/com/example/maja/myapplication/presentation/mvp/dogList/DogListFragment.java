@@ -29,7 +29,7 @@ public class DogListFragment extends Fragment implements DogListContact.View{
     private FragmentListener parentActivity;
     private DogListPresenter presenter;
     private DogListAdapter dogListAdapter;
-    private FloatingActionButton btnAddDog;
+   // private FloatingActionButton btnAddDog;
     private Dog dog;
 
     public DogListFragment() {
@@ -48,7 +48,7 @@ public class DogListFragment extends Fragment implements DogListContact.View{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dogs_list, container, false);
         builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
-        btnAddDog = (FloatingActionButton) view.findViewById(R.id.btnAddDog);
+        //btnAddDog = (FloatingActionButton) view.findViewById(R.id.btnAddDog);
 
         initListener();
         presenter.getDogList();
@@ -106,16 +106,16 @@ public class DogListFragment extends Fragment implements DogListContact.View{
 
     private void initListener() {
         Log.d(TAG, "initListener: ");
-        btnAddDog.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: ");
-                Intent intent = new Intent(getActivity(), AddDogActivity.class);
-                intent.putExtra("dog", dog);
-                getActivity().startActivity(intent);
-            }
-        });
+//        btnAddDog.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View view) {
+//                Log.d(TAG, "onClick: ");
+//                Intent intent = new Intent(getActivity(), AddDogActivity.class);
+//                intent.putExtra("dog", dog);
+//                getActivity().startActivity(intent);
+//            }
+//        });
     }
 
     @Override

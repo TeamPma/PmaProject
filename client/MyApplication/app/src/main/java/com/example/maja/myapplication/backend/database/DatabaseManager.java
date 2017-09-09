@@ -60,5 +60,9 @@ public class DatabaseManager {
         Log.d(TAG, "getShelterById: " + shelterDbHelper.readShelter(shelterId));
         return shelterDbHelper.readShelter(shelterId);
     }
+    public void insertAllDogs(ArrayList<Dog> dogList) {
+        Log.d(TAG, "insertAllDogs: ");
+        dogDbHelper.insertAllDogs(dogList);
+    }
 }
 
