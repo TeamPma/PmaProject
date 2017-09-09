@@ -13,6 +13,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by Maja on 25.8.2017.
@@ -52,6 +53,11 @@ public abstract class BasePresenter {
     protected void deleteNews_ (Announcement announcement){
         Log.d(TAG, "deleteNews_: ");
         smartBus.deleteNews(announcement);
+    }
+
+    protected ArrayList<Announcement> getAllNewsDB_() {
+        Log.d(TAG, "getAllNewsDB_: ");
+        return smartBus.getAllNewsDB();
     }
 
     //--------------------Shelter--------------------------------

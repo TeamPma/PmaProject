@@ -25,7 +25,6 @@ public class ServiceRepository extends Service {
 
     private static final String TAG = ServiceRepository.class.getSimpleName();
     private HttpRestManager restManager = new HttpRestManager();
-    private DatabaseManager databaseManager;
     private IBinder mBinder = null;
 
     @Nullable

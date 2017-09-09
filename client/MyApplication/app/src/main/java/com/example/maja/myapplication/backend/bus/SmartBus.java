@@ -7,11 +7,14 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.maja.myapplication.backend.database.DatabaseManager;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.service.ServiceRepository;
+
+import java.util.ArrayList;
 
 /**
  * Created by Maja on 27.8.2017.
@@ -21,6 +24,7 @@ public class SmartBus implements ServiceConnection {
 
     private static final String TAG = SmartBus.class.getSimpleName();
     private static final SmartBus ourInstance = new SmartBus();
+    private DatabaseManager dbManager;
 
 
     public Context context;
@@ -32,6 +36,17 @@ public class SmartBus implements ServiceConnection {
     }
 
     private SmartBus() {
+    }
+
+    public void startService(Context applicationContext) {
+        Log.d(TAG, "startService: ");
+        Intent intent = new Intent(applicationContext, ServiceRepository.class);
+        context.bindService(intent, this, Context.BIND_AUTO_CREATE);
+    }
+
+    public void initializeDBManager(Context applicationContext) {
+        dbManager = new DatabaseManager(applicationContext);
+        this.context = applicationContext;
     }
 
     @Override
@@ -46,13 +61,6 @@ public class SmartBus implements ServiceConnection {
     @Override
     public void onServiceDisconnected(ComponentName componentName) {
         mServiceBound = false;
-    }
-
-    public void startService(Context applicationContext) {
-        Log.d(TAG, "startService: ");
-        this.context = applicationContext;
-        Intent intent = new Intent(context, ServiceRepository.class);
-        context.bindService(intent, this, Context.BIND_AUTO_CREATE);
     }
 
     public Context getContext() {
@@ -112,5 +120,15 @@ public class SmartBus implements ServiceConnection {
     public void addDog(Dog dog) {
         Log.d(TAG, "addDog: ");
         mService.addDog(dog);
+    }
+
+    public void insertAllNews(ArrayList<Announcement> news) {
+        Log.d(TAG, "insertAllNews: ");
+        dbManager.insertAllNews(news);
+    }
+
+    public ArrayList<Announcement> getAllNewsDB() {
+        Log.d(TAG, "getAllNewsDB: ");
+        return dbManager.readAllNews();
     }
 }

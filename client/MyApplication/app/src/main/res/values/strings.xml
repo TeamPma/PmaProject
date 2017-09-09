@@ -55,5 +55,7 @@
     <string name="lblAddNews">Add news:</string>
     <string name="btnUpdate">Update</string>
     <string name="btnDelete">Delete</string>
+    <string name="mapShelter">Shelter map</string>
+    <string name="title_activity_map">Map</string>
 
 </resources>
