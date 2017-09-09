@@ -325,7 +325,9 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
                         ArrayList<Announcement> news = gson.fromJson(stringResponse, new TypeToken<ArrayList<Announcement>>(){}.getType());
-                        SmartBus.getInstance().insertAllNews(news);
+                        if(SmartBus.getInstance().getAllNewsDB() == null) {
+                            SmartBus.getInstance().insertAllNews(news);
+                        }
                         EventBus.getDefault().post(new GetAllNewsEvent());
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
