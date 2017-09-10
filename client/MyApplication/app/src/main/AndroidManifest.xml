@@ -26,6 +26,7 @@
         <activity android:name=".presentation.mvp.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -57,7 +58,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".presentation.mvp.updateDog.UpdateDogActivity"></activity>
+        <activity android:name=".presentation.mvp.updateDog.UpdateDogActivity" />
+        <activity android:name=".presentation.mvp.updateNews.UpdateNewsActivity"></activity>
     </application>
 
 </manifest>

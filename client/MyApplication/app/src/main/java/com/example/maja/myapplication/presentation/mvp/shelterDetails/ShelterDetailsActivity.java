@@ -152,7 +152,7 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
                 Intent intent = new Intent(ShelterDetailsActivity.this, AddNewsActivity.class);
                 intent.putExtra("shelter",shelter);
                 startActivity(intent);
-                finish();
+                //finish();
 
             }
         });
@@ -164,7 +164,7 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
                 Intent intent = new Intent(ShelterDetailsActivity.this, AddDogActivity.class);
                 intent.putExtra("shelter",shelter);
                 startActivity(intent);
-                finish();
+                //finish();
 
             }
         });
@@ -177,7 +177,7 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
                 Intent intent = new Intent(ShelterDetailsActivity.this, UpdateShelterActivity.class);
                 intent.putExtra("shelter",shelter);
                 startActivity(intent);
-                finish();
+                //finish();
 
             }
         });
@@ -191,7 +191,7 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
                 Intent intent = new Intent(ShelterDetailsActivity.this, MainActivity.class);
                 intent.putExtra("shelter",shelter);
                 startActivity(intent);
-                finish();
+               // finish();
 
             }
         });

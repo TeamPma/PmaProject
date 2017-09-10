@@ -53,4 +53,6 @@ public interface IHttpRestManager {
 
     @GET("addDog/{dog}")
     Call<ResponseBody> addDog(@Path("dog") String dog);
+
+
 }

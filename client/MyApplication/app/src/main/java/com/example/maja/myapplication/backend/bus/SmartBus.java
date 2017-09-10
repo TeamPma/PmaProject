@@ -162,4 +162,20 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "getAllNewsDB: ");
         return dbManager.readAllNews();
     }
+
+    public void delteAnnouncementDB(int idAnnouncement) {
+        Log.d(TAG, "delteAnnouncement: ");
+        dbManager.deleteAnnouncementDB(idAnnouncement);
+    }
+
+    public Announcement getAnnouncementById(int annoucementId) {
+        Log.d(TAG, "getAnnouncementById: ");
+        return dbManager.getAnnouncementById(annoucementId);
+    }
+
+    public void updateNewsDB(Announcement announcement) {
+        Log.d(TAG, "updateNewsDB: ");
+        dbManager.updateAnnouncementDB(announcement);
+    }
+
 }

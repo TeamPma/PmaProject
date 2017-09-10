@@ -40,6 +40,11 @@ public abstract class BasePresenter {
         smartBus.getAllNews();
     }
 
+    protected Announcement getAnnouncementsById_(int annoucementId)
+    {
+        Log.d(TAG, "getAnnouncementsById_: ");
+        return smartBus.getAnnouncementById(annoucementId);
+    }
     protected void addNews_ (Announcement announcement){
         Log.d(TAG, "addNews_: ");
         smartBus.addNews(announcement);

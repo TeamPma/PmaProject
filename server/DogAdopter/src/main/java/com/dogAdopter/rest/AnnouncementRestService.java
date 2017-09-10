@@ -71,7 +71,7 @@ public class AnnouncementRestService extends BaseRestService {
     public String updateAnnouncement(@PathParam("announcement") String announcement) {
     	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
 		announcementService.update(announcementFromJson);
-		return gson.toJson(announcementService.getAllAnnouncements());
+		return announcement;
     }
     
     @GET
@@ -80,7 +80,7 @@ public class AnnouncementRestService extends BaseRestService {
     public String deleteAnnouncement(@PathParam("announcement") String announcement) {
     	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
 		announcementService.delete(announcementFromJson);
-		return gson.toJson(announcementService.getAllAnnouncements());
+		return "true";
     }
     
     

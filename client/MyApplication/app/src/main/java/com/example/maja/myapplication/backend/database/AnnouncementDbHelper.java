@@ -119,4 +119,11 @@ public class AnnouncementDbHelper extends SQLiteOpenHelper {
             insert(announcement);
         }
     }
+
+    public void updateAnnDB(Announcement announcement) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_ANNOUNCEMENT_ID + "=?", new String[] {Integer.toString(announcement.getIdAnnouncement())});
+        close();
+        insert(announcement);
+    }
 }

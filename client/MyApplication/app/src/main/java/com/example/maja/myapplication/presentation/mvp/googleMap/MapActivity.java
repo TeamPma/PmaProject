@@ -101,9 +101,12 @@ public class MapActivity extends FragmentActivity implements MapContact.View, On
         }
         Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         if (location != null) {
+            Log.d(TAG, "initCurrentLocation: ");
             //Getting longitude and latitude
-            currentLongitude = location.getLongitude();
-            currentLatitude = location.getLatitude();
+            currentLongitude = 19.83694;
+            currentLatitude = 45.25167;
+            //currentLongitude = location.getLongitude();
+            //currentLatitude = location.getLatitude();
             //moving the map to location
             moveMap();
         }
@@ -114,7 +117,7 @@ public class MapActivity extends FragmentActivity implements MapContact.View, On
         Log.d("ANA", "moveMap: ");
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(30));
         mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 

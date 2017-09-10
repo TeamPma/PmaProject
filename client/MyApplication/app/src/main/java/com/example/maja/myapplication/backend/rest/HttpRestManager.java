@@ -3,7 +3,6 @@ package com.example.maja.myapplication.backend.rest;
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.bus.SmartBus;
-import com.example.maja.myapplication.backend.database.DatabaseManager;
 import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.Announcement;
@@ -23,7 +22,6 @@ import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.example.maja.myapplication.backend.events.UpdateNewsEvent;
 import com.example.maja.myapplication.backend.events.UpdateShelterEvent;
 import com.google.gson.Gson;
-import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
@@ -453,7 +451,9 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        EventBus.getDefault().post(new UpdateNewsEvent());
+                        Announcement announcement = gson.fromJson(stringResponse, Announcement.class);
+                        SmartBus.getInstance().updateNewsDB(announcement);
+                        EventBus.getDefault().post(new UpdateNewsEvent(announcement));
 
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
@@ -486,7 +486,8 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
-                         EventBus.getDefault().post(new DeleteNewsEvent());
+                        SmartBus.getInstance().delteAnnouncementDB(announcement.getIdAnnouncement());
+                        EventBus.getDefault().post(new DeleteNewsEvent());
 
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
@@ -502,6 +503,4 @@ public class HttpRestManager  {
             }
         });
     }
-
-
 }
