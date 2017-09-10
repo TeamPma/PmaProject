@@ -64,5 +64,20 @@ public class DatabaseManager {
         Log.d(TAG, "insertAllDogs: ");
         dogDbHelper.insertAllDogs(dogList);
     }
+
+    public void deleteAnnouncementDB(int idAnnouncement) {
+        Log.d(TAG, "delete: ");
+        announcementDbHelper.deleteAnnouncement(idAnnouncement);
+    }
+
+    public Announcement getAnnouncementById(int annoucementId) {
+        Log.d(TAG, "getAnnouncementById: ");
+       return announcementDbHelper.readAnnouncement(annoucementId);
+    }
+
+    public void updateAnnouncementDB(Announcement announcement) {
+        Log.d(TAG, "updateAnnouncementDB: ");
+        announcementDbHelper.updateAnnDB(announcement);
+    }
 }
 

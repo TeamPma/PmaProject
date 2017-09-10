@@ -59,19 +59,16 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
                 parentActivity.showAnnouncement(announcement);
             }
         });
-
-        //dodaces click za update and delete
-
-
-//        btnAddNews.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d(TAG, "onClick: ");
-//                parentActivity.openAddNewsActivity();
-//            }
-//        });
-        // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        Log.d(TAG, "onResume: ");
+        super.onResume();
+        presenter.resume();
+        newsListAdapter.setNewsList(presenter.getRefreshedAllNewsFromDB());
+        newsListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -103,14 +100,4 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
         newsListAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void handleUpdateNewsSuccessful() {
-        Log.d(TAG, "handleUpdateNewsSuccessful: ");
-
-    }
-
-    @Override
-    public void handleDeleteNewsSuccessful() {
-        Log.d(TAG, "handleDeleteNewsSuccessful: ");
-    }
 }

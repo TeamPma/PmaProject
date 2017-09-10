@@ -120,7 +120,7 @@ public class AddNewsActivity extends AppCompatActivity implements AddNewsContact
     public void addNewsSuccessfull() {
         Log.d(TAG, "addNewsSuccessfull: ");
         Intent intent = new Intent(AddNewsActivity.this, ShelterDetailsActivity.class);
-        intent.putExtra("shelter",shelter);
+        intent.putExtra("shelterId",shelter.getIdShelter());
         startActivity(intent);
         finish();
     }

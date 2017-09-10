@@ -1,5 +1,7 @@
 package com.example.maja.myapplication.presentation.mvp.announcement;
 
+import com.example.maja.myapplication.backend.entity.Announcement;
+
 /**
  * Created by Maja on 7.9.2017.
  */
@@ -7,8 +9,14 @@ package com.example.maja.myapplication.presentation.mvp.announcement;
 public class AnnouncementDetailContact {
 
     public interface View{
+
+        void handleError(String message);
+        void handleDeleteNewsSuccess();
     }
 
     public interface Presenter{
+
+        void updateAnnouncement(Announcement announcement);
+        void delteAnnouncements(Announcement announcement);
     }
 }

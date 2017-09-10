@@ -14,16 +14,11 @@ public class NewsContact {
 
         void handleError(String message);
         void getAllNewsSuccesfull(ArrayList<Announcement> news);
-
-        void handleUpdateNewsSuccessful();
-
-        void handleDeleteNewsSuccessful();
     }
 
     public interface Presenter{
 
         void getAllNews();
-        void updateNews(Announcement announcement);
-        void delteNews(Announcement announcement);
+        ArrayList<Announcement> getRefreshedAllNewsFromDB();
     }
 }

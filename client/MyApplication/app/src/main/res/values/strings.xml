@@ -64,6 +64,9 @@
     <string name="mapShelter">Shelter map</string>
     <string name="title_activity_map">Map</string>
     <string name="btnAddNews">Add news</string>
+    <string name="btnCreateAnnouncement">Publish</string>
+    <string name="btnUpdateAnnouncement">Update</string>
+    <string name="btnDeleteAnnouncement">Delete</string>
     <string name="btnAddDog">Add dog</string>
     <string name="logOut">Log out</string>
     <string name="btnUpdateDog">Update dog</string>

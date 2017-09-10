@@ -1,13 +1,21 @@
 package com.example.maja.myapplication.presentation.mvp.announcement;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Announcement;
+import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
+import com.example.maja.myapplication.presentation.mvp.updateNews.UpdateNewsActivity;
 
 /**
  * Created by Maja on 7.9.2017.
@@ -21,6 +29,8 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
     private TextView announcementDescription;
     private TextView announcementDate;
     private TextView announcementsShelter;
+    private Button btnUpdateAnnouncement;
+    private Button btnDelteAnnouncement;
     private Announcement announcement;
 
     @Override
@@ -51,9 +61,54 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
         announcementDescription.setText(announcement.getComment());
         //announcementsShelter.setText(announcement.getIdShelter());
         announcementDate.setText(announcement.getDate().toString());
+
+
+        btnUpdateAnnouncement = (Button) findViewById(R.id.btnUpdateAnnouncement);
+        btnDelteAnnouncement = (Button) findViewById(R.id.btnDeleteAnnouncement);
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.maja.myapplication", Context.MODE_PRIVATE);
+        String isAdminKey = "com.example.maja.myapplication.isAdmin";
+        int isAdmin = prefs.getInt(isAdminKey, 0);
+        if(isAdmin != 1){
+            btnUpdateAnnouncement.setVisibility(View.INVISIBLE);
+            btnDelteAnnouncement.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     private void initListener() {
+        Log.d(TAG, "initListener: ");
+
+        btnUpdateAnnouncement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onUpdateClick: ");
+                Intent intent = new Intent(AnnouncementDetailActivity.this, UpdateNewsActivity.class);
+                intent.putExtra("announcementId",announcement.getIdAnnouncement());
+                startActivity(intent);
+
+            }
+        });
+        btnDelteAnnouncement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onDeleteClick: ");
+                builder.setTitle("Warning")
+                        .setMessage("Are you sure that you want to delete chosen announcement?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                              presenter.delteAnnouncements(announcement);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
     }
 
     @Override
@@ -61,6 +116,9 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
+        Announcement announcementDB = presenter.getAnnouncemetDB(announcement.getIdAnnouncement());
+        announcementTitle.setText(announcementDB.getTitle());
+        announcementDescription.setText(announcementDB.getComment());
     }
 
     @Override
@@ -82,5 +140,26 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
         Log.d(TAG, "onDestroy: ");
         super.onDestroy();
         presenter.destroy();
+    }
+
+    @Override
+    public void handleError(String message) {
+        Log.d(TAG, "handleError: ");
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void handleDeleteNewsSuccess() {
+        Log.d(TAG, "handleDeleteNewsSuccess: ");
+        finish();
+
     }
 }
