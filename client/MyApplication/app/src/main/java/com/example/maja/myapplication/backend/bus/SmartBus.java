@@ -75,6 +75,11 @@ public class SmartBus implements ServiceConnection {
         mService.createAccount(user);
     }
 
+    public void updateUser(User user) {
+        Log.d(TAG, "updateUser: ");
+        mService.updateUser(user);
+    }
+
     //----------------------------Shelter-------------------------------------
 
     public void getShelterList() {

@@ -23,6 +23,7 @@ import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.example.maja.myapplication.backend.events.UpdateDogEvent;
 import com.example.maja.myapplication.backend.events.UpdateNewsEvent;
 import com.example.maja.myapplication.backend.events.UpdateShelterEvent;
+import com.example.maja.myapplication.backend.events.UpdateUserEvent;
 import com.google.gson.Gson;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.google.gson.reflect.TypeToken;
@@ -133,6 +134,37 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
                         EventBus.getDefault().post(new CreateAccountEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void updateUser(User user) {
+        Log.d(TAG, "updateUser: ");
+        Retrofit retrofit = getRetrofit(userSericeUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String userSericeUrl = gson.toJson(user);
+        iHttpRestManager.updateUser(user).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new UpdateUserEvent());
 
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());

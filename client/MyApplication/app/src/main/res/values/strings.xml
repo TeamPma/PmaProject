@@ -72,5 +72,8 @@
     <string name="lblAnamnesis">Anamnesis:</string>
     <string name="lblSterilized">Sterilized</string>
     <string name="lblMarked">Marked</string>
+    <string name="account_old_password">Old password:</string>
+    <string name="lblChangePassword">Change password</string>
+    <string name="btnUpdateUser">Update user</string>
 
 </resources>

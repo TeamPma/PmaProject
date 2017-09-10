@@ -110,4 +110,9 @@ public class ServiceRepository extends Service {
         return "";
     }
 
+    public void updateUser(User user) {
+        Log.d(TAG, "updateUser: ");
+        restManager.updateUser(user);
+    }
+
 }

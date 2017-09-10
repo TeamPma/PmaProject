@@ -1,5 +1,7 @@
 package com.example.maja.myapplication.backend.rest;
 
+import com.example.maja.myapplication.backend.entity.User;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -17,6 +19,9 @@ public interface IHttpRestManager {
 
     @GET("addUser/{user}")
     Call<ResponseBody> createAccount(@Path("user") String user);
+
+    @GET("updateUser/{user}")
+    Call<ResponseBody> updateUser(@Path("user") User user);
 
     //-------------- Shelter ----------------------------
     @GET("shelterAll")
@@ -56,4 +61,5 @@ public interface IHttpRestManager {
 
     @GET("updateDog/{dog}")
     Call<ResponseBody> updateDog(@Path("dog") String dogUrl);
+
 }
