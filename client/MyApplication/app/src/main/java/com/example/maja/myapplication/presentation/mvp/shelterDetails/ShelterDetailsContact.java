@@ -9,9 +9,15 @@ import com.example.maja.myapplication.backend.entity.Shelter;
 public class ShelterDetailsContact {
 
     public interface View{
+
+        void handleError(String message);
+        void handleDeleteShelterSuccess();
+
     }
 
     public interface Presenter{
         Shelter getShelterById(int shelterId);
+        void updateShelter(Shelter shelter);
+        void deleteShelter(Shelter shelter);
     }
 }

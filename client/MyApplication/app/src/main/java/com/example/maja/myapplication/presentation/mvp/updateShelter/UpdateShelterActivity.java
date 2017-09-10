@@ -26,6 +26,7 @@ public class UpdateShelterActivity extends AppCompatActivity implements UpdateSh
     private Button btnUpdateShelter;
     private AlertDialog.Builder builder;
     private UpdateShelterPresenter presenter;
+    private int shelterId;
     private Shelter shelter;
 
 
@@ -34,6 +35,7 @@ public class UpdateShelterActivity extends AppCompatActivity implements UpdateSh
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_shelter);
+        shelterId = (int) getIntent().getSerializableExtra("shelterId");
         presenter = new UpdateShelterPresenter(this);
         initUIComponents();
         initListener();
@@ -48,13 +50,13 @@ public class UpdateShelterActivity extends AppCompatActivity implements UpdateSh
                 if (shelterName.getText() != null && !shelterAddress.getText().toString().isEmpty() &&
                         shelterCity.getText() != null && !shelterBankAccount.getText().toString().isEmpty()){
 
-                    Shelter shelter = new Shelter();
+//                    Shelter shelter = new Shelter();
                     shelter.setName(shelterName.getText().toString());
                     shelter.setAddress(shelterAddress.getText().toString());
                     shelter.setNumber(shelterNumber.getText().toString());
                     shelter.setLocation(shelterLocation.getText().toString());
                     shelter.setCity(shelterCity.getText().toString());
-                    //shelter.setBankAccount();
+                    shelter.setBankAccount(Integer.valueOf(shelterBankAccount.getText().toString()));
                     Log.d(TAG, "onClick: "+ shelter);
                     presenter.updateShelter(shelter);
                 }
@@ -76,6 +78,7 @@ public class UpdateShelterActivity extends AppCompatActivity implements UpdateSh
 
     private void initUIComponents() {
         Log.d(TAG, "initUIComponents: ");
+        shelter = presenter.getShelterById(shelterId);
         shelterName = (EditText) findViewById(R.id.update_shelter_name);
         shelterAddress = (EditText) findViewById(R.id.update_shelter_address);
         shelterNumber = (EditText) findViewById(R.id.update_shelter_number);
@@ -83,7 +86,15 @@ public class UpdateShelterActivity extends AppCompatActivity implements UpdateSh
         shelterCity = (EditText) findViewById(R.id.update_shelter_city);
         shelterBankAccount = (EditText) findViewById(R.id.update_shelter_bank_account);
         btnUpdateShelter = (Button) findViewById(R.id.btnUpdateShelter);
+
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+
+        shelterName.setText(shelter.getName());
+        shelterAddress.setText(shelter.getAddress());
+        shelterNumber.setText(shelter.getNumber());
+        shelterLocation.setText(shelter.getLocation());
+        shelterCity.setText(shelter.getCity());
+        shelterBankAccount.setText(shelter.getBankAccount());
     }
 
     @Override

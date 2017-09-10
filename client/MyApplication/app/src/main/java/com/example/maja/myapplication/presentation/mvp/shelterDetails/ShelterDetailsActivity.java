@@ -1,6 +1,7 @@
 package com.example.maja.myapplication.presentation.mvp.shelterDetails;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
@@ -46,6 +47,8 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         setContentView(R.layout.activity_shelter_details);
         Log.d(TAG, "onCreate: " + getIntent().getSerializableExtra("shelterId"));
         int shelterId = (int) getIntent().getSerializableExtra("shelterId");
+        Log.d(TAG, "onCreate: " + getIntent().getSerializableExtra("shelter"));
+        shelter = (Shelter) getIntent().getSerializableExtra("shelter");
         Log.d(TAG, "onCreate: " + shelter);
         presenter = new ShelterDetailsPresenter(this);
         shelter = presenter.getShelterById(shelterId);
@@ -64,6 +67,13 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
+        Shelter shelterDB = presenter.getShelterDB(shelter.getIdShelter());
+        shelterName.setText(shelterDB.getName());
+        shelterAddress.setText(shelterDB.getAddress());
+        shelterNumber.setText(shelterDB.getNumber());
+        shelterLocation.setText(shelterDB.getLocation());
+        shelterBankAccount.setText(Integer.valueOf(shelterDB.getBankAccount()));
+        shelterCity.setText(shelterDB.getCity());
     }
 
     @Override
@@ -175,7 +185,7 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
                 Intent intent = new Intent(ShelterDetailsActivity.this, UpdateShelterActivity.class);
-                intent.putExtra("shelter",shelter);
+                intent.putExtra("shelterId",shelter.getIdShelter());
                 startActivity(intent);
                 //finish();
 
@@ -187,15 +197,49 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
+                builder.setTitle("Warning")
+                        .setMessage("Are you sure that you want to delete chosen shelter?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                presenter.deleteShelter(shelter);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
                 //set activity for delete shelter
-                Intent intent = new Intent(ShelterDetailsActivity.this, MainActivity.class);
-                intent.putExtra("shelter",shelter);
-                startActivity(intent);
+//                Intent intent = new Intent(ShelterDetailsActivity.this, MainActivity.class);
+//                intent.putExtra("shelter",shelter);
+//                startActivity(intent);
                // finish();
 
             }
         });
 
 
+    }
+
+    @Override
+    public void handleError(String message) {
+        Log.d(TAG, "handleError: ");
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void handleDeleteShelterSuccess() {
+        Log.d(TAG, "handleDeleteShelterSuccess: ");
+        finish();
     }
 }

@@ -34,6 +34,16 @@ public abstract class BasePresenter {
         smartBus.createAccount(user);
     }
 
+    protected void updateUser_(User user){
+        Log.d(TAG, "updateUser_: ");
+        smartBus.updateUser(user);
+    }
+
+    protected void getUserById_(int userId){
+        Log.d(TAG, "getUserById: ");
+        smartBus.getUserById(userId);
+    }
+
     //----------------------News-------------------------------
     protected void getAllNews_(){
         Log.d(TAG, "getAllNews_: ");
@@ -45,6 +55,7 @@ public abstract class BasePresenter {
         Log.d(TAG, "getAnnouncementsById_: ");
         return smartBus.getAnnouncementById(annoucementId);
     }
+
     protected void addNews_ (Announcement announcement){
         Log.d(TAG, "addNews_: ");
         smartBus.addNews(announcement);
@@ -89,7 +100,6 @@ public abstract class BasePresenter {
     protected void deleteShelter_(Shelter shelter){
         Log.d(TAG, "deleteShelter_: ");
         smartBus.deleteShelter(shelter);
-
     }
 
 
@@ -113,6 +123,17 @@ public abstract class BasePresenter {
     protected void updateDog_(Dog dog){
         Log.d(TAG, "updateDog_: ");
         smartBus.updateDog(dog);
+    }
+
+    protected void deleteDog_(Dog dog){
+        Log.d(TAG, "deleteDog_: ");
+        smartBus.deleteDog(dog);
+    }
+
+    protected Dog getDogById_(int dogId)
+    {
+        Log.d(TAG, "getDogById: ");
+        return smartBus.getDogById(dogId);
     }
 
     //----------------------Other----------------------------------

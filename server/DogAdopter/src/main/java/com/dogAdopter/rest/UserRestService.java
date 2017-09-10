@@ -51,6 +51,15 @@ public class UserRestService extends BaseRestService{
 
 	}
 	
+	@GET
+	@Path("updateUser/{user}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String updateUser(@PathParam("user") String user) {
+		User userFromJson = gson.fromJson(user, User.class);
+		userService.update(userFromJson);
+		return user;
+
+	}
 	
 	@GET
 	@Path("userById/{idOfUser}")

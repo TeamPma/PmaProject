@@ -51,4 +51,9 @@ public class UpdateDogPresenter extends BasePresenter implements UpdateDogContac
         updateDog_(dog);
 
     }
+
+    public Dog getDogById(int dogId) {
+        Log.d(TAG, "getDogById: ");
+        return getDogById_(dogId);
+    }
 }

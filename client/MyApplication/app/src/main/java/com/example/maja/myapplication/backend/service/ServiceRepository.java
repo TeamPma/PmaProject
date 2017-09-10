@@ -68,6 +68,16 @@ public class ServiceRepository extends Service {
         restManager.deleteShelter(shelter);
     }
 
+    public void deleteDog(Dog dog) {
+        Log.d(TAG, "deleteDog: ");
+        restManager.deleteDog(dog);
+    }
+
+    public void getUserById(int userId) {
+        Log.d(TAG, "getUserById: ");
+        restManager.getUserById(userId);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;
@@ -108,6 +118,11 @@ public class ServiceRepository extends Service {
         Log.d(TAG, "login: ");
         restManager.login(username,password);
         return "";
+    }
+
+    public void updateUser(User user) {
+        Log.d(TAG, "updateUser: ");
+        restManager.updateUser(user);
     }
 
 }

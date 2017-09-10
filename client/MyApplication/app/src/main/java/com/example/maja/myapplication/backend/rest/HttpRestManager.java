@@ -11,6 +11,7 @@ import com.example.maja.myapplication.backend.events.AddDogEvent;
 import com.example.maja.myapplication.backend.events.AddNewsEvent;
 import com.example.maja.myapplication.backend.events.AddShelterEvent;
 import com.example.maja.myapplication.backend.events.CreateAccountEvent;
+import com.example.maja.myapplication.backend.events.DeleteDogEvent;
 import com.example.maja.myapplication.backend.events.DeleteNewsEvent;
 import com.example.maja.myapplication.backend.events.DeleteShelterEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
@@ -18,10 +19,12 @@ import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
 import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
 import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
+import com.example.maja.myapplication.backend.events.GetUserByidEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.example.maja.myapplication.backend.events.UpdateDogEvent;
 import com.example.maja.myapplication.backend.events.UpdateNewsEvent;
 import com.example.maja.myapplication.backend.events.UpdateShelterEvent;
+import com.example.maja.myapplication.backend.events.UpdateUserEvent;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -131,6 +134,37 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
                         EventBus.getDefault().post(new CreateAccountEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void updateUser(User user) {
+        Log.d(TAG, "updateUser: ");
+        Retrofit retrofit = getRetrofit(userSericeUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String userSericeUrl = gson.toJson(user);
+        iHttpRestManager.updateUser(user).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new UpdateUserEvent());
 
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
@@ -258,7 +292,9 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        EventBus.getDefault().post(new UpdateShelterEvent());
+                        Shelter shelter = gson.fromJson(stringResponse, Shelter.class);
+                        SmartBus.getInstance().updateShelterDB(shelter);
+                        EventBus.getDefault().post(new UpdateShelterEvent(shelter));
 
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
@@ -275,7 +311,7 @@ public class HttpRestManager  {
         });
     }
 
-    public void deleteShelter(Shelter shelter) {
+    public void deleteShelter(final Shelter shelter) {
 
         Log.d(TAG, "deleteShelter: ");
         Retrofit retrofit = getRetrofit(shelterServiceUrl);
@@ -290,6 +326,7 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
+                        SmartBus.getInstance().deleteShelterDB(shelter.getIdShelter());
                         EventBus.getDefault().post(new DeleteShelterEvent());
 
                     } catch (IOException e) {
@@ -387,7 +424,9 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        EventBus.getDefault().post(new UpdateDogEvent());
+                        Dog dog = gson.fromJson(stringResponse, Dog.class);
+                        SmartBus.getInstance().updateDogDB(dog);
+                        EventBus.getDefault().post(new UpdateDogEvent(dog));
 
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
@@ -535,4 +574,69 @@ public class HttpRestManager  {
             }
         });
     }
+
+    public void deleteDog(final Dog dog) {
+        Log.d(TAG, "deleteDog: ");
+        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String dogToJson = gson.toJson(dog);
+        iHttpRestManager.deleteDog(dogToJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        SmartBus.getInstance().deleteDogDB(dog.getDogId());
+                        EventBus.getDefault().post(new DeleteDogEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void getUserById(int userId) {
+        Log.d(TAG, "getUserById: ");
+        Retrofit retrofit = getRetrofit(userSericeUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String userJson = gson.toJson(userId);
+        iHttpRestManager.getUserById(userJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        User user = gson.fromJson(stringResponse,User.class);
+                        EventBus.getDefault().post(new GetUserByidEvent(user));
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
 }

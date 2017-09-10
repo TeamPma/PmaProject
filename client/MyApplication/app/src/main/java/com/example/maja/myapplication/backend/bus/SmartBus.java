@@ -75,6 +75,11 @@ public class SmartBus implements ServiceConnection {
         mService.createAccount(user);
     }
 
+    public void updateUser(User user) {
+        Log.d(TAG, "updateUser: ");
+        mService.updateUser(user);
+    }
+
     //----------------------------Shelter-------------------------------------
 
     public void getShelterList() {
@@ -113,6 +118,16 @@ public class SmartBus implements ServiceConnection {
         dbManager.insertAllShelters(shelterList);
     }
 
+    public void updateShelterDB(Shelter shelter) {
+        Log.d(TAG, "updateShelterDB: ");
+        dbManager.updateShelterDB(shelter);
+    }
+
+    public void deleteShelterDB(int idShelter) {
+        Log.d(TAG, "deleteShelterDB: ");
+        dbManager.deleteShelterDB(idShelter);
+    }
+
     //-----------------------------------------Dog------------------------------------------------
     public void getDogList() {
         Log.d(TAG, "getDogList: ");
@@ -129,9 +144,29 @@ public class SmartBus implements ServiceConnection {
         mService.updateDog(dog);
     }
 
+    public void deleteDog(Dog dog) {
+        Log.d(TAG, "deleteDog: ");
+        mService.deleteDog(dog);
+    }
+
     public void insertAllDogsDB(ArrayList<Dog> dogList) {
         Log.d(TAG, "insertAllDogs: ");
         dbManager.insertAllDogs(dogList);
+    }
+
+    public Dog getDogById(int dogId) {
+        Log.d(TAG, "getDogById: ");
+        return dbManager.getDogById(dogId);
+    }
+
+    public void updateDogDB(Dog dog) {
+        Log.d(TAG, "updateDogDB: ");
+        dbManager.updateDogDB(dog);
+    }
+
+    public void deleteDogDB(int idDog) {
+        Log.d(TAG, "deleteDogDB: ");
+        dbManager.deleteDogDB(idDog);
     }
 
 
@@ -183,5 +218,8 @@ public class SmartBus implements ServiceConnection {
         dbManager.updateAnnouncementDB(announcement);
     }
 
-
+    public void getUserById(int userId) {
+        Log.d(TAG, "getUserById: ");
+        mService.getUserById(userId);
+    }
 }

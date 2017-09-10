@@ -1,13 +1,14 @@
 package com.example.maja.myapplication.presentation.mvp.dogDetails;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Dog;
+import com.example.maja.myapplication.presentation.mvp.updateDog.UpdateDogActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -129,6 +131,11 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
+        Dog dogDB = presenter.getDogDB(dog.getDogId());
+        dogName.setText(dogDB.getName());
+        dogBread.setText(dogDB.getBread());
+        dogGender.setText(dogDB.getGender());
+        dogAge.setText(dogDB.getAge());
     }
 
     @Override
@@ -147,6 +154,36 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
                 startActivityForResult(photoPickerIntent, 1);
             }
         });
+        Log.d(TAG, "initListener: ");
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(DogDetailsActivity.this, UpdateDogActivity.class);
+                intent.putExtra("dogId",dog.getDogId());
+                startActivity(intent);
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                builder.setTitle("Warning")
+                        .setMessage("Are you sure that you want to delete chosen dog?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                presenter.deleteDog(dog);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
     }
 
     @Override
@@ -157,13 +194,7 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
             if (resultCode == Activity.RESULT_OK) {
                 selectedImage = data.getData();
                 if (selectedImage != null) {
-//                    try {
                     loginAndSharePost();
-//                        //shareOnFb(selectedImage);
-//                    } catch (IOException e) {
-//                        Toast.makeText(this,"Facebook connection is not possible", Toast.LENGTH_LONG).show();
-//                        e.printStackTrace();
-//                    }
                 }
             }
         }
@@ -171,22 +202,6 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-//    private void shareOnFb(Uri selectedImage) throws IOException {
-//        Log.d(TAG, "shareOnFb: 1");
-//        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-//        Log.d(TAG, "shareOnFb: 2");
-//        SharePhoto photo = new SharePhoto.Builder()
-//                .setBitmap(bitmap)
-//                .setCaption("This is " + dog.getName() + " from shelter " + presenter.getShelterByShelterId(dog.getIdShelter()).getName() + ". Please adopt me !!!")
-//                .build();
-//        SharePhotoContent content = new SharePhotoContent.Builder()
-//                .addPhoto(photo)
-//                .build();
-//        Log.d(TAG, "shareOnFb: 3");
-//        ShareDialog.show(DogDetailsActivity.this,content);
-//        Log.d(TAG, "shareOnFb: 4");
-//    }
 
     private void initUIComponents() {
         dogName = (TextView) findViewById(R.id.dogName);
@@ -209,5 +224,25 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
             dogGender.setText("Not valid");
         }
         dogAge.setText(String.valueOf(dog.getAge()));
+    }
+
+    @Override
+    public void handleError(String message) {
+        Log.d(TAG, "handleError: ");
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void handleDeleteDogSuccess() {
+        Log.d(TAG, "handleDeleteDogSuccess: ");
+        finish();
     }
 }

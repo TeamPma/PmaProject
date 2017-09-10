@@ -1,6 +1,7 @@
 package com.example.maja.myapplication.presentation.mvp.main;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -35,6 +36,7 @@ import com.example.maja.myapplication.presentation.mvp.login.LoginActivity;
 import com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment;
 import com.example.maja.myapplication.presentation.mvp.shelterDetails.ShelterDetailsActivity;
 import com.example.maja.myapplication.presentation.mvp.shelterList.ShelterListFragment;
+import com.example.maja.myapplication.presentation.mvp.updateUser.UpdateUserActivity;
 
 public class MainActivity extends AppCompatActivity implements FragmentListener {
     private static final String TAG = "MainActivity";
@@ -104,8 +106,16 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        Activity activity;
+        switch (id){
+            case 0 :
+                activity = new UpdateUserActivity();
+                item.setTitle("Update user details");
+                break;
+
         }
 
         // Activate the navigation drawer toggle

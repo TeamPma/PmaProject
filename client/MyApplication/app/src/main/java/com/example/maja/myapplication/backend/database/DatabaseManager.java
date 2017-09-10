@@ -60,6 +60,16 @@ public class DatabaseManager {
         return shelterDbHelper.readShelter(shelterId);
     }
 
+    public void updateShelterDB(Shelter shelter) {
+        Log.d(TAG, "updateShelterDB: ");
+        shelterDbHelper.updateShelterDB(shelter);
+    }
+
+    public void deleteShelterDB(int idShelter) {
+        Log.d(TAG, "deleteShelterDB: ");
+        shelterDbHelper.deleteShelter(idShelter);
+    }
+
     public void insertAllDogs(ArrayList<Dog> dogList) {
         Log.d(TAG, "insertAllDogs: ");
         dogDbHelper.insertAllDogs(dogList);
@@ -80,5 +90,19 @@ public class DatabaseManager {
         announcementDbHelper.updateAnnDB(announcement);
     }
 
+    public Dog getDogById(int dogId) {
+        Log.d(TAG, "getDogById: ");
+        return dogDbHelper.readDog(dogId);
+    }
+
+    public void updateDogDB(Dog dog) {
+        Log.d(TAG, "updateDogDB: ");
+        dogDbHelper.updateDogDB(dog);
+    }
+
+    public void deleteDogDB(int dogId) {
+        Log.d(TAG, "deleteDogDB: ");
+        dogDbHelper.deleteDog(dogId);
+    }
 }
 
