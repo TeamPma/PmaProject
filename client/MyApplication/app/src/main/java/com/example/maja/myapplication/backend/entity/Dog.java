@@ -73,6 +73,10 @@ public class Dog implements Serializable{
         this.isSterilized = isSterilized;
     }
 
+    public void setIdShelter(int idShelter) {
+        this.idShelter = idShelter;
+    }
+
     public int getDogId() {
         return dogId;
     }

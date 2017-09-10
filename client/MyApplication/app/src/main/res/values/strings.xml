@@ -66,5 +66,11 @@
     <string name="btnAddNews">Add news</string>
     <string name="btnAddDog">Add dog</string>
     <string name="logOut">Log out</string>
+    <string name="btnUpdateDog">Update dog</string>
+    <string name="lblWeight">Weight:</string>
+    <string name="lblHeight">Height:</string>
+    <string name="lblAnamnesis">Anamnesis:</string>
+    <string name="lblSterilized">Sterilized</string>
+    <string name="lblMarked">Marked</string>
 
 </resources>

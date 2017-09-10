@@ -124,6 +124,11 @@ public class SmartBus implements ServiceConnection {
         mService.addDog(dog);
     }
 
+    public void updateDog(Dog dog) {
+        Log.d(TAG, "updateDog: ");
+        mService.updateDog(dog);
+    }
+
     public void insertAllDogsDB(ArrayList<Dog> dogList) {
         Log.d(TAG, "insertAllDogs: ");
         dbManager.insertAllDogs(dogList);
@@ -162,4 +167,5 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "getAllNewsDB: ");
         return dbManager.readAllNews();
     }
+
 }

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -57,15 +62,14 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"/>
 
-        <EditText
-            android:id="@+id/add_dog_gender"
+        <Spinner android:id="@+id/add_dog_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:padding="5dp"
-            android:background="@drawable/border" />
+            android:background="@drawable/border"
+            />
 
         <!-- Age -->
         <TextView
@@ -85,6 +89,86 @@
             android:padding="5dp"
             android:background="@drawable/border" />
 
+        <!-- Weight -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblWeight"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/add_dog_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Height -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblHeight"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/add_dog_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Sterilized -->
+        <CheckBox
+            android:id="@+id/is_sterilized"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="@string/lblSterilized"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Marked -->
+        <CheckBox
+            android:id="@+id/is_marked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="@string/lblMarked"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Anamnesis -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblAnamnesis"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/add_dog_anamnesis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
         <Button
             android:id="@+id/btnCreateDog"
             android:layout_width="match_parent"
@@ -96,5 +180,8 @@
             android:text="@string/btnCreateDog"
             android:textStyle="bold" />
     </LinearLayout>
+
 </LinearLayout>
+
+</ScrollView>
 
