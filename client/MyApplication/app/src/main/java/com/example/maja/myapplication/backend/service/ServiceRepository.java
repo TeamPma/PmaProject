@@ -53,6 +53,11 @@ public class ServiceRepository extends Service {
         restManager.addDog(dog);
     }
 
+    public void updateDog(Dog dog) {
+        Log.d(TAG, "updateDog: ");
+        restManager.updateDog(dog);
+    }
+
     public void updateShelter(Shelter shelter) {
         Log.d(TAG, "updateShelter: ");
         restManager.updateShelter(shelter);

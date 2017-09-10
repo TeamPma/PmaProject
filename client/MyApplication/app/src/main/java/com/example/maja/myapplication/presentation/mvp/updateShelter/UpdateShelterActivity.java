@@ -61,7 +61,7 @@ public class UpdateShelterActivity extends AppCompatActivity implements UpdateSh
                 else{
 
                     builder.setTitle("Error")
-                            .setMessage("Creating shelter failed")
+                            .setMessage("Update shelter failed")
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();

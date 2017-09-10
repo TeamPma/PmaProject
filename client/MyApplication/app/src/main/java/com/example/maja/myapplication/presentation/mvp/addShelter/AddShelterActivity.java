@@ -58,7 +58,7 @@ public class AddShelterActivity extends AppCompatActivity implements AddShelterC
                     shelter.setNumber(shelterNumber.getText().toString());
                     shelter.setLocation(shelterLocation.getText().toString());
                     shelter.setCity(shelterCity.getText().toString());
-                    //shelter.setBankAccount();
+                    shelter.setBankAccount(Integer.valueOf(shelterBankAccount.getText().toString()));
                     Log.d(TAG, "onClick: "+ shelter);
                     presenter.addShelter(shelter);
                 }

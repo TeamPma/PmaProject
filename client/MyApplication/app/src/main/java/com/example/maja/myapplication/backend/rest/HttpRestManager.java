@@ -19,6 +19,7 @@ import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
 import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
+import com.example.maja.myapplication.backend.events.UpdateDogEvent;
 import com.example.maja.myapplication.backend.events.UpdateNewsEvent;
 import com.example.maja.myapplication.backend.events.UpdateShelterEvent;
 import com.google.gson.Gson;
@@ -372,6 +373,37 @@ public class HttpRestManager  {
         });
     }
 
+    public void updateDog(Dog dog) {
+        Log.d(TAG, "updateDog: ");
+        Retrofit retrofit = getRetrofit(dogServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String dogUrl = gson.toJson(dog);
+        iHttpRestManager.updateDog(dogUrl).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        EventBus.getDefault().post(new UpdateDogEvent());
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
     //----------------------------Announcements ----------------------------------------------------------
     public void getAllNews() {
         Log.d(TAG, "getAllNews: ");
@@ -471,7 +503,7 @@ public class HttpRestManager  {
     }
     
 
-    public void deleteNews(Announcement announcement) {
+    public void deleteNews(final Announcement announcement) {
 
         Log.d(TAG, "deleteNews: ");
         Retrofit retrofit = getRetrofit(announcementsServiceUrl);

@@ -110,6 +110,11 @@ public abstract class BasePresenter {
         smartBus.addDog(dog);
     }
 
+    protected void updateDog_(Dog dog){
+        Log.d(TAG, "updateDog_: ");
+        smartBus.updateDog(dog);
+    }
+
     //----------------------Other----------------------------------
 
     public void start() {
