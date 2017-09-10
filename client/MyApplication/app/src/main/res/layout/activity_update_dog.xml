@@ -1,100 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.mvp.updateDog.UpdateDogActivity">
+    android:fillViewport="true">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp" >
+        tools:context=".presentation.mvp.updateDog.UpdateDogActivity">
 
-        <!-- Name -->
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lblName"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp" >
 
-        <EditText
-            android:id="@+id/update_dog_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
+            <!-- Name -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lblName"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"/>
 
-        <!-- Bread -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lblBread"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/update_dog_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border" />
 
-        <EditText
-            android:id="@+id/update_dog_bread"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
+            <!-- Bread -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lblBread"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
 
-        <!-- Gender -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lblGender"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/update_dog_bread"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border" />
 
-        <EditText
-            android:id="@+id/update_dog_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
+            <!-- Gender -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lblGender"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
 
-        <!-- Age -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lblAge"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
+            <Spinner android:id="@+id/update_dog_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border"
+                />
 
-        <EditText
-            android:id="@+id/update_dog_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border" />
+            <!-- Age -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lblAge"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
 
-        <Button
-            android:id="@+id/btnUpdateDog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/btnUpdateDog"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/update_dog_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border" />
+
+            <!-- Weight -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lblWeight"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/update_dog_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border" />
+
+            <!-- Height -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lblHeight"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/update_dog_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border" />
+
+            <!-- Sterilized -->
+            <CheckBox
+                android:id="@+id/is_sterilized"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="@string/lblSterilized"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border" />
+
+            <!-- Marked -->
+            <CheckBox
+                android:id="@+id/is_marked"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="@string/lblMarked"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border" />
+
+            <!-- Anamnesis -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lblAnamnesis"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/update_dog_anamnesis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border" />
+
+            <Button
+                android:id="@+id/btnUpdateDog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/btnUpdateDog"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
-</LinearLayout>
+
+</ScrollView>
 

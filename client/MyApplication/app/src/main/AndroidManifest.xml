@@ -24,10 +24,10 @@
 
         <activity android:name=".presentation.mvp.main.MainActivity" />
         <activity android:name=".presentation.mvp.splash.SplashActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service android:name=".backend.service.ServiceRepository" />
@@ -40,12 +40,7 @@
         <activity android:name=".presentation.mvp.announcement.AnnouncementDetailActivity" />
         <activity android:name=".presentation.mvp.shelterDetails.ShelterDetailsActivity" />
         <activity android:name=".presentation.mvp.dogDetails.DogDetailsActivity" />
-        <activity android:name=".presentation.mvp.addDog.AddDogActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".presentation.mvp.addDog.AddDogActivity" />
         <activity android:name=".presentation.mvp.updateShelter.UpdateShelterActivity" />
         <activity
             android:name=".presentation.mvp.googleMap.MapActivity"
