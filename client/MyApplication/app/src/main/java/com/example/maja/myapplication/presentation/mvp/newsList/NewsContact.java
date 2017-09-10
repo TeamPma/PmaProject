@@ -20,5 +20,7 @@ public class NewsContact {
 
         void getAllNews();
         ArrayList<Announcement> getRefreshedAllNewsFromDB();
+
+        ArrayList<Announcement> getNewsByTitle(String title);
     }
 }

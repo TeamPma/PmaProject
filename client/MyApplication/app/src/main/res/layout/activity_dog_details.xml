@@ -217,6 +217,13 @@
                     android:layout_weight="4" />
             </LinearLayout>
 
+            <Button
+                android:layout_gravity="center_horizontal"
+                android:text="@string/share_fb"
+                android:id="@+id/btnShareFb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
     </RelativeLayout>

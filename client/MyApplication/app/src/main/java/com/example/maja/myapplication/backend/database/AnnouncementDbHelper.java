@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.maja.myapplication.backend.entity.Announcement;
+import com.example.maja.myapplication.backend.entity.Dog;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -125,5 +126,30 @@ public class AnnouncementDbHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME, COLUMN_ANNOUNCEMENT_ID + "=?", new String[] {Integer.toString(announcement.getIdAnnouncement())});
         close();
         insert(announcement);
+    }
+
+    public ArrayList<Announcement> getNewsByTitle(String title) {
+
+        if(title==null || title.equals("")){
+            return readAnnouncements();
+        }
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
+
+        if (cursor.getCount() <= 0) {
+            return null;
+        }
+
+        ArrayList<Announcement> announcements = new ArrayList<Announcement>();
+        int i = 0;
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            Announcement ann = createAnnouncement(cursor);
+            if(ann.getTitle()!=null && (ann.getTitle().equals(title) || ann.getTitle().contains(title))){
+                announcements.add(ann);
+            }
+        }
+
+        close();
+        return announcements;
     }
 }

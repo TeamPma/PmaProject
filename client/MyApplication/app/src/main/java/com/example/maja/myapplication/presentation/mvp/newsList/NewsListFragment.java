@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.maja.myapplication.R;
@@ -30,6 +31,8 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
     private FragmentListener parentActivity;
     private NewsPresenter presenter;
     private NewsListAdapter newsListAdapter;
+    private EditText searchTitle;
+    private Button search;
 
 
     public NewsListFragment() {
@@ -59,6 +62,16 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
                 parentActivity.showAnnouncement(announcement);
             }
         });
+        searchTitle = view.findViewById(R.id.searchTitle);
+        search = view.findViewById(R.id.search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newsListAdapter.setNewsList(presenter.getNewsByTitle(searchTitle.getText()+""));
+                newsListAdapter.notifyDataSetChanged();
+            }
+        });
+
         return view;
     }
 

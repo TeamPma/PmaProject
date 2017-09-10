@@ -104,5 +104,9 @@ public class DatabaseManager {
         Log.d(TAG, "deleteDogDB: ");
         dogDbHelper.deleteDog(dogId);
     }
+
+    public ArrayList<Announcement> getNewsByTitle(String title) {
+        return announcementDbHelper.getNewsByTitle(title);
+    }
 }
 

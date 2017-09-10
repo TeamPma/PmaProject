@@ -218,9 +218,12 @@ public class SmartBus implements ServiceConnection {
         dbManager.updateAnnouncementDB(announcement);
     }
 
-
     public void getUserById(int userId) {
         Log.d(TAG, "getUserById: ");
         mService.getUserById(userId);
+    }
+
+    public ArrayList<Announcement> getNewsByTitle(String title) {
+        return dbManager.getNewsByTitle(title);
     }
 }

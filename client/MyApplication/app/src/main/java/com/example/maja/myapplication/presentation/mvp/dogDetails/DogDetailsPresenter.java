@@ -1,5 +1,6 @@
 package com.example.maja.myapplication.presentation.mvp.dogDetails;
 
+import com.example.maja.myapplication.backend.entity.Shelter;
 import android.util.Log;
 
 import com.example.maja.myapplication.backend.entity.Dog;
@@ -33,6 +34,12 @@ public class DogDetailsPresenter extends BasePresenter implements DogDetailsCont
         }
     }
 
+
+
+    @Override
+    public Shelter getShelterByShelterId(int idShelter) {
+        return getShelterById_(idShelter);
+    }
     public Dog getDogDB(int dogId) {
         Log.d(TAG, "getDogDB: ");
         return getDogById_(dogId);
@@ -47,6 +54,5 @@ public class DogDetailsPresenter extends BasePresenter implements DogDetailsCont
     public void deleteDog(Dog dog) {
         Log.d(TAG, "deleteDog: ");
         deleteDog_(dog);
-
     }
 }

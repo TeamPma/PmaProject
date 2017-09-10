@@ -1,5 +1,6 @@
 package com.example.maja.myapplication.presentation.mvp.dogDetails;
 
+import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.entity.Dog;
 
 /**
@@ -8,14 +9,19 @@ import com.example.maja.myapplication.backend.entity.Dog;
 
 public class DogDetailsContact {
 
-    public interface View{
+    public interface View {
         void handleError(String message);
+
         void handleDeleteDogSuccess();
     }
 
-    public interface Presenter{
+    public interface Presenter {
+
+
+        Shelter getShelterByShelterId(int idShelter);
 
         void updateDog(Dog dog);
+
         void deleteDog(Dog dog);
     }
 }
