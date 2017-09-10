@@ -27,6 +27,11 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
     private TextView dogBread;
     private TextView dogGender;
     private TextView dogAge;
+    private TextView dogWeight;
+    private TextView dogHeight;
+    private TextView dogAnamnesis;
+    private TextView isSterilized;
+    private TextView isMarked;
     private Dog dog;
     private Button btnUpdate;
     private Button btnDelete;
@@ -74,6 +79,11 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
         dogBread.setText(dogDB.getBread());
         dogGender.setText(dogDB.getGender());
         dogAge.setText(dogDB.getAge());
+        dogWeight.setText(String.valueOf(dogDB.getWeight()));
+        dogHeight.setText(String.valueOf(dogDB.getHeight()));
+        dogAnamnesis.setText(dogDB.getAnamnesis());
+        isSterilized.setText(dogDB.getIsSterilized());
+        isMarked.setText(dogDB.getIsMarked());
     }
 
     @Override
@@ -126,19 +136,47 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
         Log.d(TAG, "initUIComponents: " + dogGender);
         dogAge = (TextView) findViewById(R.id.dogAge);
         Log.d(TAG, "initUIComponents: " + dogAge);
+        dogWeight = (TextView) findViewById(R.id.dogWeight);
+        Log.d(TAG, "initUIComponents: " + dogWeight);
+        dogHeight = (TextView) findViewById(R.id.dogHeight);
+        Log.d(TAG, "initUIComponents: " + dogHeight);
+        dogAnamnesis = (TextView) findViewById(R.id.dogAnamnesis);
+        Log.d(TAG, "initUIComponents: " + dogAnamnesis);
+        isSterilized = (TextView) findViewById(R.id.isSterilized);
+        Log.d(TAG, "initUIComponents: " + isSterilized);
+        isMarked = (TextView) findViewById(R.id.isMarked);
+        Log.d(TAG, "initUIComponents: " + isMarked);
 
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
 
         dogName.setText(dog.getName());
         dogBread.setText(dog.getBread());
-        int gender = dog.getGender();
-        if(gender == 0){
+        if(dog.getGender()==0){
             dogGender.setText("Female");
-        } else if(gender == 1){
+        }else{
             dogGender.setText("Male");
-        } else{
-            dogGender.setText("Not valid");
         }
+        if(dog.getIsSterilized()==1){
+            isSterilized.setText("Sterilized");
+        }else{
+            isSterilized.setText("Not sterilized");
+        }
+        if(dog.getIsMarked()==1){
+            isMarked.setText("Marked");
+        }else{
+            isMarked.setText("Not marked");
+        }
+        dogWeight.setText(String.valueOf(dog.getWeight()));
+        dogHeight.setText(String.valueOf(dog.getHeight()));
+        dogAnamnesis.setText(String.valueOf(dog.getAnamnesis()));
+//        int gender = dog.getGender();
+//        if(gender == 0){
+//            dogGender.setText("Female");
+//        } else if(gender == 1){
+//            dogGender.setText("Male");
+//        } else{
+//            dogGender.setText("Not valid");
+//        }
         dogAge.setText(String.valueOf(dog.getAge()));
     }
 
