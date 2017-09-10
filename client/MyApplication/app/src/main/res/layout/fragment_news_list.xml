@@ -4,10 +4,33 @@
     android:layout_height="match_parent"
     tools:context="com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment">
 
+
+    <LinearLayout
+        android:id="@+id/seachLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <EditText
+            android:id="@+id/searchTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:hint="@string/search" />
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:drawable/ic_menu_search" />
+    </LinearLayout>
+
     <!-- TODO: Update blank fragment layout -->
     <ListView
+        android:id="@+id/newsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/newsList">
-    </ListView>
+        android:layout_below="@+id/seachLayout" />
 </RelativeLayout>

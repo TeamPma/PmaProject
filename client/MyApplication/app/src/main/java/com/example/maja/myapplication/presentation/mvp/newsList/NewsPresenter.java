@@ -63,6 +63,11 @@ public class NewsPresenter extends BasePresenter implements NewsContact.Presente
         return getAllNewsDB();
     }
 
+    @Override
+    public ArrayList<Announcement> getNewsByTitle(String title) {
+        return getNewsByTitle_(title);
+    }
+
     private void handleGetAllNewsResponse(){
         Log.d(TAG, "handleGetAllNewsResponse:");
         ArrayList<Announcement> news = getAllNewsDB();

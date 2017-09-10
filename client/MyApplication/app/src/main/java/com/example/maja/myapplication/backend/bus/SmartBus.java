@@ -222,4 +222,8 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "getUserById: ");
         mService.getUserById(userId);
     }
+
+    public ArrayList<Announcement> getNewsByTitle(String title) {
+        return dbManager.getNewsByTitle(title);
+    }
 }

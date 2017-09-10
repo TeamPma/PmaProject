@@ -76,6 +76,11 @@ public abstract class BasePresenter {
         return smartBus.getAllNewsDB();
     }
 
+    protected ArrayList<Announcement> getNewsByTitle_(String title) {
+        return smartBus.getNewsByTitle(title);
+    }
+
+
     //--------------------Shelter--------------------------------
     protected void getShelterList_(){
         Log.d(TAG, "getShelterList_: ");

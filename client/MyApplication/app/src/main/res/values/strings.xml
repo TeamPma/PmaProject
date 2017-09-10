@@ -79,5 +79,6 @@
     <string name="account_old_password">Old password:</string>
     <string name="lblChangePassword">Change password</string>
     <string name="btnUpdateUser">Update user</string>
+    <string name="search">Search by title</string>
 
 </resources>
