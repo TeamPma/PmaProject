@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.backend.events.BaseEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
+import com.example.maja.myapplication.backend.events.GetUserByidEvent;
 import com.example.maja.myapplication.presentation.BasePresenter;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -29,11 +30,20 @@ public class UpdateUserPresenter extends BasePresenter implements UpdateUserCont
             case UPDATE_USER_EVENT:
                 handleResponse();
                 break;
+            case GET_USER_BY_ID_EVENT:
+                GetUserByidEvent userIdEvent = (GetUserByidEvent) event;
+                handleGetUserByIdEvent(userIdEvent.getUser());
+                break;
             case ERROR_EVENT:
                 ErrorEvent errorEvent = (ErrorEvent) event;
                 handleError(errorEvent.getMessage());
                 break;
         }
+    }
+
+    private void handleGetUserByIdEvent(User user) {
+        Log.d(TAG, "handleGetUserByIdEvent: ");
+        view.handleGetUserById(user);
     }
 
     private void handleError(String message) {
@@ -49,5 +59,10 @@ public class UpdateUserPresenter extends BasePresenter implements UpdateUserCont
     public void updateUser(User user) {
         Log.d(TAG, "updateUser: ");
         updateUser_(user);
+    }
+
+    public void getUserById(int userId) {
+        Log.d(TAG, "getUserById: ");
+        getUserById_(userId);
     }
 }

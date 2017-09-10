@@ -1,7 +1,9 @@
 package com.example.maja.myapplication.presentation.mvp.updateUser;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,10 +40,16 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
     private EditText email;
     private EditText number;
     private Button btnUpdateUser;
+    private int userId;
+    private User userForUpdating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.maja.myapplication", Context.MODE_PRIVATE);
+        String userIdKey = "com.example.maja.myapplication.userid";
+        userId = prefs.getInt(userIdKey, 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user);
         presenter = new UpdateUserPresenter(this);
@@ -55,17 +63,40 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
-                if (isValidate() && password.getText().toString().equals(confirmPassword.getText().toString())){
+                if (isValidate() && isPasswordValidate() && changePassword.isChecked() && password.getText().toString().equals(confirmPassword.getText().toString())
+                        && oldPassword.getText().toString().equals(userForUpdating.getPassword())){
                     Log.d(TAG, "onClick: User is okey.");
-                    //User user = setUser();
+                    userForUpdating.setFirstName(firstname.getText().toString());
+                    userForUpdating.setLastName(lastName.getText().toString());
+                    userForUpdating.setEmail(email.getText().toString());
+                    userForUpdating.setNumber(number.getText().toString());
+                    userForUpdating.setPassword(password.getText().toString());
+                    presenter.updateUser(userForUpdating);
 
-                    //presenter.updateUser(user);
-
+                }
+                else if(isValidate() && !changePassword.isChecked()){
+                    userForUpdating.setFirstName(firstname.getText().toString());
+                    userForUpdating.setLastName(lastName.getText().toString());
+                    userForUpdating.setEmail(email.getText().toString());
+                    userForUpdating.setNumber(number.getText().toString());
+                    presenter.updateUser(userForUpdating);
                 }
                 else  if(!password.getText().toString().equals(confirmPassword.getText().toString())){
                     Log.d(TAG, "onClick: Passwords are not the same");
                     builder.setTitle("Error")
                             .setMessage("Password and confirm password are not the same.")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+                else if(!oldPassword.getText().toString().equals(userForUpdating.getPassword())){
+                    Log.d(TAG, "onClick: Old password incorrect.");
+                    builder.setTitle("Error")
+                            .setMessage("Old password is not correct.")
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
@@ -90,18 +121,23 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
         });
     }
 
-    private boolean isValidate(){
-        Log.d(TAG, "isValidate: ");
+    private boolean isPasswordValidate(){
+        Log.d(TAG, "isPasswordValidate: ");
         boolean isOldPasswordValid = oldPassword.getText() != null && !oldPassword.getText().toString().isEmpty();
         boolean isPasswordValid = password.getText() != null && !password.getText().toString().isEmpty();
         boolean isConfirmPasswordValid = confirmPassword.getText() != null && !confirmPassword.getText().toString().isEmpty();
+        return isOldPasswordValid && isPasswordValid && isConfirmPasswordValid;
+    }
+
+    private boolean isValidate(){
+        Log.d(TAG, "isValidate: ");
         boolean isFirstNameValid = firstname.getText() != null && !firstname.getText().toString().isEmpty();
         boolean isLastNameValid = lastName.getText() != null && !lastName.getText().toString().isEmpty();
         boolean isEmailValid = email.getText() != null && !email.getText().toString().isEmpty();
         boolean isNumberValid = number.getText() != null && !number.getText().toString().isEmpty();
 
 
-        if( isOldPasswordValid && isPasswordValid && isConfirmPasswordValid && isFirstNameValid && isLastNameValid && isEmailValid && isNumberValid){
+        if(isFirstNameValid && isLastNameValid && isEmailValid && isNumberValid){
             return true;
         }
         return  false;
@@ -109,6 +145,7 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
 
     private void initUIComponents() {
         Log.d(TAG, "initUIComponents: ");
+        presenter.getUserById(userId);
         firstname = (EditText) findViewById(R.id.firstname);
         lastName = (EditText) findViewById(R.id.lastname);
         username = (TextView) findViewById(R.id.acc_username);
@@ -143,6 +180,12 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
         number = (EditText) findViewById(R.id.number);
         btnUpdateUser = (Button) findViewById(R.id.btnUpdateUser);
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+
+        username.setText(userForUpdating.getUsername());
+        firstname.setText(userForUpdating.getFirstName());
+        lastName.setText(userForUpdating.getLastName());
+        email.setText(userForUpdating.getEmail());
+        number.setText(userForUpdating.getNumber());
     }
 
     @Override
@@ -166,6 +209,11 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
 
+    @Override
+    public void handleGetUserById(User user) {
+        Log.d(TAG, "handleGetUserById: ");
+        userForUpdating = user;
     }
 }

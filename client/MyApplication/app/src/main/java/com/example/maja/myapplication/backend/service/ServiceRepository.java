@@ -73,6 +73,11 @@ public class ServiceRepository extends Service {
         restManager.deleteDog(dog);
     }
 
+    public void getUserById(int userId) {
+        Log.d(TAG, "getUserById: ");
+        restManager.getUserById(userId);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

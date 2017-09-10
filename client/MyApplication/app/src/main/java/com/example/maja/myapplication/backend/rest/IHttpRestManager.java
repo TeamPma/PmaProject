@@ -64,4 +64,7 @@ public interface IHttpRestManager {
 
     @GET("deleteDog/{dog}")
     Call<ResponseBody> deleteDog(@Path("dog") String dogToJson);
+
+    @GET("userById/{idOfUser}")
+    Call<ResponseBody> getUserById(@Path("idOfUser") String userJson);
 }

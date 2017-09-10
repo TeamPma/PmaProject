@@ -219,4 +219,8 @@ public class SmartBus implements ServiceConnection {
     }
 
 
+    public void getUserById(int userId) {
+        Log.d(TAG, "getUserById: ");
+        mService.getUserById(userId);
+    }
 }

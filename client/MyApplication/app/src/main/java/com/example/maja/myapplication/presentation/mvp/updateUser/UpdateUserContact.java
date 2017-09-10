@@ -12,10 +12,13 @@ public class UpdateUserContact {
 
         void updateUserNotSuccessfull(String message);
         void updateUserSuccessfull();
+
+        void handleGetUserById(User user);
     }
 
     public interface Presenter{
 
+        void getUserById(int userId);
         void updateUser(User user);
 
     }

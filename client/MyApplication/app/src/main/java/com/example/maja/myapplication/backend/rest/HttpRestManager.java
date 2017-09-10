@@ -19,6 +19,7 @@ import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
 import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
 import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
+import com.example.maja.myapplication.backend.events.GetUserByidEvent;
 import com.example.maja.myapplication.backend.events.LoginEvent;
 import com.example.maja.myapplication.backend.events.UpdateDogEvent;
 import com.example.maja.myapplication.backend.events.UpdateNewsEvent;
@@ -605,4 +606,37 @@ public class HttpRestManager  {
             }
         });
     }
+
+    public void getUserById(int userId) {
+        Log.d(TAG, "getUserById: ");
+        Retrofit retrofit = getRetrofit(userSericeUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+
+        String userJson = gson.toJson(userId);
+        iHttpRestManager.getUserById(userJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        User user = gson.fromJson(stringResponse,User.class);
+                        EventBus.getDefault().post(new GetUserByidEvent(user));
+
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
 }

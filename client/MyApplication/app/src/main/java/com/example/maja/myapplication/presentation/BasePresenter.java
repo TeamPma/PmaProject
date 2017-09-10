@@ -39,6 +39,11 @@ public abstract class BasePresenter {
         smartBus.updateUser(user);
     }
 
+    protected void getUserById_(int userId){
+        Log.d(TAG, "getUserById: ");
+        smartBus.getUserById(userId);
+    }
+
     //----------------------News-------------------------------
     protected void getAllNews_(){
         Log.d(TAG, "getAllNews_: ");
