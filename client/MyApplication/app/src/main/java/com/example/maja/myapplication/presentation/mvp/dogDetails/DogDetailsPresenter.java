@@ -1,5 +1,6 @@
 package com.example.maja.myapplication.presentation.mvp.dogDetails;
 
+import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.backend.events.BaseEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.presentation.BasePresenter;
@@ -28,5 +29,11 @@ public class DogDetailsPresenter extends BasePresenter implements DogDetailsCont
                 ErrorEvent errorEvent = (ErrorEvent) event;
                 break;
         }
+    }
+
+
+    @Override
+    public Shelter getShelterByShelterId(int idShelter) {
+        return getShelterById_(idShelter);
     }
 }

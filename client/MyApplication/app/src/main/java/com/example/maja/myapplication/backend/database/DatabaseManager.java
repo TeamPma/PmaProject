@@ -79,5 +79,6 @@ public class DatabaseManager {
         Log.d(TAG, "updateAnnouncementDB: ");
         announcementDbHelper.updateAnnDB(announcement);
     }
+
 }
 

@@ -183,4 +183,5 @@ public class SmartBus implements ServiceConnection {
         dbManager.updateAnnouncementDB(announcement);
     }
 
+
 }

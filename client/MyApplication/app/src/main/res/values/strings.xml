@@ -5,7 +5,7 @@
     <string name="default_username">Username</string>
     <string name="default_password">Password</string>
     <string name="loading">Loading ...</string>
-
+    <string name="facebook_app_id">354018245051548</string>
     <!-- Navigation drawer items -->
     <string name="shelterList">Shelters</string>
     <string name="dogList">Dogs</string>
@@ -75,5 +75,6 @@
     <string name="lblAnamnesis">Anamnesis:</string>
     <string name="lblSterilized">Sterilized</string>
     <string name="lblMarked">Marked</string>
+    <string name="share_fb">Share on Facebook</string>
 
 </resources>
