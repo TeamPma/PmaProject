@@ -68,6 +68,11 @@ public class ServiceRepository extends Service {
         restManager.deleteShelter(shelter);
     }
 
+    public void deleteDog(Dog dog) {
+        Log.d(TAG, "deleteDog: ");
+        restManager.deleteDog(dog);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

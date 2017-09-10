@@ -144,4 +144,10 @@ public class DogDbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void updateDogDB(Dog dog) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_DOG_ID + "=?", new String[] {Integer.toString(dog.getDogId())});
+        close();
+        insert(dog);
+    }
 }

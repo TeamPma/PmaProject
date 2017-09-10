@@ -1,5 +1,7 @@
 package com.example.maja.myapplication.presentation.mvp.dogDetails;
 
+import com.example.maja.myapplication.backend.entity.Dog;
+
 /**
  * Created by Jovana on 8.9.2017..
  */
@@ -7,10 +9,13 @@ package com.example.maja.myapplication.presentation.mvp.dogDetails;
 public class DogDetailsContact {
 
     public interface View{
-
+        void handleError(String message);
+        void handleDeleteDogSuccess();
     }
 
     public interface Presenter{
 
+        void updateDog(Dog dog);
+        void deleteDog(Dog dog);
     }
 }

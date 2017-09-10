@@ -1,5 +1,8 @@
 package com.example.maja.myapplication.presentation.mvp.dogDetails;
 
+import android.util.Log;
+
+import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.events.BaseEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.presentation.BasePresenter;
@@ -28,5 +31,22 @@ public class DogDetailsPresenter extends BasePresenter implements DogDetailsCont
                 ErrorEvent errorEvent = (ErrorEvent) event;
                 break;
         }
+    }
+
+    public Dog getDogDB(int dogId) {
+        Log.d(TAG, "getDogDB: ");
+        return getDogById_(dogId);
+    }
+
+    @Override
+    public void updateDog(Dog dog) {
+        Log.d(TAG, "updateDog: ");
+    }
+
+    @Override
+    public void deleteDog(Dog dog) {
+        Log.d(TAG, "deleteDog: ");
+        deleteDog_(dog);
+
     }
 }

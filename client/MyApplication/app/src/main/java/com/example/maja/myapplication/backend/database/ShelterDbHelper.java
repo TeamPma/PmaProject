@@ -151,4 +151,10 @@ public class ShelterDbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void updateShelterDB(Shelter shelter) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_SHELTER_ID + "=?", new String[] {Integer.toString(shelter.getIdShelter())});
+        close();
+        insert(shelter);
+    }
 }

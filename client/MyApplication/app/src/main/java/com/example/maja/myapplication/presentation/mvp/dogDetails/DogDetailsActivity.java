@@ -1,16 +1,20 @@
 package com.example.maja.myapplication.presentation.mvp.dogDetails;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.EventLogTags;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Dog;
+import com.example.maja.myapplication.presentation.mvp.updateDog.UpdateDogActivity;
 
 import org.w3c.dom.Text;
 
@@ -65,6 +69,11 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
+        Dog dogDB = presenter.getDogDB(dog.getDogId());
+        dogName.setText(dogDB.getName());
+        dogBread.setText(dogDB.getBread());
+        dogGender.setText(dogDB.getGender());
+        dogAge.setText(dogDB.getAge());
     }
 
     @Override
@@ -75,6 +84,36 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
     }
 
     private void initListener() {
+        Log.d(TAG, "initListener: ");
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(DogDetailsActivity.this, UpdateDogActivity.class);
+                intent.putExtra("dogId",dog.getDogId());
+                startActivity(intent);
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                builder.setTitle("Warning")
+                        .setMessage("Are you sure that you want to delete chosen dog?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                presenter.deleteDog(dog);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
     }
 
     private void initUIComponents() {
@@ -101,5 +140,25 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
             dogGender.setText("Not valid");
         }
         dogAge.setText(String.valueOf(dog.getAge()));
+    }
+
+    @Override
+    public void handleError(String message) {
+        Log.d(TAG, "handleError: ");
+        builder.setTitle("Error")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void handleDeleteDogSuccess() {
+        Log.d(TAG, "handleDeleteDogSuccess: ");
+        finish();
     }
 }

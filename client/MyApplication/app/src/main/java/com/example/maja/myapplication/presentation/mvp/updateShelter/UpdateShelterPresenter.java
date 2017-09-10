@@ -50,4 +50,9 @@ public class UpdateShelterPresenter extends BasePresenter implements UpdateShelt
         Log.d(TAG, "editShelter: ");
         updateShelter_(shelter);
     }
+
+    public Shelter getShelterById(int shelterId) {
+        Log.d(TAG, "getShelterById: ");
+        return getShelterById_(shelterId);
+    }
 }

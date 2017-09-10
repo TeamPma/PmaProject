@@ -32,6 +32,11 @@ public class ShelterDetailsPresenter extends BasePresenter implements ShelterDet
         return getShelterById_(shelterId);
     }
 
+    @Override
+    public void updateShelter(Shelter shelter) {
+        Log.d(TAG, "updateShelter: ");
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(BaseEvent event) {
         switch (event.getType()){
@@ -44,4 +49,14 @@ public class ShelterDetailsPresenter extends BasePresenter implements ShelterDet
         }
     }
 
+    public void deleteShelter(Shelter shelter) {
+        Log.d(TAG, "deleteShelter: ");
+        deleteShelter_(shelter);
+    }
+
+    public Shelter getShelterDB(int idShelter) {
+        Log.d(TAG, "getShelterDB: ");
+        return  getShelterById_(idShelter);
+
+    }
 }

@@ -38,6 +38,7 @@ public class UpdateDogActivity extends AppCompatActivity implements UpdateDogCon
     private AlertDialog.Builder builder;
     private UpdateDogPresenter presenter;
     private Dog dog;
+    private int dogId;
     private int gender = 0;
     private int sterilized = 0;
     private int marked = 0;
@@ -47,6 +48,7 @@ public class UpdateDogActivity extends AppCompatActivity implements UpdateDogCon
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_dog);
+        dogId = (int) getIntent().getSerializableExtra("dogId");
         presenter = new UpdateDogPresenter(this);
         initUIComponents();
         initListener();
@@ -91,6 +93,7 @@ public class UpdateDogActivity extends AppCompatActivity implements UpdateDogCon
     }
 
     private void initUIComponents() {
+        dog = presenter.getDogById(dogId);
         List<String> spinnerList = new ArrayList<String>();
         spinnerList.add("Female");
         spinnerList.add("Male");
