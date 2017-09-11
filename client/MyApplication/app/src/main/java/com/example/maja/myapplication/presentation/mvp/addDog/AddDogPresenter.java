@@ -27,6 +27,7 @@ public class AddDogPresenter extends BasePresenter implements AddDogContact.Pres
     public void onMessageEvent(BaseEvent event) {
         switch (event.getType()) {
             case ADD_DOG_EVENT:
+                Log.d(TAG, "onMessageEvent: ");
                 handleResponse();
                 break;
             case ERROR_EVENT:

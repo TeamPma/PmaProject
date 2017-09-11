@@ -19,5 +19,6 @@ public class ShelterListContact {
 
     public interface Presenter{
         void getShelterList();
+        ArrayList<Shelter> getShelterListDB();
     }
 }

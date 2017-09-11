@@ -144,9 +144,6 @@ public class AddDogActivity extends AppCompatActivity implements AddDogContact.V
     @Override
     public void addDogSuccessfull() {
         Log.d(TAG, "addDogSuccessfull: ");
-        Intent intent = new Intent(AddDogActivity.this, ShelterDetailsActivity.class);
-        intent.putExtra("shelter", shelter);
-        startActivity(intent);
         finish();
     }
 

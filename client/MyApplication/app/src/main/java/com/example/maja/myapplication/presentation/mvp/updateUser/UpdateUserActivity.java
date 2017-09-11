@@ -181,11 +181,6 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
         btnUpdateUser = (Button) findViewById(R.id.btnUpdateUser);
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
 
-        username.setText(userForUpdating.getUsername());
-        firstname.setText(userForUpdating.getFirstName());
-        lastName.setText(userForUpdating.getLastName());
-        email.setText(userForUpdating.getEmail());
-        number.setText(userForUpdating.getNumber());
     }
 
     @Override
@@ -215,5 +210,10 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
     public void handleGetUserById(User user) {
         Log.d(TAG, "handleGetUserById: ");
         userForUpdating = user;
+        username.setText(userForUpdating.getUsername());
+        firstname.setText(userForUpdating.getFirstName());
+        lastName.setText(userForUpdating.getLastName());
+        email.setText(userForUpdating.getEmail());
+        number.setText(userForUpdating.getNumber());
     }
 }

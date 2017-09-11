@@ -19,5 +19,6 @@ public class DogListContact {
 
     public interface Presenter{
         void getDogList();
+        ArrayList<Dog> getListOfDogs();
     }
 }

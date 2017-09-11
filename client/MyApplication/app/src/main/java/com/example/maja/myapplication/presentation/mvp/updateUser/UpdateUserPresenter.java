@@ -21,18 +21,21 @@ public class UpdateUserPresenter extends BasePresenter implements UpdateUserCont
     private UpdateUserContact.View view;
 
     public UpdateUserPresenter(UpdateUserContact.View view) {
+
         this.view = view;
+        start();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(BaseEvent event) {
         switch (event.getType()) {
-            case UPDATE_USER_EVENT:
-                handleResponse();
-                break;
             case GET_USER_BY_ID_EVENT:
+                Log.d(TAG, "onMessageEvent: ");
                 GetUserByidEvent userIdEvent = (GetUserByidEvent) event;
                 handleGetUserByIdEvent(userIdEvent.getUser());
+                break;
+            case UPDATE_USER_EVENT:
+                handleResponse();
                 break;
             case ERROR_EVENT:
                 ErrorEvent errorEvent = (ErrorEvent) event;

@@ -33,6 +33,13 @@ public class DogListPresenter extends BasePresenter implements DogListContact.Pr
         getDogList_();
     }
 
+    @Override
+    public ArrayList<Dog> getListOfDogs() {
+        Log.d(TAG, "getListOfDogs: ");
+        return getDogListDB_();
+    }
+
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(BaseEvent event) {
         switch (event.getType()){

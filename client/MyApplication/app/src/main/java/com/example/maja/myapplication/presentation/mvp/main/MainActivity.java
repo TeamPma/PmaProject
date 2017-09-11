@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        Log.d(TAG, "onOptionsItemSelected: "+ id);
 
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
@@ -111,9 +112,12 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 //        }
         Activity activity;
         switch (id){
-            case 0 :
-                activity = new UpdateUserActivity();
-                item.setTitle("Update user details");
+//            case 0 :
+//                activity = new UpdateUserActivity();
+//                item.setTitle("Update user details");
+//                break;
+            case 2131558700:
+                startActivity(new Intent(this, UpdateUserActivity.class));
                 break;
 
         }

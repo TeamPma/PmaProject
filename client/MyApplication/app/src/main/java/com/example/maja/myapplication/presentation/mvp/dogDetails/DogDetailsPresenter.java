@@ -31,7 +31,15 @@ public class DogDetailsPresenter extends BasePresenter implements DogDetailsCont
             case ERROR_EVENT:
                 ErrorEvent errorEvent = (ErrorEvent) event;
                 break;
+            case DELETE_DOG_EVENT:
+                handleDeleteDog();
+                break;
         }
+    }
+
+    private void handleDeleteDog() {
+        Log.d(TAG, "handleDeleteDog: ");
+        view.handleDeleteDogSuccess();
     }
 
 

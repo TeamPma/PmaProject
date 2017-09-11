@@ -42,17 +42,17 @@ public class DogDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
-                COLUMN_DOG_ID + " TEXT, " +
+                COLUMN_DOG_ID + " INTEGER, " +
                 COLUMN_DOG_NAME + " TEXT, " +
                 COLUMN_DOG_BREAD + " TEXT, " +
-                CCOLUMN_DOG_GENDER + " TEXT, " +
-                COLUMN_DOG_AGE + " TEXT, " +
-                COLUMN_DOG_WEIGHT + " TEXT, " +
-                COLUMN_DOG_HEIGHT + " TEXT, " +
-                COLUMN_DOG_IS_STERILIZED + " TEXT, " +
-                COLUMN_DOG_IS_MARKED + " TEXT, " +
+                CCOLUMN_DOG_GENDER + " INTEGER, " +
+                COLUMN_DOG_AGE + " INTEGER, " +
+                COLUMN_DOG_WEIGHT + " DOUBLE, " +
+                COLUMN_DOG_HEIGHT + " DOUBLE, " +
+                COLUMN_DOG_IS_STERILIZED + " INTEGER, " +
+                COLUMN_DOG_IS_MARKED + " INTEGER, " +
                 COLUMN_DOG_ANAMNESIS + " TEXT, " +
-                COLUMN_DOG_SHELTER_ID + " TEXT);");
+                COLUMN_DOG_SHELTER_ID + " INTEGER);");
     }
 
     @Override
@@ -80,7 +80,7 @@ public class DogDbHelper extends SQLiteOpenHelper {
         close();
     }
 
-    public Dog[] readDogs() {
+    public ArrayList<Dog> readDogs() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
 
@@ -88,10 +88,10 @@ public class DogDbHelper extends SQLiteOpenHelper {
             return null;
         }
 
-        Dog[] dogs = new Dog[cursor.getCount()];
+        ArrayList<Dog> dogs = new ArrayList<Dog>();
         int i = 0;
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            dogs[i++] = createDog(cursor);
+            dogs.add(createDog(cursor));
         }
 
         close();

@@ -58,7 +58,7 @@ public class ShelterRestService extends BaseRestService {
     public String updateShelter(@PathParam("shelter") String shelter) {
     	Shelter shelterFromJson = gson.fromJson(shelter, Shelter.class);
 		shelterService.update(shelterFromJson);
-		return gson.toJson(shelterService.getAll());
+		return shelter;
     }
     
     @GET

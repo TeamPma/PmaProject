@@ -379,7 +379,7 @@ public class HttpRestManager  {
         });
     }
 
-    public void addDog(Dog dog) {
+    public void addDog(final Dog dog) {
         Log.d(TAG, "addDog: ");
         Retrofit retrofit = getRetrofit(dogServiceUrl);
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
@@ -393,6 +393,7 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
+                        SmartBus.getInstance().insertDogDB(dog);
                         EventBus.getDefault().post(new AddDogEvent());
 
                     } catch (IOException e) {
@@ -577,7 +578,7 @@ public class HttpRestManager  {
 
     public void deleteDog(final Dog dog) {
         Log.d(TAG, "deleteDog: ");
-        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
+        Retrofit retrofit = getRetrofit(dogServiceUrl);
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
         String dogToJson = gson.toJson(dog);
@@ -622,6 +623,7 @@ public class HttpRestManager  {
                         String stringResponse = response.body().string();
                         Log.d(TAG, "onResponse: " + stringResponse);
                         User user = gson.fromJson(stringResponse,User.class);
+                        Log.d(TAG, "onResponse: "+ user);
                         EventBus.getDefault().post(new GetUserByidEvent(user));
 
                     } catch (IOException e) {

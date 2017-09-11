@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.example.maja.myapplication.R;
 import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
+import com.example.maja.myapplication.presentation.mvp.shelterDetails.ShelterDetailsActivity;
 
 public class UpdateShelterActivity extends AppCompatActivity implements UpdateShelterContact.View {
 
@@ -94,7 +95,7 @@ public class UpdateShelterActivity extends AppCompatActivity implements UpdateSh
         shelterNumber.setText(shelter.getNumber());
         shelterLocation.setText(shelter.getLocation());
         shelterCity.setText(shelter.getCity());
-        shelterBankAccount.setText(shelter.getBankAccount());
+        shelterBankAccount.setText(shelter.getBankAccount()+"");
     }
 
     @Override
@@ -149,8 +150,9 @@ public class UpdateShelterActivity extends AppCompatActivity implements UpdateSh
     @Override
     public void updateShelterSuccessfull() {
         Log.d(TAG, "updateShelterSuccessfull: ");
-        Intent intent = new Intent(UpdateShelterActivity.this, MainActivity.class);
+        Intent intent = new Intent(UpdateShelterActivity.this, ShelterDetailsActivity.class);
         intent.putExtra("shelter",shelter);
+        intent.putExtra("shelterId", shelter.getIdShelter());
         startActivity(intent);
         finish();
     }

@@ -80,6 +80,11 @@ public abstract class BasePresenter {
         return smartBus.getNewsByTitle(title);
     }
 
+    protected ArrayList<Dog> getDogListDB_(){
+        Log.d(TAG, "getDogListDB_: ");
+        return smartBus.getDogListDB();
+    }
+
 
     //--------------------Shelter--------------------------------
     protected void getShelterList_(){
@@ -107,6 +112,10 @@ public abstract class BasePresenter {
         smartBus.deleteShelter(shelter);
     }
 
+    protected ArrayList<Shelter>  getShelterListDB_(){
+        Log.d(TAG, "getShelterListDB_: ");
+        return smartBus.getShelterListDB();
+    }
 
     protected Shelter getShelterDB_(String title) {
         return  smartBus.getShelterDBByTitle(title);

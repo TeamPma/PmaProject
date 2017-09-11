@@ -43,11 +43,20 @@ public class ShelterDetailsPresenter extends BasePresenter implements ShelterDet
             case GET_SHELTER_BY_ID_EVENT:
                 GetShelterByIdEvent getShelterByIdEvent = (GetShelterByIdEvent) event;
                 break;
+            case DELETE_SHELTER_EVENT:
+                handleDeleteShelter();
+                break;
             case ERROR_EVENT:
                 ErrorEvent errorEvent = (ErrorEvent) event;
                 break;
         }
     }
+
+    private void handleDeleteShelter() {
+        Log.d(TAG, "handleDeleteShelter: ");
+        view.handleDeleteShelterSuccess();
+    }
+
 
     public void deleteShelter(Shelter shelter) {
         Log.d(TAG, "deleteShelter: ");

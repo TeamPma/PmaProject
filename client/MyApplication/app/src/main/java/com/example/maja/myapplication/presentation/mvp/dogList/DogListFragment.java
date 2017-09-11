@@ -95,6 +95,8 @@ public class DogListFragment extends Fragment implements DogListContact.View{
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
+        dogListAdapter.setDogList(presenter.getListOfDogs());
+        dogListAdapter.notifyDataSetChanged();
     }
 
     @Override

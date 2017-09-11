@@ -58,4 +58,9 @@ public class ShelterListPresenter extends BasePresenter implements ShelterListCo
         Log.d(TAG, "handleGetAllSheltersResponse: ");
         view.getShelterListSuccessfull(shelterList);
     }
+
+    public ArrayList<Shelter> getShelterListDB() {
+        Log.d(TAG, "getShelterListDB: ");
+        return  getShelterListDB_();
+    }
 }

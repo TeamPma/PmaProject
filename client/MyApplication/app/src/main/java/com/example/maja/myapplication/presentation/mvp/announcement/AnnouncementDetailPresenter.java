@@ -52,11 +52,6 @@ public class AnnouncementDetailPresenter extends BasePresenter implements Announ
     }
 
     @Override
-    public void updateAnnouncement(Announcement announcement) {
-        Log.d(TAG, "updateAnnouncement: ");
-    }
-
-    @Override
     public void delteAnnouncements(Announcement announcement) {
         Log.d(TAG, "delteAnnouncements: ");
         deleteNews_(announcement);

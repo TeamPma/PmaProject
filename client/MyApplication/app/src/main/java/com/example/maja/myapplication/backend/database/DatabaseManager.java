@@ -108,5 +108,20 @@ public class DatabaseManager {
     public ArrayList<Announcement> getNewsByTitle(String title) {
         return announcementDbHelper.getNewsByTitle(title);
     }
+
+    public ArrayList<Dog> getDogListDB() {
+        Log.d(TAG, "getDogListDB: ");
+        return  dogDbHelper.readDogs();
+    }
+
+    public void insertDog(Dog dog) {
+        Log.d(TAG, "insertDog: ");
+        dogDbHelper.insert(dog);
+    }
+
+    public ArrayList<Shelter> getShelterListDB() {
+        Log.d(TAG, "getShelterListDB: ");
+        return shelterDbHelper.readShelters();
+    }
 }
 

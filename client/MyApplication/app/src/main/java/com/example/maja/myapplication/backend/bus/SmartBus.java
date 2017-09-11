@@ -226,4 +226,19 @@ public class SmartBus implements ServiceConnection {
     public ArrayList<Announcement> getNewsByTitle(String title) {
         return dbManager.getNewsByTitle(title);
     }
+
+    public ArrayList<Dog> getDogListDB() {
+        Log.d(TAG, "getDogListDB: ");
+        return  dbManager.getDogListDB();
+    }
+
+    public void insertDogDB(Dog dog) {
+        Log.d(TAG, "insertDogDB: ");
+         dbManager.insertDog(dog);
+    }
+
+    public ArrayList<Shelter> getShelterListDB() {
+        Log.d(TAG, "getShelterListDB: ");
+        return dbManager.getShelterListDB();
+    }
 }

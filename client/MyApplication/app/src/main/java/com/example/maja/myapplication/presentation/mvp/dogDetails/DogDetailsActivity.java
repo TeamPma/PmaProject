@@ -1,8 +1,10 @@
 package com.example.maja.myapplication.presentation.mvp.dogDetails;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -139,13 +141,13 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
         Dog dogDB = presenter.getDogDB(dog.getDogId());
         dogName.setText(dogDB.getName());
         dogBread.setText(dogDB.getBread());
-        dogGender.setText(dogDB.getGender());
-        dogAge.setText(dogDB.getAge());
+        dogGender.setText(dogDB.getGender() + "");
+        dogAge.setText(dogDB.getAge()+"");
         dogWeight.setText(String.valueOf(dogDB.getWeight()));
         dogHeight.setText(String.valueOf(dogDB.getHeight()));
         dogAnamnesis.setText(dogDB.getAnamnesis());
-        isSterilized.setText(dogDB.getIsSterilized());
-        isMarked.setText(dogDB.getIsMarked());
+        isSterilized.setText(dogDB.getIsSterilized()+"");
+        isMarked.setText(dogDB.getIsMarked()+"");
     }
 
     @Override
@@ -165,6 +167,7 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
             }
         });
         Log.d(TAG, "initListener: ");
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -231,6 +234,18 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
         Log.d(TAG, "initUIComponents: " + isMarked);
         btnShareFb = (Button) findViewById(R.id.btnShareFb);
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+
+        btnUpdate = (Button) findViewById(R.id.btnUpdate);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.maja.myapplication", Context.MODE_PRIVATE);
+        String isAdminKey = "com.example.maja.myapplication.isAdmin";
+        int isAdmin = prefs.getInt(isAdminKey, 0);
+        if(isAdmin != 1){
+            btnUpdate.setVisibility(View.INVISIBLE);
+            btnDelete.setVisibility(View.INVISIBLE);
+        }
 
         dogName.setText(dog.getName());
         dogBread.setText(dog.getBread());

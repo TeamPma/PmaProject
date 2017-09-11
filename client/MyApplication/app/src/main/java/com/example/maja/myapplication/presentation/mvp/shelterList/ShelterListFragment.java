@@ -102,6 +102,8 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
+        shelterListAdapter.setShelterList(presenter.getShelterListDB());
+        shelterListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -119,7 +121,6 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
                 Intent intent = new Intent(getActivity(), AddShelterActivity.class);
-                intent.putExtra("shelterId", shelter.getIdShelter());
                 getActivity().startActivity(intent);
             }
         });

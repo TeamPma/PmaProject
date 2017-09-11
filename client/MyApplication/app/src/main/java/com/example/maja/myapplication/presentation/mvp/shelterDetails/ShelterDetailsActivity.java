@@ -72,7 +72,7 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         shelterAddress.setText(shelterDB.getAddress());
         shelterNumber.setText(shelterDB.getNumber());
         shelterLocation.setText(shelterDB.getLocation());
-        shelterBankAccount.setText(Integer.valueOf(shelterDB.getBankAccount()));
+        shelterBankAccount.setText(shelterDB.getBankAccount()+"");
         shelterCity.setText(shelterDB.getCity());
     }
 
@@ -242,4 +242,5 @@ public class ShelterDetailsActivity extends AppCompatActivity implements Shelter
         Log.d(TAG, "handleDeleteShelterSuccess: ");
         finish();
     }
+
 }

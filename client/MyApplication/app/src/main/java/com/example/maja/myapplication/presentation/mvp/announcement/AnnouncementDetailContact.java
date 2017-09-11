@@ -16,7 +16,6 @@ public class AnnouncementDetailContact {
 
     public interface Presenter{
 
-        void updateAnnouncement(Announcement announcement);
         void delteAnnouncements(Announcement announcement);
     }
 }

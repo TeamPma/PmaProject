@@ -76,7 +76,7 @@ public class ShelterDbHelper extends SQLiteOpenHelper {
         close();
     }
 
-    public Shelter[] readShelters() {
+    public ArrayList<Shelter> readShelters() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
 
@@ -84,10 +84,10 @@ public class ShelterDbHelper extends SQLiteOpenHelper {
             return null;
         }
 
-        Shelter[] shelters = new Shelter[cursor.getCount()];
+        ArrayList<Shelter> shelters = new ArrayList<Shelter>();
         int i = 0;
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            shelters[i++] = createShelter(cursor);
+            shelters.add(createShelter(cursor));
         }
 
         close();

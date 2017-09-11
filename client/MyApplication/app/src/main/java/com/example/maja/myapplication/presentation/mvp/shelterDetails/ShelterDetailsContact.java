@@ -11,7 +11,7 @@ public class ShelterDetailsContact {
     public interface View{
 
         void handleError(String message);
-        void handleDeleteShelterSuccess();
+        void handleDeleteShelterSuccess();;
 
     }
 
