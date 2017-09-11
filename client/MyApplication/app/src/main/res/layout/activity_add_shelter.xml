@@ -71,12 +71,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_shelter_location"
+            android:text="@string/add_shelter_latitude"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/add_shelter_location"
+            android:id="@+id/shelter_latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="5dp"
+            android:background="@drawable/border" />
+
+        <!-- Location -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_shelter_langitude"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/shelter_longitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"

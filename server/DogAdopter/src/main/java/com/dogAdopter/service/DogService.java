@@ -13,5 +13,6 @@ public interface DogService {
 
 	ArrayList<Dog> getAll();
 	ArrayList<Dog> getByIdOfShleter(int id);
+	Dog getById(int id);
 	
 }

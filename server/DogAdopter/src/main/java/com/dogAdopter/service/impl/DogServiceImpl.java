@@ -38,4 +38,10 @@ public class DogServiceImpl implements DogService {
 		return dogDao.getByIdOfShleter(id);
 	}
 
+	@Override
+	public Dog getById(int id) {
+		// TODO Auto-generated method stub
+		return dogDao.getDogById(id);
+	}
+
 }

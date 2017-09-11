@@ -20,7 +20,9 @@ public class AddDogPresenter extends BasePresenter implements AddDogContact.Pres
     private AddDogContact.View view;
 
     public AddDogPresenter(AddDogContact.View view) {
+
         this.view = view;
+        start();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

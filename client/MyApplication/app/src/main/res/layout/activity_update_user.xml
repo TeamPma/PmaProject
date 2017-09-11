@@ -22,12 +22,16 @@
             android:layout_marginTop="10dp"
             android:text="@string/account_username" />
 
-        <TextView
+        <EditText
             android:id="@+id/acc_username"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/textMargin"
-            android:layout_weight="4" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/border"
+            android:inputType="text"
+            android:padding="5dp"
+            android:enabled="false"/>
 
 
         <!-- First name -->

@@ -42,6 +42,17 @@ public class DogDaoImpl extends CustomHibernateDaoSupport implements DogDao{
 		}
 		return (ArrayList<Dog>) list;
 	}
+
+	@Override
+	public Dog getDogById(int id) {
+		Object[] params = {id};
+		String[] paramsS = {"dogId"};
+		List<Dog> list = getHibernateTemplate().findByNamedQueryAndNamedParam(Dog.FIND_BY_ID, paramsS, params);
+		if(list.isEmpty()){
+			return null;
+		}
+		return list.get(0);
+	}
 	
 
 }

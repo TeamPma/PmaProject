@@ -156,7 +156,7 @@ public class HttpRestManager  {
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
         String userSericeUrl = gson.toJson(user);
-        iHttpRestManager.updateUser(user).enqueue(new Callback<ResponseBody>() {
+        iHttpRestManager.updateUser(userSericeUrl).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("TAG",response.code()+"");
@@ -385,6 +385,7 @@ public class HttpRestManager  {
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
         String dogToJson = gson.toJson(dog);
+        Log.d(TAG, "addDog: "+ dogToJson);
         iHttpRestManager.addDog(dogToJson).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -392,8 +393,8 @@ public class HttpRestManager  {
                 if (response.isSuccessful()) {
                     try {
                         String stringResponse = response.body().string();
+                        Dog dogFromJson = gson.fromJson(stringResponse, Dog.class);
                         Log.d(TAG, "onResponse: " + stringResponse);
-                        SmartBus.getInstance().insertDogDB(dog);
                         EventBus.getDefault().post(new AddDogEvent());
 
                     } catch (IOException e) {
@@ -417,6 +418,7 @@ public class HttpRestManager  {
         iHttpRestManager = retrofit.create(IHttpRestManager.class);
 
         String dogUrl = gson.toJson(dog);
+        Log.d(TAG, "updateDog: "+ dogUrl);
         iHttpRestManager.updateDog(dogUrl).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

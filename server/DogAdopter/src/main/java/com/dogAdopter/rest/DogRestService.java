@@ -53,7 +53,7 @@ public class DogRestService extends BaseRestService {
 		int randomInt = randomGenerator.nextInt(100);
 		dogFromJson.setDogId(randomInt);
 		dogService.save(dogFromJson);
-		return gson.toJson(dogService.getAll());
+		return gson.toJson(dogService.getById(randomInt));
     }
     
     @GET
@@ -62,7 +62,7 @@ public class DogRestService extends BaseRestService {
     public String updateDog(@PathParam("dog") String dog) {
     	Dog dogFromJson = gson.fromJson(dog, Dog.class);
 		dogService.update(dogFromJson);
-		return gson.toJson(dogService.getAll());
+		return dog;
     }
     
     @GET

@@ -156,6 +156,7 @@ public class SmartBus implements ServiceConnection {
 
     public Dog getDogById(int dogId) {
         Log.d(TAG, "getDogById: ");
+        Log.d(TAG, "getDogById: "+ dbManager.getDogById(dogId));
         return dbManager.getDogById(dogId);
     }
 

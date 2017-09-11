@@ -62,7 +62,6 @@ public class UpdateDogActivity extends AppCompatActivity implements UpdateDogCon
                 Log.d(TAG, "onClick: ");
                 if (dogName.getText() != null && !dogBread.getText().toString().isEmpty() && !dogAge.getText().toString().isEmpty()){
 
-                    Dog dog = new Dog();
                     dog.setName(dogName.getText().toString());
                     dog.setBread(dogBread.getText().toString());
                     dog.setGender(gender);
@@ -143,6 +142,21 @@ public class UpdateDogActivity extends AppCompatActivity implements UpdateDogCon
         dogAnamnesis = (EditText) findViewById(R.id.update_dog_anamnesis);
         btnUpdateDog = (Button) findViewById(R.id.btnUpdateDog);
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        dogName.setText(dog.getName());
+        dogBread.setText(dog.getBread());
+        dogGender.setSelection(gender);
+        dogAge.setText(dog.getAge()+"");
+        dogWeight.setText(dog.getWeight()+"");
+        dogHeight.setText(dog.getHeight()+"");
+        dogAnamnesis.setText(dog.getAnamnesis());
+        if(dog.getIsSterilized() == 1) {
+            isSterilized.setChecked(true);
+        }
+        else isSterilized.setChecked(false);
+        if(dog.getIsMarked() == 1) {
+            isMarked.setChecked(true);
+        }
+        else isMarked.setChecked(false);
     }
 
     @Override

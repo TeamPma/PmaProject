@@ -17,13 +17,15 @@ import org.hibernate.annotations.NamedQuery;
 @Entity
 @NamedQueries({
 @NamedQuery(name = Dog.FIND_ALL_DOGS, query = "FROM Dog dog"),
-@NamedQuery(name = Dog.FIND_DOGS_BY_ID_OF_SHELTER, query = "FROM Dog dog WHERE dog.idShelter = :idShelter")
+@NamedQuery(name = Dog.FIND_DOGS_BY_ID_OF_SHELTER, query = "FROM Dog dog WHERE dog.idShelter = :idShelter"),
+@NamedQuery(name = Dog.FIND_BY_ID, query = "FROM Dog dog WHERE dog.dogId = :dogId")
 })
 @Table(name = "Dog", catalog = "mydb")
 public class Dog implements Serializable{
 
 	public final static String FIND_ALL_DOGS = "findAllDogs";
 	public final static String FIND_DOGS_BY_ID_OF_SHELTER = "findDogsByIdOfShelter";
+	public final static String FIND_BY_ID = "findDogByID";
 	private int dogId;
 	private String name;
 	private String bread;

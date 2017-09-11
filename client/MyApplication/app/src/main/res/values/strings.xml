@@ -80,5 +80,7 @@
     <string name="lblChangePassword">Change password</string>
     <string name="btnUpdateUser">Update user</string>
     <string name="search">Search by title</string>
+    <string name="add_shelter_langitude">Longitude:</string>
+    <string name="add_shelter_latitude">Latitude:</string>
 
 </resources>

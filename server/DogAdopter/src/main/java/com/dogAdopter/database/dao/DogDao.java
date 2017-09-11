@@ -13,6 +13,7 @@ public interface DogDao {
 	
 	ArrayList<Dog> getAll();
 	ArrayList<Dog> getByIdOfShleter(int id);
+	Dog getDogById(int id);
 
 
 }

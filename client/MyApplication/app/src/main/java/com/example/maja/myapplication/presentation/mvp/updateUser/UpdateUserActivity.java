@@ -29,7 +29,7 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
     private UpdateUserPresenter presenter;
     private EditText firstname;
     private CheckBox changePassword;
-    private TextView username;
+    private EditText username;
     private TextView lblOldPassword;
     private EditText oldPassword;
     private TextView lblPassword;
@@ -148,7 +148,7 @@ public class UpdateUserActivity extends AppCompatActivity implements UpdateUserC
         presenter.getUserById(userId);
         firstname = (EditText) findViewById(R.id.firstname);
         lastName = (EditText) findViewById(R.id.lastname);
-        username = (TextView) findViewById(R.id.acc_username);
+        username = (EditText) findViewById(R.id.acc_username);
         changePassword = (CheckBox) findViewById(R.id.change_password);
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override

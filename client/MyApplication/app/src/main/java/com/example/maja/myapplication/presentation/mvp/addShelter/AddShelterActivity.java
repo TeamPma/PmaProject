@@ -28,6 +28,8 @@ public class AddShelterActivity extends AppCompatActivity implements AddShelterC
     private EditText shelterLocation;
     private EditText shelterCity;
     private EditText shelterBankAccount;
+    private EditText shelterLongitude;
+    private EditText shelterLantitude;
     private Button btnCreateShelter;
     private AlertDialog.Builder builder;
     private AddShelterPresenter presenter;
@@ -56,7 +58,9 @@ public class AddShelterActivity extends AppCompatActivity implements AddShelterC
                     shelter.setName(shelterName.getText().toString());
                     shelter.setAddress(shelterAddress.getText().toString());
                     shelter.setNumber(shelterNumber.getText().toString());
-                    shelter.setLocation(shelterLocation.getText().toString());
+                    shelter.setLocation("");
+                    shelter.setLongitude(Double.parseDouble(shelterLongitude.getText().toString()));
+                    shelter.setLatitude(Double.parseDouble(shelterLantitude.getText().toString()));
                     shelter.setCity(shelterCity.getText().toString());
                     shelter.setBankAccount(Integer.valueOf(shelterBankAccount.getText().toString()));
                     Log.d(TAG, "onClick: "+ shelter);
@@ -83,11 +87,12 @@ public class AddShelterActivity extends AppCompatActivity implements AddShelterC
         shelterName = (EditText) findViewById(R.id.add_shelter_name);
         shelterAddress = (EditText) findViewById(R.id.add_shelter_address);
         shelterNumber = (EditText) findViewById(R.id.add_shelter_number);
-        shelterLocation = (EditText) findViewById(R.id.add_shelter_location);
         shelterCity = (EditText) findViewById(R.id.add_shelter_city);
         shelterBankAccount = (EditText) findViewById(R.id.add_shelter_bank_account);
         btnCreateShelter = (Button) findViewById(R.id.btnCreateShelter);
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        shelterLongitude = (EditText) findViewById(R.id.shelter_longitude);
+        shelterLantitude = (EditText) findViewById(R.id.shelter_latitude);
     }
 
     @Override
