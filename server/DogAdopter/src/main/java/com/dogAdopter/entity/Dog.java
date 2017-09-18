@@ -36,6 +36,7 @@ public class Dog implements Serializable{
 	private int isSterilized;
 	private int isMarked;
 	private String anamnesis;
+	private String imageUrl;
 	private int idShelter;
 	
 	
@@ -46,7 +47,7 @@ public class Dog implements Serializable{
 
 
 	public Dog(int dogId, String name, String bread, int gender, int age, double weight, double height,
-			int isSterilized, int isMarked, String anamnesis, int idShelter) {
+			int isSterilized, int isMarked, String anamnesis,String imageUrl, int idShelter) {
 		super();
 		this.dogId = dogId;
 		this.name = name;
@@ -59,6 +60,7 @@ public class Dog implements Serializable{
 		this.isMarked = isMarked;
 		this.anamnesis = anamnesis;
 		this.idShelter = idShelter;
+		this.imageUrl = imageUrl;
 	}
 
 	@Id
@@ -171,6 +173,16 @@ public class Dog implements Serializable{
 
 	public void setIdShelter(int idShelter) {
 		this.idShelter = idShelter;
+	}
+
+	@Column(name = "imageUrl", unique = false, nullable = true, length = 2000)
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	
 	
