@@ -112,6 +112,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Announcement` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`Favorite_dogs`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Favorite_dogs` ;
+CREATE TABLE IF NOT EXISTS `mydb`.`Favorite_dogs` (
+  `favoriteId` INT NOT NULL AUTO_INCREMENT,
+  `userId` INT NOT NULL,
+  `dogId` INT NOT NULL,
+  PRIMARY KEY (`favoriteId`),
+  UNIQUE INDEX `favoriteId_UNIQUE` (`favoriteId` ASC))
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

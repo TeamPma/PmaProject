@@ -1,6 +1,7 @@
 package com.dogAdopter.rest;
 
 import com.dogAdopter.service.*;
+import com.dogAdopter.service.impl.FavoriteDogServiceImpl;
 import com.google.gson.Gson;
 
 import org.springframework.context.ApplicationContext;
@@ -12,6 +13,7 @@ public class BaseRestService {
     protected DogService dogService;
     protected ShelterService shelterService;
     protected AnnouncementService announcementService;
+    protected FavoriteDogService favoriteService;
     protected Gson gson;
 
     public BaseRestService() {
@@ -22,6 +24,7 @@ public class BaseRestService {
         dogService = (DogService) appContext.getBean("dogService");
         shelterService = (ShelterService) appContext.getBean("shelterService");
         announcementService = (AnnouncementService) appContext.getBean("announcementService");
+        favoriteService = (FavoriteDogService) appContext.getBean("favoriteService");
         gson = new Gson();
 
     }

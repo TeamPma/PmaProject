@@ -25,6 +25,7 @@ class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 		<value>com.dogAdopter.entity.Shelter</value>
 		<value>com.dogAdopter.entity.Dog</value>
 		<value>com.dogAdopter.entity.Announcement</value>
+		<value>com.dogAdopter.entity.FavoriteDog</value>
 	</list>
     </property>
 
