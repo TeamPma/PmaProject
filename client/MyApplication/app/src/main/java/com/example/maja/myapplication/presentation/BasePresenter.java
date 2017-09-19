@@ -150,6 +150,12 @@ public abstract class BasePresenter {
         return smartBus.getDogById(dogId);
     }
 
+    //----------------------Favorite dogs -------------------------
+
+    protected void getFavoriteDogs_(int userId) {
+        smartBus.getFavoriteDogs(userId);
+    }
+
     //----------------------Other----------------------------------
 
     public void start() {

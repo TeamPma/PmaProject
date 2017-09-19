@@ -19,4 +19,6 @@ public interface FragmentListener {
     void showAnnouncement(Announcement announcement);
 
     void showDog(Dog dog);
+
+    int getUserId();
 }

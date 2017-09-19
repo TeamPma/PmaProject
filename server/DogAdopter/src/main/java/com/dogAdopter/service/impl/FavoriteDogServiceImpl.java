@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dogAdopter.database.dao.DogDao;
 import com.dogAdopter.database.dao.FavoriteDogDao;
+import com.dogAdopter.entity.Dog;
 import com.dogAdopter.entity.FavoriteDog;
 import com.dogAdopter.service.FavoriteDogService;
 
@@ -14,6 +16,9 @@ public class FavoriteDogServiceImpl implements FavoriteDogService {
 	
 	@Autowired
 	FavoriteDogDao favoriteDao;
+	
+	@Autowired
+	DogDao dogDao;
 
 	@Override
 	public void save(FavoriteDog dog) {
@@ -39,9 +44,13 @@ public class FavoriteDogServiceImpl implements FavoriteDogService {
 	}
 
 	@Override
-	public ArrayList<FavoriteDog> getAllFavoriteForUser(int userId) {
-		// TODO Auto-generated method stub
-		return favoriteDao.getAllFavoriteForUser(userId);
+	public ArrayList<Dog> getAllFavoriteForUser(int userId) {
+		ArrayList<Dog> returnDogs = new ArrayList<>();
+		ArrayList<FavoriteDog> favoriteDogs =  (ArrayList<FavoriteDog>) favoriteDao.getAllFavoriteForUser(userId);
+		for (FavoriteDog favoriteDog : favoriteDogs) {
+			returnDogs.add(dogDao.getDogById(favoriteDog.getDogId()));
+		}
+		return returnDogs;
 	}
 
 }

@@ -31,6 +31,7 @@ import com.example.maja.myapplication.backend.entity.Shelter;
 import com.example.maja.myapplication.presentation.mvp.announcement.AnnouncementDetailActivity;
 import com.example.maja.myapplication.presentation.mvp.dogDetails.DogDetailsActivity;
 import com.example.maja.myapplication.presentation.mvp.dogList.DogListFragment;
+import com.example.maja.myapplication.presentation.mvp.favoriteDogs.FavoriteDogListFragment;
 import com.example.maja.myapplication.presentation.mvp.googleMap.MapActivity;
 import com.example.maja.myapplication.presentation.mvp.login.LoginActivity;
 import com.example.maja.myapplication.presentation.mvp.newsList.NewsListFragment;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mMenuItems = new String[]{getString(R.string.shelterList), getString(R.string.dogList), getString(R.string.newsList), getString(R.string.mapShelter), getString(R.string.logOut)};
+        mMenuItems = new String[]{getString(R.string.shelterList), getString(R.string.dogList), getString(R.string.newsList), getString(R.string.mapShelter), getString(R.string.logOut), getString(R.string.favorite_dogs)};
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -207,6 +208,19 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 
     }
 
+    @Override
+    public int getUserId() {
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.example.maja.myapplication", Context.MODE_PRIVATE);
+        String userIdKey = "com.example.maja.myapplication.userid";
+        int userId = 0;
+        if (prefs != null) {
+            userId = prefs.getInt(userIdKey, 0);
+            Log.d(TAG, "user: " + userId);
+        }
+        return userId;
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -244,6 +258,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
                 break;
             case 4:
                 logout();
+                break;
+            case 5:
+                fragment = new FavoriteDogListFragment();
+                title = R.string.favorite_dogs;
                 break;
         }
         if(position!=3) {

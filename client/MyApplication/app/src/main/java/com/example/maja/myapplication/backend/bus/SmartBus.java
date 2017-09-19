@@ -242,4 +242,8 @@ public class SmartBus implements ServiceConnection {
         Log.d(TAG, "getShelterListDB: ");
         return dbManager.getShelterListDB();
     }
+
+    public void getFavoriteDogs(int userId) {
+        mService.getFavoriteDogs(userId);
+    }
 }

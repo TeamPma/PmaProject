@@ -21,18 +21,6 @@ public class TestApp {
 
 	public static void main(String[] args) {
 
-        ApplicationContext appContext =
-                new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-        FavoriteDogService favoriteService = (FavoriteDogService) appContext.getBean("favoriteService");
-        favoriteService.save(new FavoriteDog(1, 2));
-        favoriteService.save(new FavoriteDog(2, 2));
-        favoriteService.save(new FavoriteDog(8, 2));
-        
-        ArrayList<FavoriteDog> dogs = favoriteService.getAllFavoriteForUser(2);
-        for (FavoriteDog favoriteDog : dogs) {
-			System.out.println(favoriteDog.getDogId());
-		}
-
 	}
 	
 }

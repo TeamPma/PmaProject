@@ -12,6 +12,6 @@ public interface FavoriteDogService {
 	void delete(FavoriteDog dog);
 
 	ArrayList<FavoriteDog> getAll();
-	ArrayList<FavoriteDog> getAllFavoriteForUser(int userId);
+	ArrayList<Dog> getAllFavoriteForUser(int userId);
 
 }

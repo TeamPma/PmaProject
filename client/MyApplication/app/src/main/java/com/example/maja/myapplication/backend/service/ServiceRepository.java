@@ -78,6 +78,11 @@ public class ServiceRepository extends Service {
         restManager.getUserById(userId);
     }
 
+    public void getFavoriteDogs(int userId) {
+        Log.d(TAG, "getFavoriteDogs: ");
+        restManager.getFavoriteDogs(userId);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

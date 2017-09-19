@@ -67,4 +67,8 @@ public interface IHttpRestManager {
 
     @GET("userById/{idOfUser}")
     Call<ResponseBody> getUserById(@Path("idOfUser") String userJson);
+
+    //------------------- Favorite dogs ------------------------------
+    @GET("favoriteDogByUserId/{userId}")
+    Call<ResponseBody> getFavoriteDogs(@Path("userId") String userId);
 }

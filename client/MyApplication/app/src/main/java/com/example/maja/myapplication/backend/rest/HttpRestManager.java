@@ -16,6 +16,7 @@ import com.example.maja.myapplication.backend.events.DeleteNewsEvent;
 import com.example.maja.myapplication.backend.events.DeleteShelterEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
 import com.example.maja.myapplication.backend.events.GetAllDogsEvent;
+import com.example.maja.myapplication.backend.events.GetAllFavoriteDogsEvent;
 import com.example.maja.myapplication.backend.events.GetAllNewsEvent;
 import com.example.maja.myapplication.backend.events.GetAllSheltersEvent;
 import com.example.maja.myapplication.backend.events.GetShelterByIdEvent;
@@ -54,6 +55,7 @@ public class HttpRestManager  {
     private static final String announcementsServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/announcementService/";
     private static final String shelterServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/shelterService/";
     private static final String dogServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/dogService/";
+    private static final String favoriteServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/favoriteDogService/";
 
     private final Gson gson = new Gson();
 
@@ -345,7 +347,36 @@ public class HttpRestManager  {
         });
     }
 
+    //----------------------------Favorite dogs -----------------------------------------------
+    public void getFavoriteDogs(int userId) {
+        Log.d(TAG, "getFavoriteDogs: ");
+        Retrofit retrofit = getRetrofit(favoriteServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+        iHttpRestManager.getFavoriteDogs(userId+"").enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("TAG",response.code()+"");
+                if (response.isSuccessful()) {
+                    try {
+                        String stringResponse = response.body().string();
+                        ArrayList<Dog> dogList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Dog>>(){}.getType());
+                        EventBus.getDefault().post(new GetAllFavoriteDogsEvent(dogList));
+                    } catch (IOException e) {
+                        Log.d("exception",e.getMessage());
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure",t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
     //----------------------------Dog----------------------------------------------------------
+
 
     public void getDogList() {
         Log.d(TAG, "getDogList: ");
@@ -642,5 +673,4 @@ public class HttpRestManager  {
             }
         });
     }
-
 }
