@@ -1,6 +1,7 @@
 package com.example.maja.myapplication.presentation.mvp.dogList;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +23,7 @@ import com.example.maja.myapplication.presentation.mvp.main.FragmentListener;
 
 import java.util.ArrayList;
 
-public class DogListFragment extends Fragment implements DogListContact.View{
+public class DogListFragment extends Fragment implements DogListContact.View {
 
     private static final String TAG = DogListFragment.class.getSimpleName();
     private AlertDialog.Builder builder;
@@ -30,6 +31,8 @@ public class DogListFragment extends Fragment implements DogListContact.View{
     private DogListPresenter presenter;
     private DogListAdapter dogListAdapter;
     private Dog dog;
+
+    ProgressDialog progress;
 
     public DogListFragment() {
     }
@@ -49,7 +52,7 @@ public class DogListFragment extends Fragment implements DogListContact.View{
         //btnAddDog = (FloatingActionButton) view.findViewById(R.id.btnAddDog);
 
         initListener();
-        presenter.getDogList();
+
 
         ListView listView = (ListView) view.findViewById(R.id.dogList);
         dogListAdapter = new DogListAdapter(getActivity());
@@ -93,8 +96,9 @@ public class DogListFragment extends Fragment implements DogListContact.View{
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
-        dogListAdapter.setDogList(presenter.getListOfDogs());
-        dogListAdapter.notifyDataSetChanged();
+        presenter.getDogList();
+        progress = ProgressDialog.show(parentActivity.getActivityContext(), "",
+                "Please wait", true);
     }
 
     @Override
@@ -121,7 +125,7 @@ public class DogListFragment extends Fragment implements DogListContact.View{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof FragmentListener){
+        if (context instanceof FragmentListener) {
             parentActivity = (FragmentListener) context;
         }
     }
@@ -129,6 +133,9 @@ public class DogListFragment extends Fragment implements DogListContact.View{
 
     @Override
     public void handleError(String message) {
+        if (progress != null) {
+            progress.dismiss();
+        }
         Log.d(TAG, "handleError: ");
         builder.setTitle("Getting DogList not successful")
                 .setMessage(message)
@@ -145,5 +152,8 @@ public class DogListFragment extends Fragment implements DogListContact.View{
     public void getDogListSuccessfull(ArrayList<Dog> dogList) {
         dogListAdapter.setDogList(dogList);
         dogListAdapter.notifyDataSetChanged();
+        if (progress != null) {
+            progress.dismiss();
+        }
     }
 }

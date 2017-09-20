@@ -2,6 +2,7 @@ package com.example.maja.myapplication.presentation.mvp.newsList;
 
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,6 +35,8 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
     private EditText searchTitle;
     private Button search;
 
+    ProgressDialog progress;
+
 
     public NewsListFragment() {
         // Required empty public constructor
@@ -41,7 +44,6 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         presenter = new NewsPresenter(this);
     }
@@ -50,7 +52,7 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news_list, container, false);
-        presenter.getAllNews();
+
         ListView listView = (ListView) view.findViewById(R.id.newsList);
         newsListAdapter = new NewsListAdapter(getActivity());
         listView.setAdapter(newsListAdapter);
@@ -80,8 +82,9 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
-        newsListAdapter.setNewsList(presenter.getRefreshedAllNewsFromDB());
-        newsListAdapter.notifyDataSetChanged();
+        progress = ProgressDialog.show(parentActivity.getActivityContext(), "",
+                "Please wait", true);
+        presenter.getAllNews();
     }
 
     @Override
@@ -94,6 +97,9 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
 
     @Override
     public void handleError(String message) {
+        if (progress != null) {
+            progress.dismiss();
+        }
         Log.d(TAG, "getShelterListNotSuccessfull: ");
         builder.setTitle("Getting ShelterList not successful")
                 .setMessage(message)
@@ -111,6 +117,9 @@ public class NewsListFragment extends Fragment implements NewsContact.View{
     public void getAllNewsSuccesfull(ArrayList<Announcement> news) {
         newsListAdapter.setNewsList(news);
         newsListAdapter.notifyDataSetChanged();
+        if (progress != null) {
+            progress.dismiss();
+        }
     }
 
 }

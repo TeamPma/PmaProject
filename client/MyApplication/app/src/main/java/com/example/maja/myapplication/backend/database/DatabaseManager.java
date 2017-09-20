@@ -1,19 +1,13 @@
 package com.example.maja.myapplication.backend.database;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.maja.myapplication.backend.bus.SmartBus;
 import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.entity.Dog;
 import com.example.maja.myapplication.backend.entity.Shelter;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Maja on 25.8.2017.
@@ -23,25 +17,25 @@ public class DatabaseManager {
 
     private static final String TAG = "DatabaseManager";
     private ShelterDbHelper shelterDbHelper;
-    private DogDbHelper dogDbHelper;
-    private AnnouncementDbHelper announcementDbHelper;
+    private DogCache dogCache;
+    private AnnouncementCache announcementCache;
     private Context context;
 
     public DatabaseManager(Context context) {
         this.context = context;
         shelterDbHelper = new ShelterDbHelper(context);
-        dogDbHelper = new DogDbHelper(context);
-        announcementDbHelper = new AnnouncementDbHelper(context);
+        dogCache = new DogCache(context);
+        announcementCache = new AnnouncementCache(context);
     }
 
     public void insertAllNews(ArrayList<Announcement> news){
         Log.d(TAG, "insertAllNews: ");
-        announcementDbHelper.insertAllAnnouncements(news);
+        announcementCache.insertAllAnnouncements(news);
     }
 
     public ArrayList<Announcement> readAllNews(){
         Log.d(TAG, "readAllNews: ");
-        return announcementDbHelper.readAnnouncements();
+        return announcementCache.readAnnouncements();
     }
 
     public Shelter getShelterByTitle(String title) {
@@ -72,51 +66,51 @@ public class DatabaseManager {
 
     public void insertAllDogs(ArrayList<Dog> dogList) {
         Log.d(TAG, "insertAllDogs: ");
-        dogDbHelper.insertAllDogs(dogList);
+        dogCache.insertAllDogs(dogList);
     }
 
     public void deleteAnnouncementDB(int idAnnouncement) {
         Log.d(TAG, "delete: ");
-        announcementDbHelper.deleteAnnouncement(idAnnouncement);
+        announcementCache.deleteAnnouncement(idAnnouncement);
     }
 
     public Announcement getAnnouncementById(int annoucementId) {
         Log.d(TAG, "getAnnouncementById: ");
-       return announcementDbHelper.readAnnouncement(annoucementId);
+       return announcementCache.readAnnouncement(annoucementId);
     }
 
     public void updateAnnouncementDB(Announcement announcement) {
         Log.d(TAG, "updateAnnouncementDB: ");
-        announcementDbHelper.updateAnnDB(announcement);
+        announcementCache.updateAnnDB(announcement);
     }
 
     public Dog getDogById(int dogId) {
         Log.d(TAG, "getDogById: ");
-        return dogDbHelper.readDog(dogId);
+        return dogCache.readDog(dogId);
     }
 
     public void updateDogDB(Dog dog) {
         Log.d(TAG, "updateDogDB: ");
-        dogDbHelper.updateDogDB(dog);
+        dogCache.updateDogDB(dog);
     }
 
     public void deleteDogDB(int dogId) {
         Log.d(TAG, "deleteDogDB: ");
-        dogDbHelper.deleteDog(dogId);
+        dogCache.deleteDog(dogId);
     }
 
     public ArrayList<Announcement> getNewsByTitle(String title) {
-        return announcementDbHelper.getNewsByTitle(title);
+        return announcementCache.getNewsByTitle(title);
     }
 
     public ArrayList<Dog> getDogListDB() {
         Log.d(TAG, "getDogListDB: ");
-        return  dogDbHelper.readDogs();
+        return  dogCache.readDogs();
     }
 
     public void insertDog(Dog dog) {
         Log.d(TAG, "insertDog: ");
-        dogDbHelper.insert(dog);
+        dogCache.insert(dog);
     }
 
     public ArrayList<Shelter> getShelterListDB() {

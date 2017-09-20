@@ -1,6 +1,7 @@
 package com.example.maja.myapplication.presentation.mvp.shelterList;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +36,7 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
     private FloatingActionButton btnAddShelter;
     public Shelter shelter;
     private static int IS_ADMIN = 0;
+    ProgressDialog progress;
 
     public ShelterListFragment() {
         // Required empty public constructor
@@ -59,7 +61,7 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
             btnAddShelter.setVisibility(View.INVISIBLE);
         }
         initListener();
-        presenter.getShelterList();
+
         ListView listView = (ListView) view.findViewById(R.id.shelterList);
         shelterListAdapter = new ShelterListAdapter(getActivity());
         listView.setAdapter(shelterListAdapter);
@@ -102,8 +104,9 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
-        shelterListAdapter.setShelterList(presenter.getShelterListDB());
-        shelterListAdapter.notifyDataSetChanged();
+        progress = ProgressDialog.show(parentActivity.getActivityContext(), "",
+                "Please wait", true);
+        presenter.getShelterList();
     }
 
     @Override
@@ -138,6 +141,9 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
     @Override
     public void getShelterListSuccessfull(ArrayList<Shelter> shelterList) {
         Log.d(TAG, "getShelterListSuccessfull: +");
+        if (progress != null) {
+            progress.dismiss();
+        }
         shelterListAdapter.setShelterList(shelterList);
         shelterListAdapter.notifyDataSetChanged();
     }
@@ -145,6 +151,9 @@ public class ShelterListFragment extends Fragment implements ShelterListContact.
     @Override
     public void getShelterListNotSuccessfull(String message) {
         Log.d(TAG, "getShelterListNotSuccessfull: ");
+        if (progress != null) {
+            progress.dismiss();
+        }
         builder.setTitle("Getting ShelterList not successful")
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {

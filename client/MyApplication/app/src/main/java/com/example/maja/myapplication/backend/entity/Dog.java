@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Dog implements Serializable{
 
-    private int dogId;
+    private Integer dogId;
     private String name;
     private String bread;
     private int gender;
