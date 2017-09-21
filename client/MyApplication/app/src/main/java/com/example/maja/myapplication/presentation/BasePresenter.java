@@ -156,6 +156,11 @@ public abstract class BasePresenter {
         smartBus.getFavoriteDogs(userId);
     }
 
+
+    protected ArrayList<Dog> getFavoriteDogsDB() {
+        return smartBus.getFavoriteDogsDB();
+    }
+
     //----------------------Other----------------------------------
 
     public void start() {

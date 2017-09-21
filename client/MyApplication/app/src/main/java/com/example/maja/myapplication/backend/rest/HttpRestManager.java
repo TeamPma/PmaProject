@@ -360,7 +360,8 @@ public class HttpRestManager  {
                     try {
                         String stringResponse = response.body().string();
                         ArrayList<Dog> dogList = gson.fromJson(stringResponse, new TypeToken<ArrayList<Dog>>(){}.getType());
-                        EventBus.getDefault().post(new GetAllFavoriteDogsEvent(dogList));
+                        SmartBus.getInstance().insertFavoriteDogs(dogList);
+                        EventBus.getDefault().post(new GetAllFavoriteDogsEvent());
                     } catch (IOException e) {
                         Log.d("exception",e.getMessage());
                         EventBus.getDefault().post(new ErrorEvent(e.getMessage()));

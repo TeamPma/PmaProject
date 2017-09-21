@@ -17,8 +17,9 @@ public class DatabaseManager {
 
     private static final String TAG = "DatabaseManager";
     private ShelterDbHelper shelterDbHelper;
-    private DogCache dogCache;
     private AnnouncementCache announcementCache;
+    private FavoriteDogCache favoriteDogCache;
+    private DogCache dogCache;
     private Context context;
 
     public DatabaseManager(Context context) {
@@ -26,6 +27,7 @@ public class DatabaseManager {
         shelterDbHelper = new ShelterDbHelper(context);
         dogCache = new DogCache(context);
         announcementCache = new AnnouncementCache(context);
+        favoriteDogCache = new FavoriteDogCache(context);
     }
 
     public void insertAllNews(ArrayList<Announcement> news){
@@ -116,6 +118,14 @@ public class DatabaseManager {
     public ArrayList<Shelter> getShelterListDB() {
         Log.d(TAG, "getShelterListDB: ");
         return shelterDbHelper.readShelters();
+    }
+
+    public void insertFavoriteDogs(ArrayList<Dog> dogList) {
+        favoriteDogCache.insertAllDogs(dogList);
+    }
+
+    public ArrayList<Dog> getFavoriteDogsDB() {
+        return favoriteDogCache.readDogs();
     }
 }
 

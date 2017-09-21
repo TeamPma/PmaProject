@@ -246,4 +246,12 @@ public class SmartBus implements ServiceConnection {
     public void getFavoriteDogs(int userId) {
         mService.getFavoriteDogs(userId);
     }
+
+    public void insertFavoriteDogs(ArrayList<Dog> dogList) {
+        dbManager.insertFavoriteDogs(dogList);
+    }
+
+    public ArrayList<Dog> getFavoriteDogsDB() {
+        return dbManager.getFavoriteDogsDB();
+    }
 }

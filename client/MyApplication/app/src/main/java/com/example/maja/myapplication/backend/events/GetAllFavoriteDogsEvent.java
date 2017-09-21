@@ -9,14 +9,9 @@ import java.util.ArrayList;
  */
 
 public class GetAllFavoriteDogsEvent extends BaseEvent {
-    private ArrayList<Dog> dogList;
 
-    public GetAllFavoriteDogsEvent(ArrayList<Dog> dogList) {
+    public GetAllFavoriteDogsEvent() {
         super(EventType.GET_FAVORITE_DOG_EVENT);
-        this.dogList = dogList;
-    }
 
-    public ArrayList<Dog> getDogList() {
-        return dogList;
     }
 }
