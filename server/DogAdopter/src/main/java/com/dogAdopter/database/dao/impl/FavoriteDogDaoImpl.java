@@ -12,25 +12,23 @@ import com.dogAdopter.util.CustomHibernateDaoSupport;
 
 @Repository("favoriteDao")
 public class FavoriteDogDaoImpl extends CustomHibernateDaoSupport implements FavoriteDogDao {
-	
-	
 
 	@Override
 	public void save(FavoriteDog dog) {
 		getHibernateTemplate().save(dog);
-		
+
 	}
 
 	@Override
 	public void update(FavoriteDog dog) {
 		getHibernateTemplate().update(dog);
-		
+
 	}
 
 	@Override
 	public void delete(FavoriteDog dog) {
 		getHibernateTemplate().delete(dog);
-		
+
 	}
 
 	@Override
@@ -40,13 +38,26 @@ public class FavoriteDogDaoImpl extends CustomHibernateDaoSupport implements Fav
 
 	@Override
 	public ArrayList<FavoriteDog> getAllFavoriteForUser(int userId) {
-		Object[] params = {userId};
-		String[] paramsS = {"idUser"};
-		List<FavoriteDog> list = getHibernateTemplate().findByNamedQueryAndNamedParam(FavoriteDog.FIND_ALL_FAVORITE_DOGS_BY_USER_ID, paramsS, params);
-		if(list.isEmpty()){
+		Object[] params = { userId };
+		String[] paramsS = { "idUser" };
+		List<FavoriteDog> list = getHibernateTemplate()
+				.findByNamedQueryAndNamedParam(FavoriteDog.FIND_ALL_FAVORITE_DOGS_BY_USER_ID, paramsS, params);
+		if (list.isEmpty()) {
 			return null;
 		}
 		return (ArrayList<FavoriteDog>) list;
+	}
+
+	@Override
+	public boolean isFavoriteForUser(int dogId, int userId) {
+		Object[] params = { userId, dogId };
+		String[] paramsS = { "idUser", "dogId" };
+		List<FavoriteDog> list = getHibernateTemplate()
+				.findByNamedQueryAndNamedParam(FavoriteDog.FIND_FAVORITE_DOG_USER_DOG_ID, paramsS, params);
+		if (list.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 }

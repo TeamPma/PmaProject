@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 
 import com.example.maja.myapplication.R;
+import com.example.maja.myapplication.backend.bus.SmartBus;
 import com.example.maja.myapplication.presentation.mvp.login.LoginActivity;
 import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
 
@@ -55,6 +56,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, LoginActivity.class);
         if (userId != 0) {
+            SmartBus.getInstance().setUserId(userId);
             intent = new Intent(this, MainActivity.class);
         }
         startActivity(intent);

@@ -83,6 +83,10 @@ public class ServiceRepository extends Service {
         restManager.getFavoriteDogs(userId);
     }
 
+    public void addFavoriteDog(int userId, int dogId) {
+        restManager.addFavoriteDog(userId,dogId);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;
@@ -114,9 +118,9 @@ public class ServiceRepository extends Service {
         restManager.getShelterList();
     }
 
-    public void getDogList() {
+    public void getDogList(int userId) {
         Log.d(TAG, "getDogList: ");
-        restManager.getDogList();
+        restManager.getDogList(userId);
     }
 
     public String login (String username, String password){

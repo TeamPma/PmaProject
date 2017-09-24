@@ -53,8 +53,8 @@ public interface IHttpRestManager {
     Call<ResponseBody> deleteNews(@Path("announcement") String announcementToJson);
 
     //------------------Dog ------------------------------------------
-    @GET("dogAll")
-    Call<ResponseBody> getDogList();
+    @GET("dogAll/{userId}")
+    Call<ResponseBody> getDogList(@Path("userId") int userId);
 
     @GET("addDog/{dog}")
     Call<ResponseBody> addDog(@Path("dog") String dog);
@@ -71,4 +71,7 @@ public interface IHttpRestManager {
     //------------------- Favorite dogs ------------------------------
     @GET("favoriteDogByUserId/{userId}")
     Call<ResponseBody> getFavoriteDogs(@Path("userId") String userId);
+
+    @GET("addFavoriteDog/{userId}/{dogId}")
+    Call<ResponseBody> addFavoriteDog(@Path("userId") String userId, @Path("dogId") String dogId);
 }

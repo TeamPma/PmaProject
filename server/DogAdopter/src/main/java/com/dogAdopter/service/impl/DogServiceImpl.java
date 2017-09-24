@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dogAdopter.database.dao.DogDao;
+import com.dogAdopter.database.dao.FavoriteDogDao;
 import com.dogAdopter.entity.Dog;
 import com.dogAdopter.service.DogService;
 
@@ -15,7 +16,10 @@ public class DogServiceImpl implements DogService {
 
 	@Autowired
 	DogDao dogDao;
-	
+
+	@Autowired
+	FavoriteDogDao favoriteDogDao;
+
 	public void save(Dog dog) {
 		dogDao.save(dog);
 	}
@@ -29,8 +33,12 @@ public class DogServiceImpl implements DogService {
 	}
 
 	@Override
-	public ArrayList<Dog> getAll() {
-		return dogDao.getAll();
+	public ArrayList<Dog> getAll(int userId) {
+		ArrayList<Dog> dogList = dogDao.getAll();
+		for (Dog dog : dogList) {
+			dog.setFavoriteForUser(favoriteDogDao.isFavoriteForUser(dog.getDogId(), userId));
+		}
+		return dogList;
 	}
 
 	@Override

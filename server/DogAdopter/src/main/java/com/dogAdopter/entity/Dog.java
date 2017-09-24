@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
@@ -39,8 +40,11 @@ public class Dog implements Serializable{
 	private String imageUrl;
 	private int idShelter;
 	
-	
-	
+	/**** Unmapped properties ***/
+	private boolean isFavoriteForUser;
+
+
+
 	public Dog() {
 		super();
 	}
@@ -183,6 +187,16 @@ public class Dog implements Serializable{
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	
+	@Transient
+	public boolean isFavoriteForUser() {
+		return isFavoriteForUser;
+	}
+
+
+	public void setFavoriteForUser(boolean isFavoriteForUser) {
+		this.isFavoriteForUser = isFavoriteForUser;
 	}
 	
 	

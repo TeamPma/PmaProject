@@ -124,9 +124,9 @@ public abstract class BasePresenter {
 
     //---------------------Dog ----------------------------------
 
-    protected void getDogList_(){
+    protected void getDogList_(int userId){
         Log.d(TAG, "getDogList_: ");
-        smartBus.getDogList();
+        smartBus.getDogList(userId);
     }
 
     protected void addDog_(Dog dog){
@@ -156,9 +156,13 @@ public abstract class BasePresenter {
         smartBus.getFavoriteDogs(userId);
     }
 
-
     protected ArrayList<Dog> getFavoriteDogsDB() {
         return smartBus.getFavoriteDogsDB();
+    }
+
+
+    public void addFavoriteDog_(int dogId) {
+        smartBus.addFavoriteDog(dogId);
     }
 
     //----------------------Other----------------------------------

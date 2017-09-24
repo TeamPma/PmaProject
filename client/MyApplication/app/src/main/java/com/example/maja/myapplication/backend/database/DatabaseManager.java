@@ -127,5 +127,9 @@ public class DatabaseManager {
     public ArrayList<Dog> getFavoriteDogsDB() {
         return favoriteDogCache.readDogs();
     }
+
+    public void addFavoriteDog(int dogId) {
+        favoriteDogCache.addFavoriteDog(dogCache.readDog(dogId));
+    }
 }
 

@@ -28,9 +28,9 @@ public class DogListPresenter extends BasePresenter implements DogListContact.Pr
     }
 
     @Override
-    public void getDogList() {
+    public void getDogList(int userId) {
         Log.d(TAG, "getDogList: ");
-        getDogList_();
+        getDogList_(userId);
     }
 
     @Override
@@ -51,6 +51,15 @@ public class DogListPresenter extends BasePresenter implements DogListContact.Pr
                 ErrorEvent errorEvent = (ErrorEvent) event;
                 handleError(errorEvent.getMessage());
                 break;
+            case ADD_FAVORITE_DOG_EVENT:
+                refreshList();
+                break;
+        }
+    }
+
+    private void refreshList() {
+        if(view!=null){
+            view.refresh();
         }
     }
 

@@ -16,10 +16,12 @@ import org.hibernate.annotations.NamedQuery;
 @Entity
 @Table(name = "Favorite_dogs", catalog = "mydb")
 @NamedQueries({
-		@NamedQuery(name = FavoriteDog.FIND_ALL_FAVORITE_DOGS_BY_USER_ID, query = "FROM FavoriteDog dog WHERE dog.idUser = :idUser") })
+		@NamedQuery(name = FavoriteDog.FIND_ALL_FAVORITE_DOGS_BY_USER_ID, query = "FROM FavoriteDog dog WHERE dog.idUser = :idUser"),
+		@NamedQuery(name = FavoriteDog.FIND_FAVORITE_DOG_USER_DOG_ID, query = "FROM FavoriteDog dog WHERE dog.idUser = :idUser AND dog.dogId = :dogId") })
 public class FavoriteDog implements Serializable {
 
 	public final static String FIND_ALL_FAVORITE_DOGS_BY_USER_ID = "findAllFDogsByUserID";
+	public final static String FIND_FAVORITE_DOG_USER_DOG_ID = "findFavoriteDogForUserIdDogId";
 
 	private int id;
 	private int dogId;
@@ -29,7 +31,7 @@ public class FavoriteDog implements Serializable {
 		super();
 	}
 
-	public FavoriteDog(int dogId, int idUser) {
+	public FavoriteDog(int idUser, int dogId) {
 		super();
 		this.dogId = dogId;
 		this.idUser = idUser;

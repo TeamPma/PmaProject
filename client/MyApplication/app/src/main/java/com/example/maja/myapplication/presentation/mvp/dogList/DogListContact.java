@@ -15,10 +15,12 @@ public class DogListContact {
         void handleError(String message);
         void getDogListSuccessfull(ArrayList<Dog> dogList);
 
+        void refresh();
+
     }
 
     public interface Presenter{
-        void getDogList();
+        void getDogList(int userId);
         ArrayList<Dog> getListOfDogs();
     }
 }

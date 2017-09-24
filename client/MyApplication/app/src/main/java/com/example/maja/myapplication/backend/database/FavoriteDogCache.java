@@ -53,4 +53,8 @@ public class FavoriteDogCache {
         deleteDog(dog.getDogId());
         insert(dog);
     }
+
+    public void addFavoriteDog(Dog dog) {
+        insert(dog);
+    }
 }

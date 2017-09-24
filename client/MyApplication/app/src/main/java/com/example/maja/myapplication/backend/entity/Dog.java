@@ -19,6 +19,7 @@ public class Dog implements Serializable{
     private int isMarked;
     private String anamnesis;
     private int idShelter;
+    private boolean isFavoriteForUser;
 
     public Dog() {
     }
@@ -119,5 +120,13 @@ public class Dog implements Serializable{
 
     public int getIdShelter() {
         return idShelter;
+    }
+
+    public boolean isFavoriteForUser() {
+        return isFavoriteForUser;
+    }
+
+    public void setFavoriteForUser(boolean favoriteForUser) {
+        isFavoriteForUser = favoriteForUser;
     }
 }

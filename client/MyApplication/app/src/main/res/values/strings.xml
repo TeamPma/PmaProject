@@ -83,5 +83,7 @@
     <string name="add_shelter_langitude">Longitude:</string>
     <string name="add_shelter_latitude">Latitude:</string>
     <string name="favorite_dogs">Favorite dogs</string>
+    <string name="favorite">Favorite</string>
+    <string name="add_favorite">Set as favorite</string>
 
 </resources>

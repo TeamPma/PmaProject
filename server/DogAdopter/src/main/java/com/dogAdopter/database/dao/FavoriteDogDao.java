@@ -12,4 +12,5 @@ public interface FavoriteDogDao {
 
 	ArrayList<FavoriteDog> getAll();
 	ArrayList<FavoriteDog> getAllFavoriteForUser(int userId);
+	boolean isFavoriteForUser(int dogId, int userId);
 }

@@ -28,10 +28,10 @@ public class FavoriteDogRestService extends BaseRestService {
     }
     
     @GET
-    @Path("addFavoriteDog/{favoriteDog}")
+    @Path("addFavoriteDog/{userId}/{dogId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String addFavoriteDog(@PathParam("favoriteDog") String favoriteDog) {
-    	FavoriteDog dogFromJson = gson.fromJson(favoriteDog, FavoriteDog.class);
+    public String addFavoriteDog(@PathParam("userId") String userId, @PathParam("dogId") String dogId) {
+    	FavoriteDog dogFromJson = new FavoriteDog(Integer.parseInt(userId),Integer.parseInt(dogId));
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(100);
 		dogFromJson.setId(randomInt);

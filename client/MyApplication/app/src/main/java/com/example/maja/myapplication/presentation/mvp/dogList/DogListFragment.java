@@ -55,7 +55,7 @@ public class DogListFragment extends Fragment implements DogListContact.View {
 
 
         ListView listView = (ListView) view.findViewById(R.id.dogList);
-        dogListAdapter = new DogListAdapter(getActivity());
+        dogListAdapter = new DogListAdapter(getActivity(), presenter);
         listView.setAdapter(dogListAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,7 +96,7 @@ public class DogListFragment extends Fragment implements DogListContact.View {
         Log.d(TAG, "onResume: ");
         super.onResume();
         presenter.resume();
-        presenter.getDogList();
+        presenter.getDogList(parentActivity.getUserId());
         progress = ProgressDialog.show(parentActivity.getActivityContext(), "",
                 "Please wait", true);
     }
@@ -155,5 +155,10 @@ public class DogListFragment extends Fragment implements DogListContact.View {
         if (progress != null) {
             progress.dismiss();
         }
+    }
+
+    @Override
+    public void refresh() {
+        onResume();
     }
 }

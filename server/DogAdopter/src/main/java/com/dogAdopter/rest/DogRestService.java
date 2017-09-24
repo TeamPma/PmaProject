@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 import org.codehaus.jackson.map.Serializers;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.ws.rs.Consumes;
@@ -23,54 +24,56 @@ import javax.ws.rs.core.MediaType;
 @Path("/dogService")
 public class DogRestService extends BaseRestService {
 
-    public DogRestService() {
-        super();
-    }
+	public DogRestService() {
+		super();
+	}
 
-    @GET
-    @Path("dogByShelterId/{idOfDog}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String getDogById(@PathParam("idOfDog") String idOfDog){
-    	
-    	Object dog = dogService.getByIdOfShleter(Integer.parseInt(idOfDog));
-    	return gson.toJson(dog);
-    }
+	@GET
+	@Path("dogByShelterId/{idOfDog}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String getDogById(@PathParam("idOfDog") String idOfDog) {
 
-    @GET
-    @Path("dogAll")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getAllDogs(){
-    	 return gson.toJson(dogService.getAll());
-    }
-    
-    @GET
-    @Path("addDog/{dog}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String addDog(@PathParam("dog") String dog) {
-    	Dog dogFromJson = gson.fromJson(dog, Dog.class);
+		Object dog = dogService.getByIdOfShleter(Integer.parseInt(idOfDog));
+		return gson.toJson(dog);
+	}
+
+	@GET
+	@Path("dogAll/{userId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllDogs(@PathParam("userId") String userId) {
+		return gson.toJson(dogService.getAll(Integer.parseInt(userId)));
+	}
+
+	@GET
+	@Path("addDog/{dog}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String addDog(@PathParam("dog") String dog) {
+		Dog dogFromJson = gson.fromJson(dog, Dog.class);
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(100);
 		dogFromJson.setDogId(randomInt);
 		dogService.save(dogFromJson);
 		return gson.toJson(dogService.getById(randomInt));
-    }
-    
-    @GET
-    @Path("updateDog/{dog}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String updateDog(@PathParam("dog") String dog) {
-    	Dog dogFromJson = gson.fromJson(dog, Dog.class);
+	}
+
+	@GET
+	@Path("updateDog/{dog}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String updateDog(@PathParam("dog") String dog) {
+		Dog dogFromJson = gson.fromJson(dog, Dog.class);
 		dogService.update(dogFromJson);
 		return dog;
-    }
-    
-    @GET
-    @Path("deleteDog/{dog}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String deleteDog(@PathParam("dog") String dog) {
-    	Dog dogFromJson = gson.fromJson(dog, Dog.class);
+	}
+
+	@GET
+	@Path("deleteDog/{dog}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String deleteDog(@PathParam("dog") String dog) {
+		Dog dogFromJson = gson.fromJson(dog, Dog.class);
 		dogService.delete(dogFromJson);
-		return gson.toJson(dogService.getAll());
-    }
+		// return gson.toJson(dogService.getAll());
+		return gson.toJson(new ArrayList<Dog>());
+	}
 }

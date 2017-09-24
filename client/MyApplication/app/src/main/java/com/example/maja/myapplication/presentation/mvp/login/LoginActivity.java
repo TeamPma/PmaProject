@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
+import com.example.maja.myapplication.backend.bus.SmartBus;
 import com.example.maja.myapplication.backend.entity.User;
 import com.example.maja.myapplication.presentation.mvp.account.CreateAccountActivity;
 import com.example.maja.myapplication.presentation.mvp.main.MainActivity;
@@ -135,6 +136,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContact.Vie
                 "com.example.maja.myapplication", Context.MODE_PRIVATE);
         String userIdKey = "com.example.maja.myapplication.userid";
         prefs.edit().putInt(userIdKey,user.getIdUser()).apply();
+        SmartBus.getInstance().setUserId(user.getIdUser());
         String isAdminKey = "com.example.maja.myapplication.isAdmin";
         prefs.edit().putInt(isAdminKey,user.isAdmin()).apply();
         Intent intent = new Intent(this, MainActivity.class);

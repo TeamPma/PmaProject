@@ -104,7 +104,7 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
             SharePhotoContent content = new SharePhotoContent.Builder()
                     .addPhoto(photo)
                     .build();
-            ShareDialog.show(DogDetailsActivity.this,content);
+            ShareDialog.show(DogDetailsActivity.this, content);
             //ShareApi.share(content, null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,12 +142,12 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
         dogName.setText(dogDB.getName());
         dogBread.setText(dogDB.getBread());
         dogGender.setText(dogDB.getGender() + "");
-        dogAge.setText(dogDB.getAge()+"");
+        dogAge.setText(dogDB.getAge() + "");
         dogWeight.setText(String.valueOf(dogDB.getWeight()));
         dogHeight.setText(String.valueOf(dogDB.getHeight()));
         dogAnamnesis.setText(dogDB.getAnamnesis());
-        isSterilized.setText(dogDB.getIsSterilized()+"");
-        isMarked.setText(dogDB.getIsMarked()+"");
+        isSterilized.setText(dogDB.getIsSterilized() + "");
+        isMarked.setText(dogDB.getIsMarked() + "");
     }
 
     @Override
@@ -173,7 +173,7 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
                 Intent intent = new Intent(DogDetailsActivity.this, UpdateDogActivity.class);
-                intent.putExtra("dogId",dog.getDogId());
+                intent.putExtra("dogId", dog.getDogId());
                 startActivity(intent);
             }
         });
@@ -242,26 +242,26 @@ public class DogDetailsActivity extends AppCompatActivity implements DogDetailsC
                 "com.example.maja.myapplication", Context.MODE_PRIVATE);
         String isAdminKey = "com.example.maja.myapplication.isAdmin";
         int isAdmin = prefs.getInt(isAdminKey, 0);
-        if(isAdmin != 1){
+        if (isAdmin != 1) {
             btnUpdate.setVisibility(View.INVISIBLE);
             btnDelete.setVisibility(View.INVISIBLE);
         }
 
         dogName.setText(dog.getName());
         dogBread.setText(dog.getBread());
-        if(dog.getGender()==0){
+        if (dog.getGender() == 0) {
             dogGender.setText("Female");
-        }else{
+        } else {
             dogGender.setText("Male");
         }
-        if(dog.getIsSterilized()==1){
+        if (dog.getIsSterilized() == 1) {
             isSterilized.setText("Sterilized");
-        }else{
+        } else {
             isSterilized.setText("Not sterilized");
         }
-        if(dog.getIsMarked()==1){
+        if (dog.getIsMarked() == 1) {
             isMarked.setText("Marked");
-        }else{
+        } else {
             isMarked.setText("Not marked");
         }
         dogWeight.setText(String.valueOf(dog.getWeight()));

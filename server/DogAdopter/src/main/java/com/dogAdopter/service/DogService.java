@@ -11,7 +11,7 @@ public interface DogService {
 	void update(Dog dog);
 	void delete(Dog dog);
 
-	ArrayList<Dog> getAll();
+	ArrayList<Dog> getAll(int userId);
 	ArrayList<Dog> getByIdOfShleter(int id);
 	Dog getById(int id);
 	

@@ -46,7 +46,7 @@ public class FavoriteDogListFragment extends Fragment implements FavoriteDogList
         View view = inflater.inflate(R.layout.fragment_dogs_list, container, false);
         builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
         ListView listView = (ListView) view.findViewById(R.id.dogList);
-        dogListAdapter = new DogListAdapter(getActivity());
+        dogListAdapter = new DogListAdapter(getActivity(), presenter);
         listView.setAdapter(dogListAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

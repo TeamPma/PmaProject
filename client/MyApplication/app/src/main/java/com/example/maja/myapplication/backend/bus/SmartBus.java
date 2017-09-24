@@ -28,6 +28,7 @@ public class SmartBus implements ServiceConnection {
     public Context context;
     private ServiceRepository mService = null;
     boolean mServiceBound = false;
+    private int userId;
 
     public static SmartBus getInstance() {
         return ourInstance;
@@ -129,9 +130,9 @@ public class SmartBus implements ServiceConnection {
     }
 
     //-----------------------------------------Dog------------------------------------------------
-    public void getDogList() {
+    public void getDogList(int userId) {
         Log.d(TAG, "getDogList: ");
-        mService.getDogList();
+        mService.getDogList(userId);
     }
 
     public void addDog(Dog dog) {
@@ -253,5 +254,14 @@ public class SmartBus implements ServiceConnection {
 
     public ArrayList<Dog> getFavoriteDogsDB() {
         return dbManager.getFavoriteDogsDB();
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void addFavoriteDog(int dogId) {
+        mService.addFavoriteDog(userId,dogId);
+        dbManager.addFavoriteDog(dogId);
     }
 }
