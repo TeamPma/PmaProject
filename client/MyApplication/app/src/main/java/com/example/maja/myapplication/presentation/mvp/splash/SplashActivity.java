@@ -49,6 +49,7 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.maja.myapplication", Context.MODE_PRIVATE);
         String userIdKey = "com.example.maja.myapplication.userid";
+
         int userId = 0;
         if (prefs != null) {
             userId = prefs.getInt(userIdKey, 0);
@@ -56,7 +57,10 @@ public class SplashActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, LoginActivity.class);
         if (userId != 0) {
+            String userUsernameKey = "com.example.maja.myapplication.username";
+            String userPasswordKey = "com.example.maja.myapplication.password";
             SmartBus.getInstance().setUserId(userId);
+            SmartBus.getInstance().login(prefs.getString(userUsernameKey,null), prefs.getString(userPasswordKey,null));
             intent = new Intent(this, MainActivity.class);
         }
         startActivity(intent);

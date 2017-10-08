@@ -135,7 +135,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContact.Vie
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.maja.myapplication", Context.MODE_PRIVATE);
         String userIdKey = "com.example.maja.myapplication.userid";
+        String userUsernameKey = "com.example.maja.myapplication.username";
+        String userPasswordKey = "com.example.maja.myapplication.password";
+
         prefs.edit().putInt(userIdKey,user.getIdUser()).apply();
+        prefs.edit().putString(userUsernameKey,username.getText().toString()).apply();
+        prefs.edit().putString(userPasswordKey,password.getText().toString()).apply();
         SmartBus.getInstance().setUserId(user.getIdUser());
         String isAdminKey = "com.example.maja.myapplication.isAdmin";
         prefs.edit().putInt(isAdminKey,user.isAdmin()).apply();
