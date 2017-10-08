@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
 //                activity = new UpdateUserActivity();
 //                item.setTitle("Update user details");
 //                break;
-            case 2131558700:
+            case 2131558703:
                 startActivity(new Intent(this, UpdateUserActivity.class));
                 break;
 

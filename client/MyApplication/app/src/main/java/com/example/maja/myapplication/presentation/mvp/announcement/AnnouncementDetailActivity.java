@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.maja.myapplication.R;
@@ -29,6 +31,8 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
     private TextView announcementDescription;
     private TextView announcementDate;
     private TextView announcementsShelter;
+    private TextView ratingScore;
+    private RatingBar rating;
     private Button btnUpdateAnnouncement;
     private Button btnDelteAnnouncement;
     private Announcement announcement;
@@ -47,29 +51,29 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
     }
 
     private void initUIComponents() {
-        Log.d(TAG, "initUIComponents: ");
         announcementTitle = (TextView) findViewById(R.id.newsTitle);
-        Log.d(TAG, "initUIComponents: " + announcementTitle);
         announcementDescription = (TextView) findViewById(R.id.newsDescription);
-        Log.d(TAG, "initUIComponents: " + announcementDescription);
         announcementDate = (TextView) findViewById(R.id.newsDate);
-        Log.d(TAG, "initUIComponents: " + announcementDate);
         announcementsShelter = (TextView) findViewById(R.id.news_shelterName);
-        Log.d(TAG, "initUIComponents: " + announcementsShelter);
+        ratingScore = (TextView) findViewById(R.id.ratingScore);
+        rating = (RatingBar) findViewById(R.id.rating);
+        rating.setIsIndicator(false);
         builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
         announcementTitle.setText(announcement.getTitle());
         announcementDescription.setText(announcement.getComment());
-        //announcementsShelter.setText(announcement.getIdShelter());
         announcementDate.setText(announcement.getDate().toString());
-
-
+        if (announcement.getRankingSize() == 0) {
+            ratingScore.setText(0 + "");
+        } else {
+            ratingScore.setText((announcement.getRankingScore() / announcement.getRankingSize()) + "");
+        }
         btnUpdateAnnouncement = (Button) findViewById(R.id.btnUpdateAnnouncement);
         btnDelteAnnouncement = (Button) findViewById(R.id.btnDeleteAnnouncement);
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.example.maja.myapplication", Context.MODE_PRIVATE);
         String isAdminKey = "com.example.maja.myapplication.isAdmin";
         int isAdmin = prefs.getInt(isAdminKey, 0);
-        if(isAdmin != 1){
+        if (isAdmin != 1) {
             btnUpdateAnnouncement.setVisibility(View.INVISIBLE);
             btnDelteAnnouncement.setVisibility(View.INVISIBLE);
         }
@@ -84,7 +88,7 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
             public void onClick(View view) {
                 Log.d(TAG, "onUpdateClick: ");
                 Intent intent = new Intent(AnnouncementDetailActivity.this, UpdateNewsActivity.class);
-                intent.putExtra("announcementId",announcement.getIdAnnouncement());
+                intent.putExtra("announcementId", announcement.getIdAnnouncement());
                 startActivity(intent);
 
             }
@@ -97,7 +101,7 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
                         .setMessage("Are you sure that you want to delete chosen announcement?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                              presenter.delteAnnouncements(announcement);
+                                presenter.delteAnnouncements(announcement);
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -107,6 +111,12 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
+            }
+        });
+        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                presenter.rateNews(v,announcement.getIdAnnouncement());
             }
         });
     }
@@ -161,5 +171,18 @@ public class AnnouncementDetailActivity extends AppCompatActivity implements Ann
         Log.d(TAG, "handleDeleteNewsSuccess: ");
         finish();
 
+    }
+
+    @Override
+    public void updateNews(Announcement announcement) {
+        this.announcement = announcement;
+        this.announcementTitle.setText(announcement.getTitle());
+        this.announcementDescription.setText(announcement.getComment());
+        this.announcementDate.setText(announcement.getDate().toString());
+        if (announcement.getRankingSize() == 0) {
+            ratingScore.setText(0 + "");
+        } else {
+            ratingScore.setText((announcement.getRankingScore() / announcement.getRankingSize()) + "");
+        }
     }
 }

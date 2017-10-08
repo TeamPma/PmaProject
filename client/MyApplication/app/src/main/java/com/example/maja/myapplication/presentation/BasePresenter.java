@@ -71,6 +71,11 @@ public abstract class BasePresenter {
         smartBus.deleteNews(announcement);
     }
 
+
+    protected void rateNews_(float rate, int idAnnouncement) {
+        smartBus.rateNews(rate, idAnnouncement);
+    }
+
     protected ArrayList<Announcement> getAllNewsDB_() {
         Log.d(TAG, "getAllNewsDB_: ");
         return smartBus.getAllNewsDB();

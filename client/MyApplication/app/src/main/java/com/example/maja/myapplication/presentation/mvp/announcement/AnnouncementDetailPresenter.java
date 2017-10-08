@@ -6,6 +6,7 @@ import com.example.maja.myapplication.backend.entity.Announcement;
 import com.example.maja.myapplication.backend.events.BaseEvent;
 import com.example.maja.myapplication.backend.events.DeleteNewsEvent;
 import com.example.maja.myapplication.backend.events.ErrorEvent;
+import com.example.maja.myapplication.backend.events.UpdateNewsEvent;
 import com.example.maja.myapplication.presentation.BasePresenter;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -36,7 +37,16 @@ public class AnnouncementDetailPresenter extends BasePresenter implements Announ
                 DeleteNewsEvent deleteNewsEvent = (DeleteNewsEvent) event;
                 handleDeleteNewsSuccess();
                 break;
+            case UPDATE_NEWS_EVENT:
+                UpdateNewsEvent updateNewsEvent = (UpdateNewsEvent) event;
+                updateNews(updateNewsEvent.getAnnouncement());
+                break;
+        }
+    }
 
+    private void updateNews(Announcement announcement) {
+        if(view!=null){
+            view.updateNews(announcement);
         }
     }
 
@@ -55,6 +65,11 @@ public class AnnouncementDetailPresenter extends BasePresenter implements Announ
     public void delteAnnouncements(Announcement announcement) {
         Log.d(TAG, "delteAnnouncements: ");
         deleteNews_(announcement);
+    }
+
+    @Override
+    public void rateNews(float rate, int idAnnouncement) {
+        rateNews_(rate, idAnnouncement);
     }
 
     public Announcement getAnnouncemetDB(int idAnnouncement) {

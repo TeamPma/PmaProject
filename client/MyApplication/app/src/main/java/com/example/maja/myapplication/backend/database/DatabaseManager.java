@@ -131,5 +131,9 @@ public class DatabaseManager {
     public void addFavoriteDog(int dogId) {
         favoriteDogCache.addFavoriteDog(dogCache.readDog(dogId));
     }
+
+    public void rateNews(float rate, int idAnnouncement) {
+        announcementCache.rateNews(rate, idAnnouncement);
+    }
 }
 

@@ -52,11 +52,11 @@ public class HttpRestManager {
 
     private static final String TAG = "HttpRestManager";
 
-    private static final String userSericeUrl = "http://192.168.0.12:8080/DogAdopter/rest/userservice/";
-    private static final String announcementsServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/announcementService/";
-    private static final String shelterServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/shelterService/";
-    private static final String dogServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/dogService/";
-    private static final String favoriteServiceUrl = "http://192.168.0.12:8080/DogAdopter/rest/favoriteDogService/";
+    private static final String userSericeUrl = "http://192.168.0.10:8080/DogAdopter/rest/userservice/";
+    private static final String announcementsServiceUrl = "http://192.168.0.10:8080/DogAdopter/rest/announcementService/";
+    private static final String shelterServiceUrl = "http://192.168.0.10:8080/DogAdopter/rest/shelterService/";
+    private static final String dogServiceUrl = "http://192.168.0.10:8080/DogAdopter/rest/dogService/";
+    private static final String favoriteServiceUrl = "http://192.168.0.10:8080/DogAdopter/rest/favoriteDogService/";
 
     private final Gson gson = new Gson();
 
@@ -573,6 +573,35 @@ public class HttpRestManager {
                         EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
                         e.printStackTrace();
                     }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Failure", t.getMessage());
+                EventBus.getDefault().post(new ErrorEvent(t.getMessage()));
+            }
+        });
+    }
+
+    public void rateNews(float rate, int idAnnouncement) {
+        Log.d(TAG, "rateNews: ");
+        Retrofit retrofit = getRetrofit(announcementsServiceUrl);
+        iHttpRestManager = retrofit.create(IHttpRestManager.class);
+        iHttpRestManager.rateNews(idAnnouncement+"",((int)rate)+"").enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    try {
+                        String stringResponse = response.body().string();
+                        Log.d(TAG, "onResponse: " + stringResponse);
+                        Announcement announcement = gson.fromJson(stringResponse, Announcement.class);
+                        SmartBus.getInstance().updateNewsDB(announcement);
+                        EventBus.getDefault().post(new UpdateNewsEvent(announcement));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
 

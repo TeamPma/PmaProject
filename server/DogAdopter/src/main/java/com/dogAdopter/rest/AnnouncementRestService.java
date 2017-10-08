@@ -21,70 +21,77 @@ import javax.ws.rs.core.MediaType;
 @Path("/announcementService")
 public class AnnouncementRestService extends BaseRestService {
 
-    public AnnouncementRestService() {
-        super();
-    }
-    
-    
-    //getAnnByDate
-    
-    @GET
-    @Path("announcementByShelterId/{idOfShelter}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getAnnouncementByShelterId(@PathParam("idOfShelter") String idOfShelter){
-    	int shleterId = gson.fromJson(idOfShelter, int.class);
-    	Object announcement = announcementService.getAnnouncementByShelterId(shleterId);
-    	return gson.toJson(announcement);
-    }
+	public AnnouncementRestService() {
+		super();
+	}
 
-    @GET
-    @Path("announcementById/{idOfAnnouncement}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String getAnnouncementId(@PathParam("idOfAnnouncement") String idOfAnnouncement){
-    	Object announcement = announcementService.getAnnouncementId(Integer.parseInt(idOfAnnouncement));
-    	return gson.toJson(announcement);
-    }
-    
-    @GET
-    @Path("announcementsAll")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getAllAnnouncements() {
-	   return gson.toJson(announcementService.getAllAnnouncements());
-    }
-    
-    @GET
-    @Path("addAnnouncement/{announcement}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String addAnnouncement(@PathParam("announcement") String announcement) {
-    	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
+	// getAnnByDate
+
+	@GET
+	@Path("announcementByShelterId/{idOfShelter}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAnnouncementByShelterId(@PathParam("idOfShelter") String idOfShelter) {
+		int shleterId = gson.fromJson(idOfShelter, int.class);
+		Object announcement = announcementService.getAnnouncementByShelterId(shleterId);
+		return gson.toJson(announcement);
+	}
+
+	@GET
+	@Path("announcementById/{idOfAnnouncement}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String getAnnouncementId(@PathParam("idOfAnnouncement") String idOfAnnouncement) {
+		Object announcement = announcementService.getAnnouncementId(Integer.parseInt(idOfAnnouncement));
+		return gson.toJson(announcement);
+	}
+
+	@GET
+	@Path("announcementsAll")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllAnnouncements() {
+		return gson.toJson(announcementService.getAllAnnouncements());
+	}
+
+	@GET
+	@Path("addAnnouncement/{announcement}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String addAnnouncement(@PathParam("announcement") String announcement) {
+		Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(100);
 		announcementFromJson.setIdAnnouncement(randomInt);
 		announcementService.save(announcementFromJson);
 		return gson.toJson(announcementService.getAllAnnouncements());
-    }
-    
-    @GET
-    @Path("updateAnnouncement/{announcement}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String updateAnnouncement(@PathParam("announcement") String announcement) {
-    	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
+	}
+
+	@GET
+	@Path("updateAnnouncement/{announcement}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String updateAnnouncement(@PathParam("announcement") String announcement) {
+		Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
 		announcementService.update(announcementFromJson);
 		return announcement;
-    }
-    
-    @GET
-    @Path("deleteAnnouncement/{announcement}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String deleteAnnouncement(@PathParam("announcement") String announcement) {
-    	Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
+	}
+
+	@GET
+	@Path("updateRankingScore/{idOfAnnouncement}/{score}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String updateRankingScore(@PathParam("idOfAnnouncement") String idOfAnnouncement,
+			@PathParam("score") String score) {
+		Announcement announcement = announcementService.getAnnouncementId(Integer.parseInt(idOfAnnouncement));
+		announcement.setRankingSize(announcement.getRankingSize() + 1);
+		announcement.setRankingScore(announcement.getRankingScore() + Integer.parseInt(score));
+		announcementService.update(announcement);
+		return gson.toJson(announcement);
+	}
+
+	@GET
+	@Path("deleteAnnouncement/{announcement}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String deleteAnnouncement(@PathParam("announcement") String announcement) {
+		Announcement announcementFromJson = gson.fromJson(announcement, Announcement.class);
 		announcementService.delete(announcementFromJson);
 		return "true";
-    }
-    
-    
-    
-
+	}
 
 }

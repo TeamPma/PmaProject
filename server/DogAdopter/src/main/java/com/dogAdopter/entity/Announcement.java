@@ -25,6 +25,8 @@ public class Announcement implements Serializable {
     private String comment;
     private Date date;
     private String title;
+    private Integer rankingScore;
+	private Integer rankingSize;
 
     public Announcement() {
         super();
@@ -85,5 +87,23 @@ public class Announcement implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+    
+    @Column(name = "rankingScore", unique = false, nullable = true)
+    public int getRankingScore() {
+		return rankingScore;
+	}
+
+	public void setRankingScore(int rankingScore) {
+		this.rankingScore = rankingScore;
+	}
+
+	@Column(name = "rankingSize", unique = false, nullable = true)
+	public Integer getRankingSize() {
+		return rankingSize;
+	}
+
+	public void setRankingSize(Integer rankingSize) {
+		this.rankingSize = rankingSize;
+	}
 
 }

@@ -87,6 +87,10 @@ public class ServiceRepository extends Service {
         restManager.addFavoriteDog(userId,dogId);
     }
 
+    public void rateNews(float rate, int idAnnouncement) {
+        restManager.rateNews(rate,idAnnouncement);
+    }
+
     public class BinderObject extends Binder{
         public ServiceRepository getService(){
             return ServiceRepository.this;

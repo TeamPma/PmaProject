@@ -52,6 +52,9 @@ public interface IHttpRestManager {
     @GET("deleteAnnouncement/{announcement}")
     Call<ResponseBody> deleteNews(@Path("announcement") String announcementToJson);
 
+    @GET("updateRankingScore/{idOfAnnouncement}/{score}")
+    Call<ResponseBody> rateNews(@Path("idOfAnnouncement")String idOfAnnouncement,@Path("score") String score);
+
     //------------------Dog ------------------------------------------
     @GET("dogAll/{userId}")
     Call<ResponseBody> getDogList(@Path("userId") int userId);
@@ -74,4 +77,5 @@ public interface IHttpRestManager {
 
     @GET("addFavoriteDog/{userId}/{dogId}")
     Call<ResponseBody> addFavoriteDog(@Path("userId") String userId, @Path("dogId") String dogId);
+
 }

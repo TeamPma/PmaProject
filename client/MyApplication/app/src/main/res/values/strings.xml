@@ -34,7 +34,7 @@
 
     <!-- Shelter strings -->
     <string name="add_shelter_name">Name:</string>
-    <string name="add_shelter_address">Address:</string>
+    <string name="add_shelter_address">Addr:</string>
     <string name="add_shelter_number">Number:</string>
     <string name="add_shelter_location">Location:</string>
     <string name="add_shelter_city">City:</string>
@@ -45,7 +45,7 @@
     <!-- Dogs strings -->
     <string name="lblName">Name:</string>
     <string name="lblBread">Bread:</string>
-    <string name="lblGender">Gender:</string>
+    <string name="lblGender">Gen.:</string>
     <string name="lblAge">Age:</string>
     <string name="btnCreateDog">Create dog</string>
 
@@ -85,5 +85,7 @@
     <string name="favorite_dogs">Favorite dogs</string>
     <string name="favorite">Favorite</string>
     <string name="add_favorite">Set as favorite</string>
+    <string name="lblRateScoreNews">Rating score:</string>
+    <string name="lblRateNews">Give your rate:</string>
 
 </resources>

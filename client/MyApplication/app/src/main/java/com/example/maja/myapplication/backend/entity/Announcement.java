@@ -14,8 +14,12 @@ public class Announcement implements Serializable{
     private String comment;
     private Date date;
     private String title;
+    private Integer rankingScore = 0;
+    private Integer rankingSize = 0;
 
     public Announcement() {
+        rankingScore = 0;
+        rankingSize = 0;
     }
 
     public Announcement(int idShelter, String comment, Date date, String title) {
@@ -71,5 +75,21 @@ public class Announcement implements Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Integer getRankingScore() {
+        return rankingScore;
+    }
+
+    public void setRankingScore(Integer rankingScore) {
+        this.rankingScore = rankingScore;
+    }
+
+    public Integer getRankingSize() {
+        return rankingSize;
+    }
+
+    public void setRankingSize(Integer rankingSize) {
+        this.rankingSize = rankingSize;
     }
 }

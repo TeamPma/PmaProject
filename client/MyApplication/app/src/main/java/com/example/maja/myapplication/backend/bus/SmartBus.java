@@ -264,4 +264,9 @@ public class SmartBus implements ServiceConnection {
         mService.addFavoriteDog(userId,dogId);
         dbManager.addFavoriteDog(dogId);
     }
+
+    public void rateNews(float rate, int idAnnouncement) {
+        dbManager.rateNews(rate,idAnnouncement);
+        mService.rateNews(rate,idAnnouncement);
+    }
 }

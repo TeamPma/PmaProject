@@ -12,10 +12,14 @@ public class AnnouncementDetailContact {
 
         void handleError(String message);
         void handleDeleteNewsSuccess();
+
+        void updateNews(Announcement announcement);
     }
 
     public interface Presenter{
 
         void delteAnnouncements(Announcement announcement);
+
+        void rateNews(float rate, int idAnnouncement);
     }
 }

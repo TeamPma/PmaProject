@@ -69,4 +69,12 @@ public class AnnouncementCache {
         }
         return returnAnnouncements;
     }
+
+    public void rateNews(float rate, int idAnnouncement) {
+        if (announcements.containsKey(idAnnouncement)) {
+            Announcement announcement = announcements.get(idAnnouncement);
+            announcements.get(idAnnouncement).setRankingScore(announcement.getRankingScore() + (int)rate);
+            announcements.get(idAnnouncement).setRankingSize(announcement.getRankingSize() + 1);
+        }
+    }
 }
